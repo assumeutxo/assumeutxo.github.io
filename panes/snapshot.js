@@ -6,7 +6,7 @@ wiki.panes.push({
   canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Snapshot'),
   render(subject, store, root, raw) {
     const doc = raw || store.get(subject);
-    const { el, link, value } = wiki;
+    const { el, link, value, light } = wiki;
     const copy = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); return b; };
     const gb = doc.bytes ? (doc.bytes / 1e9).toFixed(2) + ' GB' : '';
     const facts = el('div', 'facts');
