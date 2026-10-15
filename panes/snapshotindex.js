@@ -4,6 +4,7 @@ wiki.panes.push({
   canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'SnapshotIndex'),
   render(subject, store, root, raw) {
     const doc = raw || store.get(subject); const { el, link } = wiki;
+    if (doc.status) root.append(el('p', 'status', doc.status)); // the state of the record, first
     const snaps = [].concat(doc.entries || []).filter((e) => wiki.has(e, 'Snapshot')); const others = [].concat(doc.entries || []).filter((e) => !wiki.has(e, 'Snapshot'));
     // one tint per chain, rows grouped under the chain and sorted by height, a stripe at the left of each row
     const ORDER = ['btc', 'xbt', 'tbtc4', 'txbt4', 'tbtc3', 'signet']; const NAMES = { btc: 'Bitcoin mainnet', xbt: 'Bitcoin BLAKE2b mainnet', tbtc4: 'Bitcoin testnet4', txbt4: 'Bitcoin BLAKE2b testnet4', tbtc3: 'Bitcoin testnet3', signet: 'Bitcoin signet' };
@@ -31,6 +32,5 @@ wiki.panes.push({
     root.append(t);
     if (others.length) { const ul = el('ul', 'more'); for (const o of others) { const li = el('li'); li.append(link(o['@id'], o.name || o['@id'])); if (o.description) li.append(el('span', 'muted', ' · ' + o.description)); ul.append(li); } root.append(ul); }
     root.append(el('p', 'muted', 'A snapshot is named by its txoutset hash; the file is proven by its sha256 and infohash; the hosts are only where a copy was.'));
-    if (doc.status) root.append(el('p', 'muted status', doc.status));
   },
 });
