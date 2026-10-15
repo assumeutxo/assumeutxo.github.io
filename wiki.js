@@ -169,7 +169,7 @@
   const loadScript = (src) => new Promise((res) => { const s = document.createElement('script'); s.src = src; s.onload = s.onerror = () => res(); document.head.append(s); });
   const loadModulePane = async (url) => { try { const m = await import(new URL(url, location.href).href); const p = m.default || m.pane; if (p && typeof p.render === 'function') return asPane(p); } catch (e) { console.warn('[wiki] pane failed to load', url, e.message); } return null; };
   async function localPanes(types) {
-    await Promise.all([...types].map((t) => loadScript(new URL('panes/' + String(t).toLowerCase() + '.js', ROOT).href)));
+    for (const t of types) await loadScript(new URL('panes/' + String(t).toLowerCase() + '.js', ROOT).href); // in the island's @type order, so the first type's pane is the first tab
     for (const s of document.querySelectorAll('script[data-pane]')) { const p = await loadModulePane(s.getAttribute('src') || s.dataset.pane); if (p) wiki.panes.push(p); }
   }
   async function registryPanes(types, doc) {
@@ -194,8 +194,9 @@
     const rest = (d) => Object.fromEntries(Object.entries(d).filter(([k]) => !['@id', '@type', 'name', 'title', 'description'].includes(k)));
     views.push({ label: 'outline', canHandle: () => true, render: (s, st, e, d) => e.append(table(rest(d))) }, { label: 'raw', canHandle: () => true, render: (s, st, e, d) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
     const bar = el('div', 'tabs'); const body = el('div', 'view');
-    const show = (v) => { body.replaceChildren(); try { v.render(subject, wiki.store, body, doc); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.dataset.label === v.label)); try { localStorage.setItem('wiki-tab:' + location.pathname, v.label); } catch {} };
-    for (const v of views) { const b = el('button', null, (v.icon ? v.icon + ' ' : '') + v.label); b.dataset.label = v.label; b.onclick = () => show(v); bar.append(b); }
+    const show = (v) => { body.replaceChildren(); try { v.render(subject, wiki.store, body, doc); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.dataset.label === v.label)); };
+    // a tab is remembered only when the reader chose it, never from the first render
+    for (const v of views) { const b = el('button', null, (v.icon ? v.icon + ' ' : '') + v.label); b.dataset.label = v.label; b.onclick = () => { show(v); try { localStorage.setItem('wiki-tab:' + location.pathname, v.label); } catch {} }; bar.append(b); }
     sec.append(bar, body); let remembered = null; try { remembered = localStorage.getItem('wiki-tab:' + location.pathname); } catch {} show(views.find((v) => v.label === remembered) || views[0]);
   }
   async function run() {
