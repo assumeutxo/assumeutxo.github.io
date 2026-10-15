@@ -11,7 +11,7 @@ import { homedir } from 'node:os';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..'); const HOME = homedir(); const dry = process.argv.includes('--dry');
 const { finalizeEvent, parsePrivateKey, publicKey, RelayPool } = await import(`${HOME}/remote/github.com/bitcoin-desktop/headers/publisher/nostr.js`);
 const RELAYS = ['wss://nos.lol', 'wss://relay.damus.io', 'wss://nostr.mom', 'wss://relay.primal.net', 'wss://relay.nostr.band', 'wss://nostr.oxtr.dev'];
-const WIKI = 'https://assumeutxo.github.io/';
+const WIKI = 'https://assumeutxo.com/'; // the record's address appears only as an r tag, never in the content: a host is where the data is, not a fact about the snapshot
 const D = JSON.parse(readFileSync(`${ROOT}/data/snapshots.json`, 'utf8'));
 const CHAIN_WORDS = { btc: ['mainnet'], xbt: ['mainnet', 'blake2b'], tbtc3: ['testnet', 'testnet3'], tbtc4: ['testnet', 'testnet4'], txbt4: ['testnet', 'testnet4', 'blake2b'], signet: ['signet'] };
 const priv = dry ? null : parsePrivateKey(execFileSync('git', ['config', 'nostr.privkey'], { cwd: `${HOME}/ideas/knots`, encoding: 'utf8' }));
@@ -37,7 +37,6 @@ for (const s of todo) {
     s.note ? s.note : null,
     '',
     'This is an announcement, not an attestation: the facts above were read from the sources named; the announcer has not loaded this file. Anyone who loads it and compares the txoutset hash can say so.',
-    `More, as data: ${page}`,
   ].filter((l) => l !== null).join('\n');
   const tags = [['title', title], ['x', s.infohash], ['file', dn, String(s.bytes || 0)], ...trackers.map((t) => ['tracker', t]), ...(s.mirror ? [['tracker', s.mirror]] : []),
     ['alt', `Torrent: ${title}`], ['i', 'tcat:other'], ['t', 'assumeutxo'], ['t', 'utxo'], ['t', 'bitcoin'], ...CHAIN_WORDS[s.network].map((w) => ['t', w]), ['t', s.network], ['t', 'bitcoin-core'], ['t', 'bitcoin-kernel'],
