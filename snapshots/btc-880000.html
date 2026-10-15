@@ -44,6 +44,56 @@
     }
   ],
   "producedBy": "Core chainparams; torrent from Sjors (PR 31969), also on jaonoctus",
+  "attestations": [
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "hodlinator (GitHub)",
+      "at": "2025-03-01",
+      "did": "generated his own snapshot and compared; ACK",
+      "says": {
+        "height": 880000,
+        "txoutsetHash": "dbd190983eaf433ef7c15f78a278ae42c00ef52e0fd2a54953782175fbadcea9"
+      },
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/31969#pullrequestreview-2652599416"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "polespinasa (GitHub)",
+      "at": "2025-03-03",
+      "did": "dumped the UTXO set and got the same values; ACK",
+      "says": {
+        "height": 880000,
+        "txoutsetHash": "dbd190983eaf433ef7c15f78a278ae42c00ef52e0fd2a54953782175fbadcea9"
+      },
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/31969#pullrequestreview-2654759272"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "l0rinc (GitHub)",
+      "at": "2025-03-04",
+      "did": "loaded the snapshot and confirmed it cannot load without the new entry; post-merge ACK",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/31969#pullrequestreview-2658919045"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "l0rinc (GitHub)",
+      "at": "2025-03-10",
+      "did": "confirmed full background validation succeeded",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/31969#issuecomment-2712065213"
+      }
+    }
+  ],
   "announcedAt": [
     {
       "@id": "../events/a32ec670.html#this",

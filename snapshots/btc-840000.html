@@ -43,6 +43,76 @@
     }
   ],
   "producedBy": "Core chainparams; torrent from Sjors (PR 28553), also on jaonoctus",
+  "attestations": [
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "willcl-ark (GitHub)",
+      "at": "2024-08-13",
+      "did": "recreated the snapshot with utxo_snapshot.sh and got the same sha256sum; tACK",
+      "says": {
+        "height": 840000,
+        "txoutsetHash": "a2a5521b1b5ab65f67818e5e8eccabb7171a517f9e2382208f77687310768f96"
+      },
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#pullrequestreview-2236651580"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "pablomartin4btc (GitHub)",
+      "at": "2024-08-21",
+      "did": "loaded the snapshot on a full node and on a pruned node and continued until background validation finished and the node fully synced",
+      "says": {
+        "height": 840000,
+        "txoutsetHash": "a2a5521b1b5ab65f67818e5e8eccabb7171a517f9e2382208f77687310768f96"
+      },
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#pullrequestreview-2251032570"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "pablomartin4btc (GitHub)",
+      "at": "2024-08-14",
+      "did": "checksum matched the downloaded file; performed loadtxoutset on a new node; tACK",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#pullrequestreview-2238694990"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "mzumsande (GitHub)",
+      "at": "2024-08-13",
+      "did": "re-created the snapshot at height 840k and verified the file is identical to the one from the torrent; loaded it into a new node; tested ACK",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#pullrequestreview-2236239890"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "theStack (GitHub)",
+      "at": "2024-08-13",
+      "did": "loaded the provided snapshot on a fresh pruned node and waited until background validation finished successfully; tested ACK",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#pullrequestreview-2235126233"
+      }
+    },
+    {
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "fjahr (GitHub)",
+      "at": "2024-07-22",
+      "did": "downloaded the snapshot from the torrent, verified the hash, loaded it in a fresh node, saw the snapshot chainstate sync to the tip; tACK",
+      "where": {
+        "@id": "https://github.com/bitcoin/bitcoin/pull/28553#issuecomment-2242330336"
+      }
+    }
+  ],
   "announcedAt": [
     {
       "@id": "../events/2169f816.html#this",
