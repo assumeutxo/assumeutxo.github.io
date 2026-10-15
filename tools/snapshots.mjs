@@ -40,6 +40,8 @@ entries.push({ '@id': 'https://nostrapps.github.io/ntorrent/?q=assumeutxo', '@ty
   { '@id': 'https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp', '@type': 'WebPage', name: 'Bitcoin Core chainparams', description: 'the assumeutxo entries a Core node accepts, by height and txoutset hash' });
 const island = { '@context': CTX, '@id': '#this', '@type': ['SnapshotIndex', 'Index'], name: 'assumeUTXO snapshots',
   description: 'Every UTXO set snapshot we know of, across Bitcoin and the BLAKE2b chains: Core\'s chain-parameter entries with their torrents, Knots\' mainnet entry, and ours. A snapshot is named by its txoutset hash; a file is proven by its sha256 and its infohash; a torrent or a host is only where a copy was. Attestations of who loaded what are to come.',
-  creator: { '@id': 'me.html#me' }, trail: { '@id': 'trail.html#this' }, data: { '@id': 'data/snapshots.json' }, entries };
+  creator: { '@id': 'me.html#me' }, trail: { '@id': 'trail.html#this' }, data: { '@id': 'data/snapshots.json' },
+  status: 'Formal attestations, signed statements checked in the page, and fraud proofs are coming soon. What is here today: every published snapshot, its torrents and announcements, and the informal verifications found in the Core review threads, each linked to its source.',
+  entries };
 page('index.html', 'assumeUTXO snapshots', island, '');
 console.log(`${made} snapshot pages, ${evPages.size} announcement pages written, ${entries.length} entries on index.html`);

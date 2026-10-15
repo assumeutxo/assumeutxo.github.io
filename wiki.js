@@ -66,6 +66,7 @@
     .wiki table.dt td.num{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
     .wiki table.dt tr:first-child td{border-top:0}.wiki table.dt .muted{font-size:12px}
     .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
+    .wiki p.status{border-left:3px solid var(--accent);padding:6px 14px;background:var(--accent2);border-radius:0 8px 8px 0;color:var(--ink2)}
     .wiki ul.links li{margin:0 0 10px}.wiki ul.links li a{font-size:15px}.wiki ul.links li div.muted{margin-top:1px}
     .wiki table.dt tr.grp td{background:#f6f3ec;font:500 13px var(--sans);color:var(--ink);padding:9px 14px;border-top:1px solid var(--line2)}
     .wiki table.dt tr.grp .type{margin-right:4px}

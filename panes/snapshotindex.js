@@ -31,5 +31,6 @@ wiki.panes.push({
     root.append(t);
     if (others.length) { const ul = el('ul', 'more'); for (const o of others) { const li = el('li'); li.append(link(o['@id'], o.name || o['@id'])); if (o.description) li.append(el('span', 'muted', ' · ' + o.description)); ul.append(li); } root.append(ul); }
     root.append(el('p', 'muted', 'A snapshot is named by its txoutset hash; the file is proven by its sha256 and infohash; the hosts are only where a copy was.'));
+    if (doc.status) root.append(el('p', 'muted status', doc.status));
   },
 });
