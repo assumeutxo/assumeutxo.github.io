@@ -5,7 +5,8 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..'); const CTX = 'https://bitcoin-desktop.github.io/schema/context.jsonld';
 const D = JSON.parse(readFileSync(`${ROOT}/data/snapshots.json`, 'utf8'));
-const page = (path, title, island, up) => writeFileSync(`${ROOT}/${path}`, `<!doctype html>\n<meta charset="utf-8"><title>${title}</title>\n<script type="application/ld+json">\n${JSON.stringify(island, null, 2)}\n</script>\n<script src="${up}wiki.js"></script>\n`);
+import { withOgp } from './ogp.mjs';
+const page = (path, title, island, up) => writeFileSync(`${ROOT}/${path}`, withOgp(`<!doctype html>\n<meta charset="utf-8"><title>${title}</title>\n<script type="application/ld+json">\n${JSON.stringify(island, null, 2)}\n</script>\n<script src="${up}wiki.js"></script>\n`, path));
 import { readdirSync } from 'node:fs';
 // every announcement we hold, as a NostrEvent page by value (id and signature are checked in the page)
 const evPages = new Map();

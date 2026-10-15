@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf8f3"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#c47a12"/>
+  <circle cx="92" cy="118" r="11" fill="#c47a12"/>
+  <text x="118" y="128" font-family="DejaVu Sans, sans-serif" font-size="26" font-weight="600" fill="#17160f">assumeUTXO</text>
+  <text x="90" y="300" font-family="DejaVu Serif, serif" font-size="78" fill="#17160f">Every UTXO snapshot</text>
+  <text x="90" y="388" font-family="DejaVu Serif, serif" font-size="78" fill="#17160f">and who verified it.</text>
+  <text x="90" y="458" font-family="DejaVu Sans, sans-serif" font-size="27" fill="#78736a">Bitcoin, testnet3, testnet4, signet and the BLAKE2b chains.</text>
+  <text x="90" y="496" font-family="DejaVu Sans, sans-serif" font-size="27" fill="#78736a">Identity by txoutset hash · torrents · announcements · attestations.</text>
+  <text x="90" y="560" font-family="DejaVu Sans Mono, monospace" font-size="24" fill="#c47a12">assumeutxo.com</text>
+</svg>
