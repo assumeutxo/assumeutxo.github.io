@@ -59,6 +59,12 @@
     .wiki .light{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px;vertical-align:1px;background:var(--grey)}
     .wiki .light.ok{background:var(--ok);box-shadow:0 0 0 3px #e3f3e9}.wiki .light.bad{background:var(--bad);box-shadow:0 0 0 3px #f9e1de}.wiki .light.grey{background:var(--grey);box-shadow:0 0 0 3px #f0ece3}
     .wiki .view > p.muted{margin:14px 0 0}
+    .wiki table.dt{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;border-collapse:separate;border-spacing:0;width:100%}
+    .wiki table.dt th{font:500 11px/1.6 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 14px;background:#fcfbf8;border-bottom:1px solid var(--line)}
+    .wiki table.dt td{font:14px/1.45 var(--sans);padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;color:var(--ink2)}
+    .wiki table.dt td.num{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+    .wiki table.dt tr:first-child td{border-top:0}.wiki table.dt .muted{font-size:12px}
+    .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
     .wiki .facts{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
     .wiki .fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:120px}
     .wiki .fk{display:block;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 4px}

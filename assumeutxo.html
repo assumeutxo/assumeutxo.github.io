@@ -4,7 +4,10 @@
 {
   "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
   "@id": "#this",
-  "@type": "Index",
+  "@type": [
+    "SnapshotIndex",
+    "Index"
+  ],
   "name": "assumeUTXO snapshots",
   "description": "Every UTXO set snapshot we know of for the BLAKE2b chains, each as a page with its hashes, its torrent and where it was announced. A snapshot is named by its txoutset hash; the file is proven by its sha256 and its infohash; the hosts are only where a copy was.",
   "creator": {
@@ -18,39 +21,46 @@
       "@id": "snapshots/txbt4-150307.html#this",
       "@type": "Snapshot",
       "name": "txbt4 at 150307",
-      "description": "testnet4 BLAKE2b, the fork point · 14,230,182 coins · 0.87 GB · ours, torrent + webseed"
+      "network": "txbt4",
+      "chain": "Bitcoin BLAKE2b testnet4",
+      "height": 150307,
+      "coins": 14230182,
+      "bytes": 869836053,
+      "source": "ours: the fork point, cut from our node",
+      "txoutsetHash": "372bfcaeef1e93892acccda9e700b00bf90f45d73746d69959d33620a3df5518",
+      "torrent": {
+        "@id": "torrents/utxo-knots-150307.html#this"
+      },
+      "magnet": "magnet:?xt=urn:btih:242e9b7dcba15cc0ed8f1bc5f06b68da008f87c0&dn=utxo-knots-150307.dat",
+      "webseed": true,
+      "announcedAt": {
+        "@id": "events/86d79268.html#this"
+      }
     },
     {
       "@id": "snapshots/xbt-976000.html#this",
       "@type": "Snapshot",
       "name": "xbt at 976000",
-      "description": "mainnet BLAKE2b · 167,095,701 coins · 9.52 GB · a mirror found in the swarm, torrent only"
-    },
-    {
-      "@id": "torrents/utxo-knots-150307.html#this",
-      "@type": "Torrent",
-      "name": "torrent: utxo-knots-150307.dat"
-    },
-    {
-      "@id": "torrents/utxo-976000.html#this",
-      "@type": "Torrent",
-      "name": "torrent: utxo-976000.dat"
+      "network": "xbt",
+      "chain": "Bitcoin BLAKE2b mainnet",
+      "height": 976000,
+      "coins": 167095701,
+      "bytes": 9517597408,
+      "source": "a mirror found in the swarm; txoutset hash not stated",
+      "torrent": {
+        "@id": "torrents/utxo-976000.html#this"
+      },
+      "magnet": "magnet:?xt=urn:btih:3cf7e4d15841f116856f6f19bf2ac15b1dbae2c3&dn=utxo-976000.dat&xl=9517597408",
+      "webseed": false,
+      "announcedAt": {
+        "@id": "events/8f0f0b05.html#this"
+      }
     },
     {
       "@id": "https://nostrapps.github.io/ntorrent/?q=assumeutxo",
       "@type": "WebPage",
       "name": "browse assumeutxo torrents on ntorrent",
       "description": "every kind 2003 announcement tagged assumeutxo, on Nostr, whoever posted it"
-    },
-    {
-      "@id": "events/86d79268.html#this",
-      "@type": "NostrEvent",
-      "name": "announcement: txbt4 150307"
-    },
-    {
-      "@id": "events/8f0f0b05.html#this",
-      "@type": "NostrEvent",
-      "name": "announcement: xbt 976000"
     }
   ]
 }
