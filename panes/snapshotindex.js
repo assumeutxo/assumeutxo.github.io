@@ -12,7 +12,7 @@ wiki.panes.push({
     const keys = [...groups.keys()].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99));
     for (const k of keys) {
       const gh = el('tr', 'grp ' + 'net-' + k); const gc = el('td'); gc.colSpan = 6; gc.append(el('span', 'type', k), ' ', NAMES[k] || groups.get(k)[0].chain || ''); gh.append(gc); t.append(gh);
-      for (const e of groups.get(k).sort((a, b) => (a.height || 0) - (b.height || 0))) {
+      for (const e of groups.get(k).sort((a, b) => (b.height || 0) - (a.height || 0))) {
         const tr = el('tr', 'net-' + k);
         const c = el('td'); c.append(link(e['@id'], String(e.height != null ? e.height.toLocaleString('en-US') : '?'))); if (e.sharedWith) c.append(el('div', 'muted', 'also ' + e.sharedWith.split(' (')[0])); tr.append(c);
         const hcell = el('td', 'num'); if (e.txoutsetHash) { const a = link(e['@id'], e.txoutsetHash.slice(0, 12) + '…'); a.title = e.txoutsetHash; hcell.append(a); } else hcell.append('?'); tr.append(hcell);
