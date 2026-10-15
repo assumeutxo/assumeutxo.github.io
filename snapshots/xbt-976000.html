@@ -6,7 +6,7 @@
   "@id": "#this",
   "@type": "Snapshot",
   "name": "xbt assumeUTXO snapshot at 976000",
-  "description": "UTXO set at height 976000 of the BLAKE2b mainnet chain (xbt), which forked from Bitcoin at 961640. Not made by us: a mirror of a node image found in the swarm, announced on Nostr with the facts read from the file itself. The announcement states no txoutset hash, so loading it and computing one is the check.",
+  "description": "UTXO set at height 976000 of the BLAKE2b mainnet chain (xbt), which forked from Bitcoin at 961640. Cut by chrisguida with dumptxoutset rollback=976000 on a fully synced Knots v29.4.2 node on 2026-10-07 for Knots PR 444, which adds it as an assumeutxo entry; three reviewers recomputed the txoutset hash and got the same one. The torrent was mirrored and announced on Nostr; the announcement omitted the web seed, a private host.",
   "network": "xbt",
   "chain": "btc:mainnet-blake2b",
   "height": 976000,
@@ -15,7 +15,7 @@
   "bytes": 9517597408,
   "sha256": "bfd2460a55ae1d2e94b9957ccd512ae027855feed1dbef996cfed0abebe5d123",
   "file": "utxo-976000.dat",
-  "producedBy": "unknown: a mirror of a node image found in the swarm; dumptxoutset v2, network magic f9beb4d9",
+  "producedBy": "chrisguida: dumptxoutset rollback=976000 on Bitcoin Knots v29.4.2.knots20260508, 2026-10-07 (Knots PR 444)",
   "torrent": {
     "@type": "Torrent",
     "infohash": "3cf7e4d15841f116856f6f19bf2ac15b1dbae2c3",
@@ -34,7 +34,29 @@
   ],
   "creator": {
     "@id": "../me.html#me"
-  }
+  },
+  "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118",
+  "nchaintx": 1417215373,
+  "source": {
+    "@id": "https://github.com/bitcoinknots/bitcoin/pull/444",
+    "name": "bitcoinknots/bitcoin PR 444: chainparams: add assumeutxo snapshot at height 976000"
+  },
+  "verifiedBy": [
+    {
+      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#pullrequestreview-5447913209",
+      "name": "luke-jr, 2026-10-07",
+      "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+    },
+    {
+      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6046407002",
+      "name": "starslab, 2026-10-07",
+      "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+    },
+    {
+      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6091037710",
+      "name": "alphaminetech, 2026-10-09: loaded and validated on an unpatched 29.4.2 node"
+    }
+  ]
 }
 </script>
 <script src="../wiki.js"></script>

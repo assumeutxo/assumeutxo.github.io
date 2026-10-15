@@ -33,6 +33,8 @@ wiki.panes.push({
     if (doc.producedBy) where.append(` · produced by ${doc.producedBy}`);
     for (const ev of [].concat(doc.announcedAt || [])) { where.append(` · announced on Nostr as kind ${ev.kind} `); where.append(link(ev.browse && ev.browse['@id'] || '', String(ev.id || '').slice(0, 12) + '…')); }
     root.append(where);
+    if (doc.source) { const p = el('p', 'muted'); p.append('source: '); p.append(link(doc.source['@id'], doc.source.name || doc.source['@id'])); root.append(p); }
+    const vb = [].concat(doc.verifiedBy || []); if (vb.length) { root.append(el('h3', null, 'verified by')); const ul = el('ul'); for (const v of vb) { const li = el('li'); li.append(link(v['@id'], v.name || v['@id'])); if (v.txoutsetHash) li.append(el('span', 'muted', v.txoutsetHash === doc.txoutsetHash ? ' · same txoutset hash' : ' · a different txoutset hash ✗')); ul.append(li); } root.append(ul); }
     if (doc.note) root.append(el('p', 'muted', doc.note));
     const how = el('p', 'muted', 'Load it with any node that reads the dumptxoutset v2 format, then compare its txoutset hash with the one above. The hash is the claim; the comparison is the check.');
     root.append(how);
