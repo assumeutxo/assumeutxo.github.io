@@ -1,0 +1,58 @@
+<!doctype html>
+<meta charset="utf-8"><title>assumeUTXO snapshots</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Index",
+  "name": "assumeUTXO snapshots",
+  "description": "Every UTXO set snapshot we know of for the BLAKE2b chains, each as a page with its hashes, its torrent and where it was announced. A snapshot is named by its txoutset hash; the file is proven by its sha256 and its infohash; the hosts are only where a copy was.",
+  "creator": {
+    "@id": "me.html#me"
+  },
+  "trail": {
+    "@id": "trail.html#this"
+  },
+  "entries": [
+    {
+      "@id": "snapshots/txbt4-150307.html#this",
+      "@type": "Snapshot",
+      "name": "txbt4 at 150307",
+      "description": "testnet4 BLAKE2b, the fork point · 14,230,182 coins · 0.87 GB · ours, torrent + webseed"
+    },
+    {
+      "@id": "snapshots/xbt-976000.html#this",
+      "@type": "Snapshot",
+      "name": "xbt at 976000",
+      "description": "mainnet BLAKE2b · 167,095,701 coins · 9.52 GB · a mirror found in the swarm, torrent only"
+    },
+    {
+      "@id": "torrents/utxo-knots-150307.html#this",
+      "@type": "Torrent",
+      "name": "torrent: utxo-knots-150307.dat"
+    },
+    {
+      "@id": "torrents/utxo-976000.html#this",
+      "@type": "Torrent",
+      "name": "torrent: utxo-976000.dat"
+    },
+    {
+      "@id": "https://nostrapps.github.io/ntorrent/?q=assumeutxo",
+      "@type": "WebPage",
+      "name": "browse assumeutxo torrents on ntorrent",
+      "description": "every kind 2003 announcement tagged assumeutxo, on Nostr, whoever posted it"
+    },
+    {
+      "@id": "events/86d79268.html#this",
+      "@type": "NostrEvent",
+      "name": "announcement: txbt4 150307"
+    },
+    {
+      "@id": "events/8f0f0b05.html#this",
+      "@type": "NostrEvent",
+      "name": "announcement: xbt 976000"
+    }
+  ]
+}
+</script>
+<script src="wiki.js"></script>
