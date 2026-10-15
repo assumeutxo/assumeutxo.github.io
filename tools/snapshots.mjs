@@ -14,13 +14,13 @@ for (const s of D.snapshots) {
     const island = { '@context': CTX, '@id': '#this', '@type': 'Snapshot', name: `${s.network} assumeUTXO snapshot at ${s.height}`,
       description: `UTXO set of ${s.chain} at height ${s.height.toLocaleString('en-US')}, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. ${s.sharedWith ? 'Shared with ' + s.sharedWith + '. ' : ''}Facts read from the sources below; we have not loaded this one ourselves.`,
       network: s.network, chain: s.chain, height: s.height, txoutsetHash: s.txoutsetHash, chainTxCount: s.chainTxCount, bytes: s.bytes, sha256: s.sha256, sharedWith: s.sharedWith,
-      torrent: s.infohash ? { '@type': 'Torrent', infohash: s.infohash, magnet: s.magnet } : undefined,
+      torrent: s.infohash ? { '@type': 'Torrent', infohash: s.infohash, magnet: s.magnet, webseed: s.mirror ? [{ '@id': s.mirror }] : undefined } : undefined, bytesFrom: s.bytesFrom,
       source: refs[0], sources: refs, producedBy: s.source, creator: { '@id': '../me.html#me' } };
-    for (const k of Object.keys(island)) if (island[k] === undefined) delete island[k];
+    for (const k of Object.keys(island)) if (island[k] === undefined) delete island[k]; if (island.torrent && island.torrent.webseed === undefined) delete island.torrent.webseed;
     page(path, `${s.network} snapshot at ${s.height}`, island, '../'); made++;
   }
   entries.push({ '@id': id, '@type': 'Snapshot', name: `${s.network} at ${s.height.toLocaleString('en-US')}`, network: s.network, chain: s.chain, height: s.height, coins: s.coins, bytes: s.bytes, txoutsetHash: s.txoutsetHash, source: s.source, sharedWith: s.sharedWith,
-    torrent: s.infohash && s.page ? { '@id': path.replace('snapshots/', 'torrents/').replace(/^torrents\/(txbt4|xbt)-(\d+)\.html/, (m, n, h) => n === 'txbt4' ? 'torrents/utxo-knots-150307.html' : 'torrents/utxo-976000.html') + '#this' } : undefined, magnet: s.magnet, webseed: !!s.webseed, announcedAt: s.announcedAt ? { '@id': s.announcedAt } : undefined });
+    torrent: s.infohash && s.page ? { '@id': path.replace('snapshots/', 'torrents/').replace(/^torrents\/(txbt4|xbt)-(\d+)\.html/, (m, n, h) => n === 'txbt4' ? 'torrents/utxo-knots-150307.html' : 'torrents/utxo-976000.html') + '#this' } : undefined, magnet: s.magnet, webseed: !!(s.webseed || s.mirror), announcedAt: s.announcedAt ? { '@id': s.announcedAt } : undefined });
 }
 for (const e of entries) for (const k of Object.keys(e)) if (e[k] === undefined) delete e[k];
 entries.push({ '@id': 'https://nostrapps.github.io/ntorrent/?q=assumeutxo', '@type': 'WebPage', name: 'browse assumeutxo torrents on ntorrent', description: 'every kind 2003 announcement tagged assumeutxo, on Nostr, whoever posted it' },
