@@ -66,7 +66,7 @@
     .wiki table.dt td.num{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
     .wiki table.dt tr:first-child td{border-top:0}.wiki table.dt .muted{font-size:12px}
     .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
-    .wiki p.status{margin:0 0 18px;border-left:3px solid var(--accent);padding:8px 16px;background:var(--accent2);border-radius:0 8px 8px 0;color:var(--ink2);font-size:14.5px;line-height:1.5}
+    .wiki p.status{margin:-8px 0 26px;max-width:860px;border-left:3px solid var(--accent);padding:8px 16px;background:var(--accent2);border-radius:0 8px 8px 0;color:var(--ink2);font-size:14.5px;line-height:1.5}
     .wiki ul.links li{margin:0 0 10px}.wiki ul.links li a{font-size:15px}.wiki ul.links li div.muted{margin-top:1px}
     .wiki table.dt tr.grp td{background:#f6f3ec;font:500 13px var(--sans);color:var(--ink);padding:9px 14px;border-top:1px solid var(--line2)}
     .wiki table.dt tr.grp .type{margin-right:4px}
@@ -148,6 +148,7 @@
     sec.append(el(i ? 'h2' : 'h1', null, doc.name || doc.title || (id ? id : 'document')));
     if (id) { const full = new URL(id, location.href).href; const line = el('div', 'id'); line.append(link(full, full)); const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(full).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); line.append(b); sec.append(line); }
     if (doc.description) sec.append(el('p', 'lede', doc.description));
+    if (doc.status) sec.append(el('p', 'status', doc.status)); // the state of the thing, part of the hero, above any view
     await tabs(doc, sec);
     return sec;
   }
