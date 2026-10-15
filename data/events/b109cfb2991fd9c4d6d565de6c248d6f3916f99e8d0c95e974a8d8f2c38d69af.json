@@ -1,0 +1,95 @@
+{
+  "kind": 2003,
+  "pubkey": "cccccc0a8338a4aba51691f309f2f892c6c58f655a1ec3fc30522c894c166d9c",
+  "created_at": 1792081213,
+  "content": "UTXO set of Bitcoin signet at height 320000, in Bitcoin Core's dumptxoutset v2 format.\ntxoutset hash (hash_serialized, the entry in Core's chainparams): 1aaf72ecb376cc16957fbb8d5d406bfd6e3165510e2fc83879b6d14cd20b4462\nsize: 3273449689 bytes\n\nProvenance: Core chainparams (PR 36196); torrent from Sjors.\nBitcoin Core chainparams (assumeutxo entries): https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp\nCore PR 36196: chainparams updates pre-32.0 (965000): https://github.com/bitcoin/bitcoin/pull/36196\nSjors' torrents for the pre-32.0 snapshots: https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399\n\nThis is an announcement, not an attestation: the facts above were read from the sources named; the announcer has not loaded this file. Anyone who loads it and compares the txoutset hash can say so.\nMore, as data: https://melvin.me/public/datawiki/snapshots/signet-320000.html",
+  "tags": [
+    [
+      "title",
+      "Bitcoin signet assumeUTXO snapshot at block 320000"
+    ],
+    [
+      "x",
+      "27e140a6d93aee27e6d15c4623cae4c275f315db"
+    ],
+    [
+      "file",
+      "utxo-signet-320000.dat",
+      "3273449689"
+    ],
+    [
+      "tracker",
+      "udp://tracker.opentrackr.org:1337/announce"
+    ],
+    [
+      "tracker",
+      "udp://tracker.bitcoin.sprovoost.nl:6969"
+    ],
+    [
+      "alt",
+      "Torrent: Bitcoin signet assumeUTXO snapshot at block 320000"
+    ],
+    [
+      "i",
+      "tcat:other"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "utxo"
+    ],
+    [
+      "t",
+      "bitcoin"
+    ],
+    [
+      "t",
+      "signet"
+    ],
+    [
+      "t",
+      "signet"
+    ],
+    [
+      "t",
+      "bitcoin-core"
+    ],
+    [
+      "t",
+      "bitcoin-kernel"
+    ],
+    [
+      "txoutset_hash",
+      "1aaf72ecb376cc16957fbb8d5d406bfd6e3165510e2fc83879b6d14cd20b4462"
+    ],
+    [
+      "n",
+      "signet"
+    ],
+    [
+      "height",
+      "320000"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/pull/36196"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399"
+    ],
+    [
+      "r",
+      "https://melvin.me/public/datawiki/snapshots/signet-320000.html"
+    ]
+  ],
+  "id": "b109cfb2991fd9c4d6d565de6c248d6f3916f99e8d0c95e974a8d8f2c38d69af",
+  "sig": "4eda8e4bc9069a14e5e464ce00dbab3d7af93a6092e95c34cb9d19257f120f7cc1a6ec8b30b5eb7145eac7d0a25f2e9038703fb8b0998cdf7e1228d7e28caf6d"
+}

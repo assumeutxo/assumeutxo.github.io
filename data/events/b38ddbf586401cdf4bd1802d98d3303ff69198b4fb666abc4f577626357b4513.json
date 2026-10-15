@@ -1,0 +1,99 @@
+{
+  "kind": 2003,
+  "pubkey": "cccccc0a8338a4aba51691f309f2f892c6c58f655a1ec3fc30522c894c166d9c",
+  "created_at": 1792081213,
+  "content": "UTXO set of Bitcoin mainnet at height 935000, in Bitcoin Core's dumptxoutset v2 format.\ntxoutset hash (hash_serialized, the entry in Core's chainparams): e4b90ef9eae834f56c4b64d2d50143cee10ad87994c614d7d04125e2a6025050\nsize: 9387990306 bytes (Content-Length of the jaonoctus copy)\nchain tx count: 1305397408\n\nProvenance: Core chainparams (PR 34677); torrent on jaonoctus.\nBitcoin Core chainparams (assumeutxo entries): https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp\nCore PR 34677: chainparams updates pre-31.0 (935000): https://github.com/bitcoin/bitcoin/pull/34677\nbitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature): https://bitcoin-snapshots.jaonoctus.dev/\nDirect copy (also the web seed here): https://files-vps02.jaonoctus.dev/utxo-935000.dat\n\nThis is an announcement, not an attestation: the facts above were read from the sources named; the announcer has not loaded this file. Anyone who loads it and compares the txoutset hash can say so.\nMore, as data: https://melvin.me/public/datawiki/snapshots/btc-935000.html",
+  "tags": [
+    [
+      "title",
+      "Bitcoin mainnet assumeUTXO snapshot at block 935000"
+    ],
+    [
+      "x",
+      "3492d082655d173d3459f7a5e454f3dd4ed0101b"
+    ],
+    [
+      "file",
+      "utxo-935000.dat",
+      "9387990306"
+    ],
+    [
+      "tracker",
+      "udp://tracker.opentrackr.org:1337/announce"
+    ],
+    [
+      "tracker",
+      "udp://tracker.bitcoin.sprovoost.nl:6969"
+    ],
+    [
+      "tracker",
+      "https://files-vps02.jaonoctus.dev/utxo-935000.dat"
+    ],
+    [
+      "alt",
+      "Torrent: Bitcoin mainnet assumeUTXO snapshot at block 935000"
+    ],
+    [
+      "i",
+      "tcat:other"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "utxo"
+    ],
+    [
+      "t",
+      "bitcoin"
+    ],
+    [
+      "t",
+      "mainnet"
+    ],
+    [
+      "t",
+      "btc"
+    ],
+    [
+      "t",
+      "bitcoin-core"
+    ],
+    [
+      "t",
+      "bitcoin-kernel"
+    ],
+    [
+      "txoutset_hash",
+      "e4b90ef9eae834f56c4b64d2d50143cee10ad87994c614d7d04125e2a6025050"
+    ],
+    [
+      "n",
+      "btc"
+    ],
+    [
+      "height",
+      "935000"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/pull/34677"
+    ],
+    [
+      "r",
+      "https://bitcoin-snapshots.jaonoctus.dev/"
+    ],
+    [
+      "r",
+      "https://melvin.me/public/datawiki/snapshots/btc-935000.html"
+    ]
+  ],
+  "id": "b38ddbf586401cdf4bd1802d98d3303ff69198b4fb666abc4f577626357b4513",
+  "sig": "2d3ff1296daa23f9d03b26ee879e66223d3d5de7028cb284c9469573b818382fa8736a3d22b38ed199ac9653749ea69de73cc0995e4837f69d93a5977234160c"
+}

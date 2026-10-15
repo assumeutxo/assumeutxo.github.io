@@ -1,0 +1,95 @@
+{
+  "kind": 2003,
+  "pubkey": "cccccc0a8338a4aba51691f309f2f892c6c58f655a1ec3fc30522c894c166d9c",
+  "created_at": 1792081213,
+  "content": "UTXO set of Bitcoin testnet4 at height 120000, in Bitcoin Core's dumptxoutset v2 format.\ntxoutset hash (hash_serialized, the entry in Core's chainparams): 10b05d05ad468d0971162e1b222a4aa66caca89da2bb2a93f8f37fb29c4794b0\nsize: 850142614 bytes (Content-Length of the jaonoctus copy)\nchain tx count: 14141057\nAlso valid for txbt4 (below the fork point 150308).\n\nProvenance: Core chainparams; torrent on jaonoctus.\nBitcoin Core chainparams (assumeutxo entries): https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp\nbitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature): https://bitcoin-snapshots.jaonoctus.dev/\nDirect copy (also the web seed here): https://files-vps02.jaonoctus.dev/utxo-testnet4-120000.dat\n\nThis is an announcement, not an attestation: the facts above were read from the sources named; the announcer has not loaded this file. Anyone who loads it and compares the txoutset hash can say so.\nMore, as data: https://melvin.me/public/datawiki/snapshots/tbtc4-120000.html",
+  "tags": [
+    [
+      "title",
+      "Bitcoin testnet4 assumeUTXO snapshot at block 120000"
+    ],
+    [
+      "x",
+      "25733a7e451ca435f2901921b805c167f560424d"
+    ],
+    [
+      "file",
+      "utxo-testnet4-120000.dat",
+      "850142614"
+    ],
+    [
+      "tracker",
+      "udp://tracker.opentrackr.org:1337/announce"
+    ],
+    [
+      "tracker",
+      "https://files-vps02.jaonoctus.dev/utxo-testnet4-120000.dat"
+    ],
+    [
+      "alt",
+      "Torrent: Bitcoin testnet4 assumeUTXO snapshot at block 120000"
+    ],
+    [
+      "i",
+      "tcat:other"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "utxo"
+    ],
+    [
+      "t",
+      "bitcoin"
+    ],
+    [
+      "t",
+      "testnet"
+    ],
+    [
+      "t",
+      "testnet4"
+    ],
+    [
+      "t",
+      "tbtc4"
+    ],
+    [
+      "t",
+      "bitcoin-core"
+    ],
+    [
+      "t",
+      "bitcoin-kernel"
+    ],
+    [
+      "txoutset_hash",
+      "10b05d05ad468d0971162e1b222a4aa66caca89da2bb2a93f8f37fb29c4794b0"
+    ],
+    [
+      "n",
+      "tbtc4"
+    ],
+    [
+      "height",
+      "120000"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp"
+    ],
+    [
+      "r",
+      "https://bitcoin-snapshots.jaonoctus.dev/"
+    ],
+    [
+      "r",
+      "https://melvin.me/public/datawiki/snapshots/tbtc4-120000.html"
+    ]
+  ],
+  "id": "25e67aa6ab1e6fd6092bb7c254c55748470e81b2f5fc34549efcf189f6b794f4",
+  "sig": "6d5d3d0eaf52c6b8696dc2fdac680d9641102a3abe874f3fdf375330106f9d0434820ed305948d9d9bd585271b8c4769f72e9559f3de49baa85311bc5948d71b"
+}

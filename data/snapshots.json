@@ -96,7 +96,13 @@
         "pr28553",
         "jaonoctus"
       ],
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-840000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-840000.dat",
+      "announcedAt": {
+        "id": "2169f816f612e1492db691ab8cc0e74a431ac69bf6f8500b90ee15bb9a22f07d",
+        "kind": 2003,
+        "event": "data/events/2169f816f612e1492db691ab8cc0e74a431ac69bf6f8500b90ee15bb9a22f07d.json",
+        "relays": 3
+      }
     },
     {
       "network": "btc",
@@ -115,7 +121,13 @@
       ],
       "bytes": 10449923529,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-880000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-880000.dat",
+      "announcedAt": {
+        "id": "a32ec6700c7206de5b51385ae1591ebb9d8810640fd032fc9c57db90f4f17d1e",
+        "kind": 2003,
+        "event": "data/events/a32ec6700c7206de5b51385ae1591ebb9d8810640fd032fc9c57db90f4f17d1e.json",
+        "relays": 3
+      }
     },
     {
       "network": "btc",
@@ -133,7 +145,13 @@
       ],
       "bytes": 9637809744,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-910000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-910000.dat",
+      "announcedAt": {
+        "id": "3207bf95245e633728a9ea07f5a086219927e120eb0d9d09854e941750491f9f",
+        "kind": 2003,
+        "event": "data/events/3207bf95245e633728a9ea07f5a086219927e120eb0d9d09854e941750491f9f.json",
+        "relays": 3
+      }
     },
     {
       "network": "btc",
@@ -151,7 +169,13 @@
       ],
       "bytes": 9387990306,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-935000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-935000.dat",
+      "announcedAt": {
+        "id": "b38ddbf586401cdf4bd1802d98d3303ff69198b4fb666abc4f577626357b4513",
+        "kind": 2003,
+        "event": "data/events/b38ddbf586401cdf4bd1802d98d3303ff69198b4fb666abc4f577626357b4513.json",
+        "relays": 3
+      }
     },
     {
       "network": "btc",
@@ -167,7 +191,13 @@
         "core-chainparams",
         "pr36196",
         "sjors36196"
-      ]
+      ],
+      "announcedAt": {
+        "id": "a025074a0588cf009ea21cc9509635398e86ce7cc0c369c0d94f4b2a3bf21388",
+        "kind": 2003,
+        "event": "data/events/a025074a0588cf009ea21cc9509635398e86ce7cc0c369c0d94f4b2a3bf21388.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc3",
@@ -185,8 +215,14 @@
         "jaonoctus"
       ],
       "bytes": 1245790499,
-      "note": "Sjors' original torrent (511e09f4\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
-      "bytesFrom": "the torrent metainfo, from a peer"
+      "note": "Sjors' original torrent (511e09f4…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "bytesFrom": "the torrent metainfo, from a peer",
+      "announcedAt": {
+        "id": "0b3d3afb10637fd4d4f49a9a5fad19858f1a3c65ba756c57746a6f81929b8400",
+        "kind": 2003,
+        "event": "data/events/0b3d3afb10637fd4d4f49a9a5fad19858f1a3c65ba756c57746a6f81929b8400.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc3",
@@ -203,7 +239,13 @@
       ],
       "bytes": 13877497766,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-testnet-4840000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-testnet-4840000.dat",
+      "announcedAt": {
+        "id": "200deb8644688261f57a5b970281770a8a5c22aa8e14c1414a51fe13672094b0",
+        "kind": 2003,
+        "event": "data/events/200deb8644688261f57a5b970281770a8a5c22aa8e14c1414a51fe13672094b0.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc3",
@@ -219,7 +261,13 @@
         "core-chainparams",
         "pr36196",
         "sjors36196"
-      ]
+      ],
+      "announcedAt": {
+        "id": "0eb23d05a757c321aa6dcf9a8876482543c3ddfddffaa3e2cc788f201a4fa1e1",
+        "kind": 2003,
+        "event": "data/events/0eb23d05a757c321aa6dcf9a8876482543c3ddfddffaa3e2cc788f201a4fa1e1.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc4",
@@ -236,7 +284,13 @@
       ],
       "sharedWith": "txbt4 (below the fork point 150308)",
       "bytes": 785253704,
-      "bytesFrom": "the torrent metainfo, from a peer"
+      "bytesFrom": "the torrent metainfo, from a peer",
+      "announcedAt": {
+        "id": "2bc3163439d0bf7ceacfad6fcda5b7294df1e82b9f406cd8967850eb384186c7",
+        "kind": 2003,
+        "event": "data/events/2bc3163439d0bf7ceacfad6fcda5b7294df1e82b9f406cd8967850eb384186c7.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc4",
@@ -254,7 +308,13 @@
       "sharedWith": "txbt4 (below the fork point 150308)",
       "bytes": 850142614,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-testnet4-120000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-testnet4-120000.dat",
+      "announcedAt": {
+        "id": "25e67aa6ab1e6fd6092bb7c254c55748470e81b2f5fc34549efcf189f6b794f4",
+        "kind": 2003,
+        "event": "data/events/25e67aa6ab1e6fd6092bb7c254c55748470e81b2f5fc34549efcf189f6b794f4.json",
+        "relays": 2
+      }
     },
     {
       "network": "tbtc4",
@@ -271,7 +331,13 @@
         "pr36196",
         "sjors36196"
       ],
-      "sharedWith": "txbt4 (307 blocks below the fork point: a second valid start for the BLAKE2b testnet)"
+      "sharedWith": "txbt4 (307 blocks below the fork point: a second valid start for the BLAKE2b testnet)",
+      "announcedAt": {
+        "id": "238e83c08352d53f764ae64f53de7bf47d68b65393317003ecc7a803a38efdf2",
+        "kind": 2003,
+        "event": "data/events/238e83c08352d53f764ae64f53de7bf47d68b65393317003ecc7a803a38efdf2.json",
+        "relays": 2
+      }
     },
     {
       "network": "signet",
@@ -289,8 +355,14 @@
         "jaonoctus"
       ],
       "bytes": 87828915,
-      "note": "Sjors' original torrent (9da986cb\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
-      "bytesFrom": "the torrent metainfo, from a peer"
+      "note": "Sjors' original torrent (9da986cb…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "bytesFrom": "the torrent metainfo, from a peer",
+      "announcedAt": {
+        "id": "2d39893ab241d971aab2f339863be90121fb1649136339a0be4a3ed2eea20b4c",
+        "kind": 2003,
+        "event": "data/events/2d39893ab241d971aab2f339863be90121fb1649136339a0be4a3ed2eea20b4c.json",
+        "relays": 2
+      }
     },
     {
       "network": "signet",
@@ -307,7 +379,13 @@
       ],
       "bytes": 2681957895,
       "bytesFrom": "Content-Length of the jaonoctus copy",
-      "mirror": "https://files-vps02.jaonoctus.dev/utxo-signet-290000.dat"
+      "mirror": "https://files-vps02.jaonoctus.dev/utxo-signet-290000.dat",
+      "announcedAt": {
+        "id": "baa63577262a3a64e2e062fa0be6a4db78a581f5c987d377dee559dc70e823a0",
+        "kind": 2003,
+        "event": "data/events/baa63577262a3a64e2e062fa0be6a4db78a581f5c987d377dee559dc70e823a0.json",
+        "relays": 2
+      }
     },
     {
       "network": "signet",
@@ -322,7 +400,13 @@
         "core-chainparams",
         "pr36196",
         "sjors36196"
-      ]
+      ],
+      "announcedAt": {
+        "id": "b109cfb2991fd9c4d6d565de6c248d6f3916f99e8d0c95e974a8d8f2c38d69af",
+        "kind": 2003,
+        "event": "data/events/b109cfb2991fd9c4d6d565de6c248d6f3916f99e8d0c95e974a8d8f2c38d69af.json",
+        "relays": 2
+      }
     }
   ]
 }

@@ -1,0 +1,99 @@
+{
+  "kind": 2003,
+  "pubkey": "cccccc0a8338a4aba51691f309f2f892c6c58f655a1ec3fc30522c894c166d9c",
+  "created_at": 1792081213,
+  "content": "UTXO set of Bitcoin testnet3 at height 2500000, in Bitcoin Core's dumptxoutset v2 format.\ntxoutset hash (hash_serialized, the entry in Core's chainparams): f841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7\nsha256 of the file: eeeca845385ba91e84ef58c09d38f98f246a24feadaad57fe1e5874f3f92ef8c\nsize: 1245790499 bytes (the torrent metainfo, from a peer)\nchain tx count: 66484552\n\nProvenance: Core chainparams; torrent on jaonoctus (Sjors' original unseeded).\nBitcoin Core chainparams (assumeutxo entries): https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp\nCore PR 28516: assumeutxo params for testnet and signet: https://github.com/bitcoin/bitcoin/pull/28516\nbitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature): https://bitcoin-snapshots.jaonoctus.dev/\nSjors' original torrent (511e09f4…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers\n\nThis is an announcement, not an attestation: the facts above were read from the sources named; the announcer has not loaded this file. Anyone who loads it and compares the txoutset hash can say so.\nMore, as data: https://melvin.me/public/datawiki/snapshots/tbtc3-2500000.html",
+  "tags": [
+    [
+      "title",
+      "Bitcoin testnet3 assumeUTXO snapshot at block 2500000"
+    ],
+    [
+      "x",
+      "4063ff1580db4923e6dbc3ac6cab3baf4cf19bc4"
+    ],
+    [
+      "file",
+      "utxo-testnet-2500000.dat",
+      "1245790499"
+    ],
+    [
+      "tracker",
+      "udp://tracker.opentrackr.org:1337/announce"
+    ],
+    [
+      "alt",
+      "Torrent: Bitcoin testnet3 assumeUTXO snapshot at block 2500000"
+    ],
+    [
+      "i",
+      "tcat:other"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "utxo"
+    ],
+    [
+      "t",
+      "bitcoin"
+    ],
+    [
+      "t",
+      "testnet"
+    ],
+    [
+      "t",
+      "testnet3"
+    ],
+    [
+      "t",
+      "tbtc3"
+    ],
+    [
+      "t",
+      "bitcoin-core"
+    ],
+    [
+      "t",
+      "bitcoin-kernel"
+    ],
+    [
+      "txoutset_hash",
+      "f841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7"
+    ],
+    [
+      "sha256",
+      "eeeca845385ba91e84ef58c09d38f98f246a24feadaad57fe1e5874f3f92ef8c"
+    ],
+    [
+      "n",
+      "tbtc3"
+    ],
+    [
+      "height",
+      "2500000"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp"
+    ],
+    [
+      "r",
+      "https://github.com/bitcoin/bitcoin/pull/28516"
+    ],
+    [
+      "r",
+      "https://bitcoin-snapshots.jaonoctus.dev/"
+    ],
+    [
+      "r",
+      "https://melvin.me/public/datawiki/snapshots/tbtc3-2500000.html"
+    ]
+  ],
+  "id": "0b3d3afb10637fd4d4f49a9a5fad19858f1a3c65ba756c57746a6f81929b8400",
+  "sig": "34a50f91e365903f6aa3beec9369437be313642c6b1bcfbac763e99891186532f103e659f0899a0fdfaa0ccdf4efc51fc3f812016ad6d3f1e9924f32f3c07564"
+}
