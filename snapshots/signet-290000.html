@@ -1,0 +1,40 @@
+<!doctype html>
+<meta charset="utf-8"><title>signet snapshot at 290000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "signet assumeUTXO snapshot at 290000",
+  "description": "UTXO set of Bitcoin signet at height 290,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "signet",
+  "chain": "Bitcoin signet",
+  "height": 290000,
+  "txoutsetHash": "97267e000b4b876800167e71b9123f1529d13b14308abec2888bbd2160d14545",
+  "chainTxCount": 28547497,
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "304c3ee0ac2ce34ba64173b50d1950976544e8a3",
+    "magnet": "magnet:?xt=urn:btih:304c3ee0ac2ce34ba64173b50d1950976544e8a3&dn=utxo-signet-290000.dat&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://bitcoin-snapshots.jaonoctus.dev/",
+      "name": "bitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature)"
+    }
+  ],
+  "producedBy": "Core chainparams; torrent on jaonoctus",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>

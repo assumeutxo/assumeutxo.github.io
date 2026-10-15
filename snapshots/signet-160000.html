@@ -1,0 +1,45 @@
+<!doctype html>
+<meta charset="utf-8"><title>signet snapshot at 160000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "signet assumeUTXO snapshot at 160000",
+  "description": "UTXO set of Bitcoin signet at height 160,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "signet",
+  "chain": "Bitcoin signet",
+  "height": 160000,
+  "txoutsetHash": "fe0a44309b74d6b5883d246cb419c6221bcccf0b308c9b59b7d70783dbdf928a",
+  "chainTxCount": 2289496,
+  "sha256": "79db4b025448cc0ac388d8589a28eab02de53055d181e34eb47391717aa16388",
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "9da986cb27b3980ea7fd06b21e199b148d486880",
+    "magnet": "magnet:?xt=urn:btih:9da986cb27b3980ea7fd06b21e199b148d486880&dn=utxo-signet-160000.dat&tr=udp%3A%2F%2Ftracker.bitcoin.sprovoost.nl%3A6969"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/28516",
+      "name": "Core PR 28516: assumeutxo params for testnet and signet"
+    },
+    {
+      "@id": "https://bitcoin-snapshots.jaonoctus.dev/",
+      "name": "bitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature)"
+    }
+  ],
+  "producedBy": "Core chainparams; torrent from Sjors (PR 28516); jaonoctus has another packaging (ae77ab03…)",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>

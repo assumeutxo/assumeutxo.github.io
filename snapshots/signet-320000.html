@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8"><title>signet snapshot at 320000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "signet assumeUTXO snapshot at 320000",
+  "description": "UTXO set of Bitcoin signet at height 320,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "signet",
+  "chain": "Bitcoin signet",
+  "height": 320000,
+  "txoutsetHash": "1aaf72ecb376cc16957fbb8d5d406bfd6e3165510e2fc83879b6d14cd20b4462",
+  "bytes": 3273449689,
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "27e140a6d93aee27e6d15c4623cae4c275f315db",
+    "magnet": "magnet:?xt=urn:btih:27e140a6d93aee27e6d15c4623cae4c275f315db&dn=utxo-signet-320000.dat&xl=3273449689&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.bitcoin.sprovoost.nl%3A6969"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/36196",
+      "name": "Core PR 36196: chainparams updates pre-32.0 (965000)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399",
+      "name": "Sjors' torrents for the pre-32.0 snapshots"
+    }
+  ],
+  "producedBy": "Core chainparams (PR 36196); torrent from Sjors",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>

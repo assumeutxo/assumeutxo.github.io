@@ -1,0 +1,46 @@
+<!doctype html>
+<meta charset="utf-8"><title>tbtc4 snapshot at 150000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "tbtc4 assumeUTXO snapshot at 150000",
+  "description": "UTXO set of Bitcoin testnet4 at height 150,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Shared with txbt4 (307 blocks below the fork point: a second valid start for the BLAKE2b testnet). Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "tbtc4",
+  "chain": "Bitcoin testnet4",
+  "height": 150000,
+  "txoutsetHash": "ca068cae50679d7c947454bbe4f0e6aeec1fbe2c6c2735a08bb988623649f950",
+  "chainTxCount": 14810011,
+  "bytes": 869730622,
+  "sharedWith": "txbt4 (307 blocks below the fork point: a second valid start for the BLAKE2b testnet)",
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "9c772a052840afb227a722715cfb547f0b1606af",
+    "magnet": "magnet:?xt=urn:btih:9c772a052840afb227a722715cfb547f0b1606af&dn=utxo-testnet4-150000.dat&xl=869730622&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.bitcoin.sprovoost.nl%3A6969"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/36196",
+      "name": "Core PR 36196: chainparams updates pre-32.0 (965000)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399",
+      "name": "Sjors' torrents for the pre-32.0 snapshots"
+    }
+  ],
+  "producedBy": "Core chainparams (PR 36196); torrent from Sjors",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>

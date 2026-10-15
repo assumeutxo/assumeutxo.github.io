@@ -1,0 +1,41 @@
+<!doctype html>
+<meta charset="utf-8"><title>tbtc4 snapshot at 120000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "tbtc4 assumeUTXO snapshot at 120000",
+  "description": "UTXO set of Bitcoin testnet4 at height 120,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Shared with txbt4 (below the fork point 150308). Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "tbtc4",
+  "chain": "Bitcoin testnet4",
+  "height": 120000,
+  "txoutsetHash": "10b05d05ad468d0971162e1b222a4aa66caca89da2bb2a93f8f37fb29c4794b0",
+  "chainTxCount": 14141057,
+  "sharedWith": "txbt4 (below the fork point 150308)",
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "25733a7e451ca435f2901921b805c167f560424d",
+    "magnet": "magnet:?xt=urn:btih:25733a7e451ca435f2901921b805c167f560424d&dn=utxo-testnet4-120000.dat&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://bitcoin-snapshots.jaonoctus.dev/",
+      "name": "bitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature)"
+    }
+  ],
+  "producedBy": "Core chainparams; torrent on jaonoctus",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>

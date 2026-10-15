@@ -1,0 +1,44 @@
+<!doctype html>
+<meta charset="utf-8"><title>btc snapshot at 935000</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Snapshot",
+  "name": "btc assumeUTXO snapshot at 935000",
+  "description": "UTXO set of Bitcoin mainnet at height 935,000, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. Facts read from the sources below; we have not loaded this one ourselves.",
+  "network": "btc",
+  "chain": "Bitcoin mainnet",
+  "height": 935000,
+  "txoutsetHash": "e4b90ef9eae834f56c4b64d2d50143cee10ad87994c614d7d04125e2a6025050",
+  "chainTxCount": 1305397408,
+  "torrent": {
+    "@type": "Torrent",
+    "infohash": "3492d082655d173d3459f7a5e454f3dd4ed0101b",
+    "magnet": "magnet:?xt=urn:btih:3492d082655d173d3459f7a5e454f3dd4ed0101b&dn=utxo-935000.dat&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.bitcoin.sprovoost.nl%3A6969"
+  },
+  "source": {
+    "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+    "name": "Bitcoin Core chainparams (assumeutxo entries)"
+  },
+  "sources": [
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+      "name": "Bitcoin Core chainparams (assumeutxo entries)"
+    },
+    {
+      "@id": "https://github.com/bitcoin/bitcoin/pull/34677",
+      "name": "Core PR 34677: chainparams updates pre-31.0 (935000)"
+    },
+    {
+      "@id": "https://bitcoin-snapshots.jaonoctus.dev/",
+      "name": "bitcoin-snapshots.jaonoctus.dev (torrents, SHA-512 sums, GPG signature)"
+    }
+  ],
+  "producedBy": "Core chainparams (PR 34677); torrent on jaonoctus",
+  "creator": {
+    "@id": "../me.html#me"
+  }
+}
+</script>
+<script src="../wiki.js"></script>
