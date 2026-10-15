@@ -5,36 +5,68 @@
 // its own island and its own copy of this file. A page with a richer renderer can add it; this is the floor.
 (() => {
   const CSS = `
-    body{margin:0;font:15px/1.5 system-ui,sans-serif;color:#1b1b1b;background:#fbfaf7}
-    main.wiki{max-width:860px;margin:0 auto;padding:1.5rem 1rem 4rem}
-    .wiki h1{font-size:1.5rem;margin:.2rem 0 .1rem}.wiki h2{font-size:1.1rem;margin:1.6rem 0 .4rem;color:#444}
-    .wiki .id{font:13px ui-monospace,monospace;color:#777;word-break:break-all}
-    .wiki table{border-collapse:collapse;width:100%;margin:.4rem 0}
-    .wiki td{vertical-align:top;padding:.3rem .5rem;border-top:1px solid #e8e5dd;font-size:14px}
-    .wiki td.k{width:11em;color:#666;font-family:ui-monospace,monospace;font-size:13px;white-space:nowrap}
-    .wiki td.v{font-family:ui-monospace,monospace;font-size:13px;word-break:break-all}
-    .wiki td.v table{margin:0;border:1px solid #e8e5dd}
-    .wiki ul{margin:0;padding-left:1.1rem}.wiki li{margin:.15rem 0}
-    .wiki a{color:#0b5fa5;text-decoration:none}.wiki a:hover{text-decoration:underline}
-    .wiki .type{display:inline-block;font:12px ui-monospace,monospace;background:#ecebe6;border-radius:4px;padding:0 .4rem;margin-right:.4rem;color:#333}
-    .wiki details{margin-top:1.2rem}.wiki summary{cursor:pointer;color:#666;font-size:13px}
-    .wiki pre{background:#f3f2ee;padding:.8rem;border-radius:6px;overflow:auto;font-size:12.5px}
-    .wiki nav{font-size:13px;color:#777;margin-bottom:1rem}.wiki nav a{margin-right:.8rem}
-    .wiki .tabs{display:flex;gap:.3rem;margin:.6rem 0 .4rem;border-bottom:1px solid #e8e5dd}
-    .wiki .tabs button{font:13px ui-monospace,monospace;background:none;border:0;border-bottom:2px solid transparent;padding:.3rem .6rem;color:#666;cursor:pointer}
-    .wiki .tabs button.on{color:#1b1b1b;border-bottom-color:#1b1b1b}
-    .wiki .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem;margin-top:.6rem}
-    .wiki .card{display:block;border:1px solid #e8e5dd;border-radius:8px;padding:.7rem .9rem;background:#fff;color:inherit}
-    .wiki .card:hover{border-color:#bbb;text-decoration:none}.wiki .card b{display:block;margin-top:.3rem}
-    .wiki .light{display:inline-block;width:.7em;height:.7em;border-radius:50%;margin-right:.4em;vertical-align:middle;background:#bbb}
-    .wiki .light.ok{background:#2a9d4a}.wiki .light.bad{background:#c43b2f}.wiki .light.grey{background:#bbb}
-    .wiki .mark{border:1px solid #e8e5dd;border-radius:8px;padding:.6rem .9rem;margin:.5rem 0;background:#fff;font-size:14px}
-    .wiki .mark code{font-size:12.5px}.wiki .err{color:#c43b2f}.wiki .muted{color:#777;font-size:13px}
+    :root{--paper:#faf8f3;--card:#ffffff;--ink:#17160f;--ink2:#3d3a33;--mute:#78736a;--line:#e9e4d9;--line2:#d9d2c3;--accent:#c47a12;--accent2:#fff4e3;--link:#1f4e8c;--ok:#2f9e5b;--bad:#cc3d2e;--grey:#c9c3b6;
+      --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Inter,Roboto,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace}
+    *{box-sizing:border-box}
+    html{background:var(--paper)}
+    body{margin:0;font:16px/1.55 var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+    main.wiki{max-width:880px;margin:0 auto;padding:0 20px 96px}
+    .wiki nav{display:flex;align-items:center;gap:22px;height:56px;margin:0 0 40px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.02em}
+    .wiki nav a{color:var(--mute);text-decoration:none}.wiki nav a:hover{color:var(--ink)}
+    .wiki nav a.wordmark{color:var(--ink);font:600 15px var(--serif);letter-spacing:0;margin-right:auto}
+    .wiki nav a.wordmark::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:9px;vertical-align:1px}
+    .wiki section{margin:0 0 56px}
+    .wiki .eyebrow{display:flex;gap:8px;align-items:center;margin:0 0 10px}
+    .wiki h1{font:400 44px/1.1 var(--serif);letter-spacing:-.015em;margin:0 0 10px;color:var(--ink)}
+    .wiki h2{font:400 28px/1.15 var(--serif);letter-spacing:-.01em;margin:0 0 10px}
+    .wiki .id{display:flex;align-items:center;gap:8px;font:12.5px var(--mono);color:var(--mute);word-break:break-all;margin:0 0 14px}
+    .wiki .id a{color:var(--mute)}
+    .wiki p.lede{font:19px/1.5 var(--serif);color:var(--ink2);margin:0 0 26px;max-width:62ch}
+    .wiki .type{display:inline-block;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent2);border:1px solid #f1dcb9;border-radius:999px;padding:5px 9px 4px}
+    .wiki a{color:var(--link);text-decoration:none}.wiki a:hover{text-decoration:underline;text-underline-offset:3px}
+    .wiki .tabs{display:inline-flex;gap:2px;padding:3px;background:#efeae0;border-radius:10px;margin:0 0 18px}
+    .wiki .tabs button{font:500 13px var(--sans);background:none;border:0;border-radius:8px;padding:6px 14px;color:var(--mute);cursor:pointer}
+    .wiki .tabs button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 0 0 1px var(--line)}
+    .wiki .tabs button:hover:not(.on){color:var(--ink)}
+    .wiki table{border-collapse:collapse;width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .wiki td{vertical-align:top;padding:11px 16px;border-top:1px solid var(--line);font-size:14px;line-height:1.5}
+    .wiki tr:first-child td{border-top:0}
+    .wiki td.k{width:12.5em;color:var(--mute);font:500 12px/1.6 var(--mono);letter-spacing:.03em;white-space:nowrap;background:#fcfbf8}
+    .wiki td.v{font:13.5px/1.55 var(--mono);color:var(--ink2);word-break:break-all}
+    .wiki td.v table{margin:2px 0;border-radius:8px}.wiki td.v td{padding:7px 12px;font-size:13px}.wiki td.v td.k{width:10em}
+    .wiki ul{margin:0;padding-left:0;list-style:none}.wiki li{margin:0 0 6px;padding-left:14px;position:relative}
+    .wiki li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--line2)}
+    .wiki .num{font-variant-numeric:tabular-nums;color:var(--ink)}
+    .wiki .hash{font:13px var(--mono);color:var(--ink2)}
+    .wiki .hash b{font-weight:600;color:var(--ink)}
+    .wiki button.copy{font:11px var(--mono);border:1px solid var(--line2);background:var(--card);color:var(--mute);border-radius:6px;padding:2px 7px;margin-left:8px;cursor:pointer;vertical-align:middle}
+    .wiki button.copy:hover{color:var(--ink);border-color:#bbb}
+    .wiki pre{background:var(--card);border:1px solid var(--line);padding:16px 18px;border-radius:12px;overflow:auto;font:12.5px/1.5 var(--mono);color:var(--ink2);margin:0}
+    .wiki .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:0 0 20px}
+    .wiki .card{display:block;border:1px solid var(--line);border-radius:14px;padding:18px 20px 20px;background:var(--card);color:inherit;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+    .wiki .card:hover{text-decoration:none;transform:translateY(-2px);border-color:var(--line2);box-shadow:0 10px 30px -18px rgba(23,22,15,.35)}
+    .wiki .card b{display:block;font:400 21px/1.25 var(--serif);letter-spacing:-.01em;margin:12px 0 6px;color:var(--ink)}
+    .wiki .card .muted{display:block}
+    .wiki .muted{color:var(--mute);font-size:13.5px}
+    .wiki .err{color:var(--bad)}
+    .wiki .marks{position:relative;margin:4px 0 0;padding-left:26px}
+    .wiki .marks::before{content:"";position:absolute;left:8px;top:14px;bottom:14px;width:2px;background:var(--line)}
+    .wiki .mark{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:0 0 14px;font-size:14px}
+    .wiki .mark::before{content:"";position:absolute;left:-23px;top:20px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--paper)}
+    .wiki .mark > div:first-child{font:400 17px var(--serif);margin:0 0 10px;color:var(--ink)}
+    .wiki .mark > div:first-child a{font:13px var(--mono)}
+    .wiki .mark div{margin:4px 0;color:var(--ink2)}
+    .wiki .light{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px;vertical-align:1px;background:var(--grey)}
+    .wiki .light.ok{background:var(--ok);box-shadow:0 0 0 3px #e3f3e9}.wiki .light.bad{background:var(--bad);box-shadow:0 0 0 3px #f9e1de}.wiki .light.grey{background:var(--grey);box-shadow:0 0 0 3px #f0ece3}
+    .wiki .view > p.muted{margin:14px 0 0}
+    @media (max-width:640px){.wiki h1{font-size:34px}.wiki td.k{width:9em;font-size:11px}.wiki td{padding:9px 12px}main.wiki{padding:0 14px 72px}}
   `;
   const isIri = (s) => /^(https?:|magnet:|did:|txo:|urn:|mailto:|wss?:|\.{0,2}\/|[\w.-]+\.(html|jsonld|json|torrent|dat)(#|$)|#)/i.test(s);
   const href = (iri) => { try { return /^(https?:|\.{0,2}\/|[\w./-]+\.html|#)/i.test(iri) ? new URL(iri, location.href).href : iri; } catch { return iri; } };
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const link = (iri, text) => { const a = el('a', null, text ?? iri); a.href = href(iri); return a; };
+  // a long hex value: the first and last characters emphasised so two hashes can be told apart at a glance, and a copy button
+  const hash = (h) => { const s = el('span', 'hash'); s.append(el('b', null, h.slice(0, 8)), h.slice(8, -8), el('b', null, h.slice(-8))); const b = el('button', 'copy', 'copy'); b.onclick = (e) => { e.preventDefault(); navigator.clipboard.writeText(h).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); }; s.append(b); return s; };
 
   function value(v) {
     if (v == null) return el('span', null, '—');
@@ -45,6 +77,8 @@
       return table(v);
     }
     if (typeof v === 'string' && isIri(v)) return link(v);
+    if (typeof v === 'string' && /^[0-9a-f]{40,}$/i.test(v)) return hash(v);
+    if (typeof v === 'number') return el('span', 'num', v.toLocaleString('en-US'));
     return el('span', null, String(v));
   }
   function table(obj) {
@@ -62,10 +96,10 @@
   function island(doc, i) {
     const sec = el('section');
     const id = doc['@id']; if (id && id.startsWith('#')) sec.id = id.slice(1);
-    const h = el(i ? 'h2' : 'h1'); h.append(...[].concat(doc['@type'] || []).map((x) => el('span', 'type', x)), doc.name || doc.title || (id ? id : 'document'));
-    sec.append(h);
-    if (id) sec.append(el('div', 'id', new URL(id, location.href).href));
-    if (doc.description) sec.append(el('p', null, doc.description));
+    const eyebrow = el('div', 'eyebrow'); eyebrow.append(...[].concat(doc['@type'] || []).map((x) => el('span', 'type', x))); sec.append(eyebrow);
+    sec.append(el(i ? 'h2' : 'h1', null, doc.name || doc.title || (id ? id : 'document')));
+    if (id) { const full = new URL(id, location.href).href; const line = el('div', 'id'); line.append(link(full, full)); const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(full).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); line.append(b); sec.append(line); }
+    if (doc.description) sec.append(el('p', 'lede', doc.description));
     tabs(doc, sec);
     return sec;
   }
@@ -79,7 +113,9 @@
   const loadPane = (type) => new Promise((res) => { const s = document.createElement('script'); s.src = new URL('panes/' + String(type).toLowerCase() + '.js', ROOT).href; s.onload = s.onerror = () => res(); document.head.append(s); });
   function tabs(doc, sec) {
     const views = wiki.panes.map((p) => { let l = null; try { l = p.label(doc); } catch {} return l ? { name: l, render: p.render } : null; }).filter(Boolean);
-    views.push({ name: 'outline', render: (d, e) => e.append(table(d)) }, { name: 'raw', render: (d, e) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
+    // the outline leaves out what the hero already shows: the id, the type, the name and the description
+    const rest = (d) => Object.fromEntries(Object.entries(d).filter(([k]) => !['@id', '@type', 'name', 'title', 'description'].includes(k)));
+    views.push({ name: 'outline', render: (d, e) => e.append(table(rest(d))) }, { name: 'raw', render: (d, e) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
     const bar = el('div', 'tabs'); const body = el('div', 'view'); let cur;
     const show = (v) => { cur = v; body.replaceChildren(); try { v.render(doc, body); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.textContent === v.name)); };
     for (const v of views) { const b = el('button', null, v.name); b.onclick = () => show(v); bar.append(b); }
@@ -91,7 +127,7 @@
     const types = new Set(islands.flatMap((d) => [].concat(d['@type'] || [])));
     await Promise.all([...types].map(loadPane));
     const main = el('main', 'wiki');
-    const nav = el('nav'); for (const [p, t] of [['index.html', 'index'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', null, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
+    const nav = el('nav'); for (const [p, t, c] of [['index.html', 'datawiki', 'wordmark'], ['index.html', 'index'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
     islands.forEach((d, i) => main.append(island(d, i)));
     if (!document.title && islands[0]) document.title = islands[0].name || islands[0]['@id'] || 'datawiki';
     document.body.append(main);

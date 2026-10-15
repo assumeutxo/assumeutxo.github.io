@@ -34,7 +34,7 @@
       const states = doc.states && doc.states.length ? doc.states : txos.map((t) => t && t.commit);
       const head = el('p', 'muted', `profile ${doc.profile || '?'} · chain ${doc.chain || '?'} · ${txos.length} mark${txos.length === 1 ? '' : 's'} · base key ${String(doc.pubkeyBase || '').slice(0, 12)}…`);
       root.append(head);
-      const list = el('div'); root.append(list);
+      const list = el('div', 'marks'); root.append(list);
       const status = el('p', 'muted', 'loading the key and codec code (pinned by commit)…'); root.append(status);
       load().then(({ walk, codec }) => {
         let base = String(doc.pubkeyBase || '').toLowerCase(); if (/^[0-9a-f]{64}$/.test(base)) base = '02' + base;
@@ -44,7 +44,7 @@
           const m = el('div', 'mark'); list.append(m);
           if (!t) { m.append(el('span', 'err', 'not a txo: URI')); return; }
           const line = (cls, text) => { const p = el('div'); p.append(el('span', 'light ' + cls), text); m.append(p); };
-          m.append(el('div', null, `${i + 1}. state ${String(states[i]).slice(0, 12)}… · `), link(t.uri.split('?')[0], t.txid.slice(0, 12) + '…:' + t.vout));
+          const h = el('div'); h.append(`${i + 1}. state ${String(states[i]).slice(0, 12)}… `, link(t.uri.split('?')[0], t.txid.slice(0, 12) + '…:' + t.vout)); m.append(h);
           if (!t.hex) { line('grey', 'given by name only: nothing to check here without the bytes'); return; }
           try {
             const d = codec.decode('Transaction', t.hex); const txid = codec.txid(d);
