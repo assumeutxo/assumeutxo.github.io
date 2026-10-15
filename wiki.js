@@ -38,7 +38,7 @@
     .wiki li::before{content:"";position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--line2)}
     .wiki .num{font-variant-numeric:tabular-nums;color:var(--ink)}
     .wiki .hash{font:13px var(--mono);color:var(--ink2)}
-    .wiki .hash b{font-weight:600;color:var(--ink)}
+    .wiki .hash b{font-weight:400;color:var(--ink)}.wiki .hash span.mid{color:#a39e93}
     .wiki button.copy{font:11px var(--mono);border:1px solid var(--line2);background:var(--card);color:var(--mute);border-radius:6px;padding:2px 7px;margin-left:8px;cursor:pointer;vertical-align:middle}
     .wiki button.copy:hover{color:var(--ink);border-color:#bbb}
     .wiki pre{background:var(--card);border:1px solid var(--line);padding:16px 18px;border-radius:12px;overflow:auto;font:12.5px/1.5 var(--mono);color:var(--ink2);margin:0}
@@ -83,7 +83,8 @@
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const link = (iri, text) => { const a = el('a', null, text ?? iri); a.href = href(iri); return a; };
   // a long hex value: the first and last characters emphasised so two hashes can be told apart at a glance, and a copy button
-  const hash = (h) => { const s = el('span', 'hash'); s.append(el('b', null, h.slice(0, 8)), h.slice(8, -8), el('b', null, h.slice(-8))); const b = el('button', 'copy', 'copy'); b.onclick = (e) => { e.preventDefault(); navigator.clipboard.writeText(h).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); }; s.append(b); return s; };
+  // the ends in ink, the middle lighter: two hashes can be told apart at a glance without anything looking emphasised
+  const hash = (h) => { const s = el('span', 'hash'); s.append(el('b', null, h.slice(0, 8)), el('span', 'mid', h.slice(8, -8)), el('b', null, h.slice(-8))); const b = el('button', 'copy', 'copy'); b.onclick = (e) => { e.preventDefault(); navigator.clipboard.writeText(h).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); }; s.append(b); return s; };
 
   function value(v) {
     if (v == null) return el('span', null, '—');
