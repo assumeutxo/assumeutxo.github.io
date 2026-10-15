@@ -17,9 +17,14 @@ wiki.panes.push({
         const c = el('td'); c.append(link(e['@id'], String(e.height != null ? e.height.toLocaleString('en-US') : '?'))); if (e.sharedWith) c.append(el('div', 'muted', 'also ' + e.sharedWith.split(' (')[0])); tr.append(c);
         const hcell = el('td', 'num'); if (e.txoutsetHash) { const a = link(e['@id'], e.txoutsetHash.slice(0, 12) + '…'); a.title = e.txoutsetHash; hcell.append(a); } else hcell.append('?'); tr.append(hcell);
         tr.append(el('td', 'num', e.bytes != null ? (e.bytes / 1e9).toFixed(2) + ' GB' : '?'));
-        const ac = el('td', 'num'); const at = e.attested || {}; ac.textContent = (at.formal || at.informal) ? `${at.formal || 0} formal · ${at.informal || 0} informal` : '—'; ac.title = 'formal: a signed statement checked in the page; informal: a claim made elsewhere, linked'; tr.append(ac);
+        // attested: two small pills, formal green and informal amber when present, grey when zero
+        const ac = el('td', 'att'); const at = e.attested || {};
+        const pill = (n, kind) => { const p = el('span', 'pill ' + kind + (n ? ' on' : '')); p.append(el('b', null, String(n || 0)), ' ' + kind); p.title = kind === 'formal' ? 'signed statements, checked in the page' : 'claims made elsewhere, linked, not vouched for'; return p; };
+        ac.append(pill(at.formal, 'formal'), pill(at.informal, 'informal')); tr.append(ac);
         const sc = el('td', 'src'); sc.title = e.source || ''; sc.textContent = e.source || ''; tr.append(sc);
-        const g = el('td', 'get'); if (e.magnet) { const a = el('a', null, 'magnet'); a.href = e.magnet; g.append(a); } if (e.torrent) { g.append(' · '); g.append(link(e.torrent['@id'], 'torrent')); } if (e.webseed) g.append(' · webseed'); if (e.announcedAt) { g.append(' · '); g.append(link(e.announcedAt['@id'], 'announcement')); } tr.append(g);
+        // get it: small chips that wrap cleanly, no separators
+        const g = el('td', 'get'); const chip = (a, cls) => { a.className = 'chip ' + (cls || ''); g.append(a); };
+        if (e.magnet) { const a = el('a', null, 'magnet'); a.href = e.magnet; chip(a, 'primary'); } if (e.torrent) chip(link(e.torrent['@id'], 'torrent')); if (e.webseed) chip(el('span', null, 'webseed'), 'plain'); if (e.announcedAt) chip(link(e.announcedAt['@id'], 'announcement')); tr.append(g);
         t.append(tr);
       }
     }

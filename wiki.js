@@ -70,8 +70,17 @@
     .wiki table.dt tr.grp .type{margin-right:4px}
     .wiki table.dt td:first-child{border-left:4px solid var(--stripe,transparent);padding-left:12px}
     .wiki table.dt td.src{max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mute);font-size:13px}
-    .wiki table.dt td.get{white-space:nowrap;font-size:13px}
-    .wiki table.dt td.get a{color:var(--link)}
+    .wiki table.dt td.get{font-size:12.5px;min-width:13em}
+    .wiki table.dt td.get .chip{display:inline-block;margin:0 6px 6px 0;padding:3px 9px;border-radius:999px;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font:500 12px var(--sans);text-decoration:none}
+    .wiki table.dt td.get a.chip:hover{border-color:var(--ink);color:var(--ink)}
+    .wiki table.dt td.get .chip.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.wiki table.dt td.get .chip.primary:hover{background:#2a2820}
+    .wiki table.dt td.get .chip.plain{color:var(--mute);background:#f6f3ec;border-color:transparent}
+    .wiki table.dt td.att{white-space:nowrap}
+    .wiki .pill{display:inline-block;margin:0 6px 4px 0;padding:2px 9px;border-radius:999px;font:12px var(--sans);color:var(--mute);background:#f3f0e8;border:1px solid var(--line)}
+    .wiki .pill b{font-weight:600;color:inherit}
+    .wiki .pill.formal.on{color:#1f6b3f;background:#e3f3e9;border-color:#bfe3cc}.wiki .pill.informal.on{color:#8a5a00;background:#fbefd6;border-color:#f1dcb9}
+    .wiki table.dt td.src{max-width:14em}
+    .wiki table.dt td:first-child a{font:500 15px var(--sans)}
     .wiki tr.net-btc{--stripe:#e0a93a}.wiki tr.net-xbt{--stripe:#c47a12}.wiki tr.net-tbtc4{--stripe:#5aa87a}.wiki tr.net-txbt4{--stripe:#2f9e5b}.wiki tr.net-tbtc3{--stripe:#8c9bb0}.wiki tr.net-signet{--stripe:#9b7ad1}
     .wiki tr.grp.net-btc .type{color:#8a5a00;background:#fbefd6;border-color:#f1dcb9}.wiki tr.grp.net-xbt .type{color:#8a4a00;background:#fde9d2;border-color:#f3cfa7}
     .wiki tr.grp.net-tbtc4 .type,.wiki tr.grp.net-txbt4 .type{color:#1f6b3f;background:#e3f3e9;border-color:#bfe3cc}
