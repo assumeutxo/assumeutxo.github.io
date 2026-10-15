@@ -44,7 +44,9 @@
           const m = el('div', 'mark'); list.append(m);
           if (!t) { m.append(el('span', 'err', 'not a txo: URI')); return; }
           const line = (cls, text) => { const p = el('div'); p.append(el('span', 'light ' + cls), text); m.append(p); };
-          const h = el('div'); h.append(`${i + 1}. state ${String(states[i]).slice(0, 12)}… `, link(t.uri.split('?')[0], t.txid.slice(0, 12) + '…:' + t.vout)); m.append(h);
+          // the coin link carries the value in the name: coin.html?txo=<uri with hex and block>
+          const q = t.hex ? `${t.uri.split('?')[0]}?hex=${t.hex}${t.block ? `&block=${t.block.height}:${t.block.hash}` : ''}` : t.uri.split('?')[0];
+          const h = el('div'); h.append(`${i + 1}. state ${String(states[i]).slice(0, 12)}… `, link(new URL('coin.html?txo=' + q, wiki.ROOT).href, t.txid.slice(0, 12) + '…:' + t.vout)); m.append(h);
           if (!t.hex) { line('grey', 'given by name only: nothing to check here without the bytes'); return; }
           try {
             const d = codec.decode('Transaction', t.hex); const txid = codec.txid(d);

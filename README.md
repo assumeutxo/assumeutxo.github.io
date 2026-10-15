@@ -12,7 +12,8 @@ this repo is its spine: each anchored commit is one state on a trail on Bitcoin 
 - `me.html#me`: the identity behind the wiki, a Nostr key (`agent.did.json`, written by `npm init agent`).
 - `snapshots/txbt4-150307.html#this`: the txbt4 assumeUTXO snapshot, with its torrent and announcement.
 - `faucet.html#this`: the txbt4 faucet.
-- `trail.html#this`: this wiki's trail, the mark given by value (bytes and block in the island).
+- `trail.html#this`: this wiki's trail, every mark given by value (bytes and block in the island).
+- `torrents/`, `events/`, `epochs/`, `attestations/`, `fraudproofs/`, `marks/`: one page per thing, by value where the thing has bytes. The attestation is real, signed by this wiki's key; the fraud proof and the marking objects are examples and say so.
 
 ## Panes
 
@@ -28,6 +29,12 @@ from what is only claimed (grey).
 - `panes/snapshot.js`: a download card: the txoutset hash as the identity, block, sha256 and infohash, magnet, .torrent and webseed buttons.
 - `panes/faucet.js`: a service card: address, limits, the voucher format, where to redeem, what it paid this wiki.
 - `panes/blocktrail.js`: the trail verified in the page.
+- `panes/transactionoutput.js`, `panes/transaction.js`: a coin and a whole transaction from their bytes, txid recomputed; `coin.html?txo=…` and `tx.html?hex=…` build their island from the query, the value riding in the name.
+- `panes/torrent.js`, `panes/nostrevent.js` (id and signature checked), `panes/epoch.js`, `panes/attestation.js` (the signed event checked: author, signature, that it says what the page says), `panes/fraudproof.js`.
+- `panes/mark.js`, `bounty.js`, `submission.js`, `verdict.js`: the marking vocabulary, signatures checked when present.
+- `panes/person.js`: a human's profile.
+
+The shim exports a toolkit for panes that verify (`wiki.kit()`: the kernel's codec, hashes and curve, pinned by commit), Nostr and marking signature checks, bech32 for addresses and npubs, and the shared pieces (`facts`, `card`, `light`, `copyBtn`).
 
 ## Rules
 

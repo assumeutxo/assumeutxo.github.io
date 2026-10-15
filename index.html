@@ -1,15 +1,90 @@
 <!doctype html>
 <meta charset="utf-8"><title>datawiki</title>
 <script type="application/ld+json">
-{ "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
-  "@id": "#this", "@type": "Index", "name": "datawiki",
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Index",
+  "name": "datawiki",
   "description": "A wiki whose pages are data: each page is HTML with a JSON-LD island, rendered by wiki.js. This is the front door; every entry below is a page with an island of its own.",
-  "creator": { "@id": "me.html#me" },
-  "trail": { "@id": "trail.html#this" },
+  "creator": {
+    "@id": "me.html#me"
+  },
+  "trail": {
+    "@id": "trail.html#this"
+  },
   "entries": [
-    { "@id": "snapshots/txbt4-150307.html#this", "@type": "Snapshot", "name": "txbt4 assumeUTXO snapshot at 150307" },
-    { "@id": "faucet.html#this", "@type": "Faucet", "name": "txbt4 faucet" },
-    { "@id": "trail.html#this", "@type": "Blocktrail", "name": "this wiki's trail on txbt4" }
-  ] }
+    {
+      "@id": "snapshots/txbt4-150307.html#this",
+      "@type": "Snapshot",
+      "name": "txbt4 assumeUTXO snapshot at 150307"
+    },
+    {
+      "@id": "torrents/utxo-knots-150307.html#this",
+      "@type": "Torrent",
+      "name": "the snapshot as a torrent"
+    },
+    {
+      "@id": "events/86d79268.html#this",
+      "@type": "NostrEvent",
+      "name": "its announcement on Nostr"
+    },
+    {
+      "@id": "epochs/txbt4-151200.html#this",
+      "@type": "Epoch",
+      "name": "epoch 150307 \u2192 151200"
+    },
+    {
+      "@id": "attestations/txbt4-153044.html#this",
+      "@type": "Attestation",
+      "name": "tip 153044, attested by this wiki"
+    },
+    {
+      "@id": "fraudproofs/example.html#this",
+      "@type": "FraudProof",
+      "name": "a fraud proof, example"
+    },
+    {
+      "@id": "faucet.html#this",
+      "@type": "Faucet",
+      "name": "txbt4 faucet"
+    },
+    {
+      "@id": "trail.html#this",
+      "@type": "Blocktrail",
+      "name": "this wiki's trail on txbt4"
+    },
+    {
+      "@id": "marks/mark.html#this",
+      "@type": "Mark",
+      "name": "a mark, example"
+    },
+    {
+      "@id": "marks/bounty.html#this",
+      "@type": "Bounty",
+      "name": "a bounty, example"
+    },
+    {
+      "@id": "marks/submission.html#this",
+      "@type": "Submission",
+      "name": "a submission, example"
+    },
+    {
+      "@id": "marks/verdict.html#this",
+      "@type": "Verdict",
+      "name": "a verdict, example"
+    },
+    {
+      "@id": "person.html#me",
+      "@type": "Person",
+      "name": "Melvin Carvalho"
+    },
+    {
+      "@id": "me.html#me",
+      "@type": "Agent",
+      "name": "this wiki's key"
+    }
+  ]
+}
 </script>
 <script src="wiki.js"></script>

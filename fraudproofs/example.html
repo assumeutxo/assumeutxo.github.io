@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8"><title>fraud proof, example</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "FraudProof",
+  "name": "example: an EpochMismatch proof",
+  "description": "What a fraud proof looks like: it names the attestation it disputes, says in what way it is wrong, and carries the evidence that lets anyone rerun the check. This one is an example and disputes nothing.",
+  "example": true,
+  "kind": "EpochMismatch",
+  "against": {
+    "@id": "../attestations/txbt4-153044.html#this",
+    "height": 153044
+  },
+  "claim": "the attested muhash at this height is not what the blocks produce from the previous epoch end",
+  "evidence": {
+    "attested": "4306f4e857b5a04a02e79526addfc9e829736aed76611355f347389b0a2a474c",
+    "recomputed": "(the muhash the kernel reaches from the epoch package and the blocks; it would differ here)",
+    "epoch": {
+      "@id": "../epochs/txbt4-151200.html#this"
+    }
+  },
+  "prover": {
+    "@id": "did:nostr:9798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723"
+  },
+  "at": "2026-10-15T14:32:30Z"
+}
+</script>
+<script src="../wiki.js"></script>

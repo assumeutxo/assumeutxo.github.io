@@ -56,6 +56,7 @@
     .wiki .mark > div:first-child{font:400 17px var(--serif);margin:0 0 10px;color:var(--ink)}
     .wiki .mark > div:first-child a{font:13px var(--mono)}
     .wiki .mark div{margin:4px 0;color:var(--ink2)}
+    .wiki .lit{margin:4px 0;color:var(--ink2);font-size:14px}
     .wiki .light{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px;vertical-align:1px;background:var(--grey)}
     .wiki .light.ok{background:var(--ok);box-shadow:0 0 0 3px #e3f3e9}.wiki .light.bad{background:var(--bad);box-shadow:0 0 0 3px #f9e1de}.wiki .light.grey{background:var(--grey);box-shadow:0 0 0 3px #f0ece3}
     .wiki .view > p.muted{margin:14px 0 0}
@@ -125,7 +126,31 @@
   // label returns null when the pane does not apply. For each distinct @type on the page, panes/<type>.js is
   // loaded (lower-cased) if it exists and registers itself with wiki.panes.push(...). The outline and the raw
   // JSON are always the last two tabs, so a page with no pane still has its floor.
-  const wiki = (window.wiki = window.wiki || {}); wiki.panes = wiki.panes || []; wiki.ROOT = ROOT; wiki.el = el; wiki.link = link; wiki.value = value; wiki.table = table;
+  const wiki = (window.wiki = window.wiki || {}); wiki.panes = wiki.panes || []; wiki.ROOT = ROOT; wiki.el = el; wiki.link = link; wiki.value = value; wiki.table = table; wiki.hash = hash;
+  // shared pieces for panes: a copy button, fact tiles, an id card of rows, a light with its text
+  wiki.copyBtn = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = (e) => { e.preventDefault(); navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); }; return b; };
+  wiki.facts = (pairs) => { const f = el('div', 'facts'); for (const [k, v] of pairs) if (v != null && v !== '') { const d = el('div', 'fact'); d.append(el('span', 'fk', k), el('span', 'fv', String(v))); f.append(d); } return f; };
+  wiki.card = (rows) => { const c = el('div', 'idcard'); for (const [k, ...v] of rows) if (v.length && v[0] != null) { const r = el('div', 'prow'); r.append(el('span', 'pk', k)); const pv = el('span', 'pv'); pv.append(...v.map((x) => typeof x === 'string' ? document.createTextNode(x) : x)); r.append(pv); c.append(r); } return c; };
+  wiki.light = (cls, text) => { const p = el('div', 'lit'); p.append(el('span', 'light ' + cls), text); return p; };
+  wiki.types = (doc) => [].concat(doc['@type'] || []);
+  wiki.has = (doc, t) => wiki.types(doc).includes(t);
+  // one pinned toolkit for panes that verify: the kernel's codec, hashes, the curve, pinned by commit
+  const SCHEMA = 'https://cdn.jsdelivr.net/gh/bitcoin-desktop/schema@b8cbf6337c7450fe14ddc5bce00c7280059aab5d/codec/';
+  wiki.kit = () => (wiki._kit ??= (async () => { const [hash, secp, { Codec }, core] = await Promise.all([import(SCHEMA + 'hash.js'), import(SCHEMA + 'secp256k1.js'), import(SCHEMA + 'codec.js'), fetch('https://bitcoin-kernel.com/engine/schema/core.jsonld').then((r) => r.json())]); return { hash, secp, codec: new Codec(core) }; })());
+  // bech32 / bech32m for addresses and npubs
+  const CH = 'qpzry9x8gf2tvdw0s3jn54khce6mua7l', GEN = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+  const pm = (v) => { let c = 1; for (const x of v) { const b = c >>> 25; c = ((c & 0x1ffffff) << 5) ^ x; for (let i = 0; i < 5; i++) if ((b >> i) & 1) c ^= GEN[i]; } return c >>> 0; };
+  const words = (bytes) => { const w = []; let acc = 0, bits = 0; for (const b of bytes) { acc = (acc << 8) | b; bits += 8; while (bits >= 5) { bits -= 5; w.push((acc >> bits) & 31); } } if (bits) w.push((acc << (5 - bits)) & 31); return w; };
+  const bech = (hrp, data, konst) => { const exp = [...[...hrp].map((c) => c.charCodeAt(0) >> 5), 0, ...[...hrp].map((c) => c.charCodeAt(0) & 31)]; const p = pm([...exp, ...data, 0, 0, 0, 0, 0, 0]) ^ konst; const chk = []; for (let i = 0; i < 6; i++) chk.push((p >> (5 * (5 - i))) & 31); return hrp + '1' + [...data, ...chk].map((d) => CH[d]).join(''); };
+  const unhex = (h) => Uint8Array.from(h.match(/../g).map((x) => parseInt(x, 16)));
+  wiki.npub = (hex) => bech('npub', words(unhex(hex)), 1);
+  wiki.address = (chain, spk) => { const hrp = /^(btc|xbt|mainnet)$/.test(chain) ? 'bc' : 'tb'; if (/^5120[0-9a-f]{64}$/.test(spk)) return bech(hrp, [1, ...words(unhex(spk.slice(4)))], 0x2bc830a3); if (/^0014[0-9a-f]{40}$/.test(spk) || /^0020[0-9a-f]{64}$/.test(spk)) return bech(hrp, [0, ...words(unhex(spk.slice(4)))], 1); return null; };
+  wiki.scriptKind = (spk) => /^5120[0-9a-f]{64}$/.test(spk) ? 'taproot (P2TR)' : /^0014/.test(spk) ? 'P2WPKH' : /^0020/.test(spk) ? 'P2WSH' : /^76a914/.test(spk) ? 'P2PKH' : /^a914/.test(spk) ? 'P2SH' : /^6a/.test(spk) ? 'OP_RETURN (unspendable)' : 'other';
+  // Nostr: the event id as NIP-01 serialises it, and the BIP 340 signature over it
+  wiki.nostrCheck = async (ev) => { const { hash, secp } = await wiki.kit(); const ser = JSON.stringify([0, ev.pubkey, ev.created_at, ev.kind, ev.tags, ev.content]); const id = hash.bytesToHex(hash.sha256(new TextEncoder().encode(ser))); const idOK = id === ev.id; let sigOK = false; try { sigOK = idOK && secp.verifySchnorr(hash.hexToBytes(ev.id), hash.hexToBytes(ev.sig), hash.hexToBytes(ev.pubkey)); } catch {} return { id, idOK, sigOK }; };
+  // marking: BIP 340 over sha256 of the canonical object (sorted keys, no whitespace, sig excluded)
+  wiki.canon = (v) => v === null || typeof v !== 'object' ? JSON.stringify(v) : Array.isArray(v) ? '[' + v.map(wiki.canon).join(',') + ']' : '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + wiki.canon(v[k])).join(',') + '}';
+  wiki.markCheck = async (obj, signerDid) => { if (!obj.sig) return null; const { hash, secp } = await wiki.kit(); const { sig, ...rest } = obj; const msg = hash.sha256(new TextEncoder().encode(wiki.canon(rest))); const pk = (String(signerDid || '').match(/^did:nostr:([0-9a-f]{64})$/) || [])[1]; if (!pk) return false; try { return secp.verifySchnorr(msg, hash.hexToBytes(sig), hash.hexToBytes(pk)); } catch { return false; } };
   const loadPane = (type) => new Promise((res) => { const s = document.createElement('script'); s.src = new URL('panes/' + String(type).toLowerCase() + '.js', ROOT).href; s.onload = s.onerror = () => res(); document.head.append(s); });
   function tabs(doc, sec) {
     const views = wiki.panes.map((p) => { let l = null; try { l = p.label(doc); } catch {} return l ? { name: l, render: p.render } : null; }).filter(Boolean);

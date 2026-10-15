@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8"><title>coin</title>
+<script>
+// ?txo=txo:<chain>:<txid>:<vout>[?hex=<bytes>&block=<height>:<hash>]: the island is written from the name given, then rendered as any page
+(() => {
+  const q = new URLSearchParams(location.search).get('txo') || ''; const m = q.match(/^txo:([a-z0-9]+):([0-9a-f]{64}):(\d+)(?:\?(.*))?$/i);
+  const island = { '@context': 'https://bitcoin-desktop.github.io/schema/context.jsonld', '@id': '#this', '@type': 'TransactionOutput' };
+  if (m) { const p = new URLSearchParams(m[4] || ''); Object.assign(island, { name: `coin ${m[2].slice(0, 12)}…:${m[3]}`, chain: m[1].toLowerCase(), txid: m[2].toLowerCase(), vout: +m[3] }); if (p.get('hex')) island.transaction = { '@type': 'Transaction', hex: p.get('hex') }; if (p.get('block')) { const b = p.get('block').split(':'); island.block = { height: +b[0], hash: b[1] }; } island.description = p.get('hex') ? 'One output, given by value: the transaction bytes travelled in this page\'s address, and the coin is read from them here.' : 'One output, given by name only.'; }
+  else Object.assign(island, { name: 'coin', description: 'Open this page as coin.html?txo=txo:<chain>:<txid>:<vout>, with &hex=<bytes> in the txo: query to carry the transaction by value.' });
+  const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(island, null, 2); document.head.append(s); document.title = island.name;
+})();
+</script>
+<script src="wiki.js"></script>

@@ -1,0 +1,13 @@
+<!doctype html>
+<meta charset="utf-8"><title>transaction</title>
+<script>
+// ?hex=<bytes>[&chain=<id>]: a whole transaction by value, decoded here
+(() => {
+  const p = new URLSearchParams(location.search); const hex = (p.get('hex') || '').trim();
+  const island = { '@context': 'https://bitcoin-desktop.github.io/schema/context.jsonld', '@id': '#this', '@type': 'Transaction', chain: p.get('chain') || 'txbt4' };
+  if (/^[0-9a-f]{20,}$/i.test(hex)) Object.assign(island, { name: `transaction, ${hex.length / 2} bytes`, description: 'A transaction given by value in this page\'s address, decoded with the kernel\'s codec.', hex: hex.toLowerCase() });
+  else Object.assign(island, { name: 'transaction', description: 'Open this page as tx.html?hex=<the transaction bytes>.' });
+  const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(island, null, 2); document.head.append(s); document.title = island.name;
+})();
+</script>
+<script src="wiki.js"></script>

@@ -1,0 +1,23 @@
+<!doctype html>
+<meta charset="utf-8"><title>bounty, example</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Bounty",
+  "name": "example: a bounty for a fraud proof",
+  "description": "A bounty offers marks for a submission that a fixed rule can judge. This one is an example.",
+  "example": true,
+  "by": {
+    "@id": "did:nostr:9798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723"
+  },
+  "subject": {
+    "@id": "../attestations/"
+  },
+  "amount": 5,
+  "rule": "a FraudProof against any attestation of this wiki that the kernel upholds",
+  "deadline": "2027-04-01T00:00:00Z",
+  "at": "2026-10-15T14:32:30Z"
+}
+</script>
+<script src="../wiki.js"></script>
