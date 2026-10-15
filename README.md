@@ -24,6 +24,9 @@ the kernel's codec and the trail key code pinned by commit, and shows what it ch
 from what is only claimed (grey).
 
 - `panes/index.js`: the entries as cards.
+- `panes/agent.js`: a profile card: npub and DID with copy, the address (balance from a local explorer when one answers), what it maintains.
+- `panes/snapshot.js`: a download card: the txoutset hash as the identity, block, sha256 and infohash, magnet, .torrent and webseed buttons.
+- `panes/faucet.js`: a service card: address, limits, the voucher format, where to redeem, what it paid this wiki.
 - `panes/blocktrail.js`: the trail verified in the page.
 
 ## Rules

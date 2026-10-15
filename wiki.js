@@ -59,6 +59,22 @@
     .wiki .light{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:10px;vertical-align:1px;background:var(--grey)}
     .wiki .light.ok{background:var(--ok);box-shadow:0 0 0 3px #e3f3e9}.wiki .light.bad{background:var(--bad);box-shadow:0 0 0 3px #f9e1de}.wiki .light.grey{background:var(--grey);box-shadow:0 0 0 3px #f0ece3}
     .wiki .view > p.muted{margin:14px 0 0}
+    .wiki .facts{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
+    .wiki .fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:120px}
+    .wiki .fk{display:block;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 4px}
+    .wiki .fv{display:block;font:400 22px/1.1 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}
+    .wiki .idcard,.wiki .profile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;margin:0 0 16px}
+    .wiki .prow{display:flex;gap:14px;padding:10px 16px;border-top:1px solid var(--line);align-items:baseline}
+    .wiki .prow:first-child{border-top:0}
+    .wiki .pk{flex:0 0 12.5em;font:500 12px/1.6 var(--mono);letter-spacing:.03em;color:var(--mute)}
+    .wiki .pv{font:13.5px/1.55 var(--mono);color:var(--ink2);word-break:break-all;min-width:0}
+    .wiki .pv code{font:inherit;background:#f3f0e8;padding:1px 6px;border-radius:5px}
+    .wiki .get{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 14px}
+    .wiki .btn{display:inline-block;font:500 14px var(--sans);background:var(--ink);color:#fff;border-radius:10px;padding:10px 18px;border:1px solid var(--ink)}
+    .wiki .btn:hover{text-decoration:none;background:#2a2820}
+    .wiki .btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line2)}.wiki .btn.ghost:hover{border-color:var(--ink)}
+    .wiki h3{font:400 20px var(--serif);margin:18px 0 8px}
+    @media (max-width:640px){.wiki .prow{flex-direction:column;gap:2px}.wiki .pk{flex:none}}
     @media (max-width:640px){.wiki h1{font-size:34px}.wiki td.k{width:9em;font-size:11px}.wiki td{padding:9px 12px}main.wiki{padding:0 14px 72px}}
   `;
   const isIri = (s) => /^(https?:|magnet:|did:|txo:|urn:|mailto:|wss?:|\.{0,2}\/|[\w.-]+\.(html|jsonld|json|torrent|dat)(#|$)|#)/i.test(s);
