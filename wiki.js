@@ -20,6 +20,16 @@
     .wiki details{margin-top:1.2rem}.wiki summary{cursor:pointer;color:#666;font-size:13px}
     .wiki pre{background:#f3f2ee;padding:.8rem;border-radius:6px;overflow:auto;font-size:12.5px}
     .wiki nav{font-size:13px;color:#777;margin-bottom:1rem}.wiki nav a{margin-right:.8rem}
+    .wiki .tabs{display:flex;gap:.3rem;margin:.6rem 0 .4rem;border-bottom:1px solid #e8e5dd}
+    .wiki .tabs button{font:13px ui-monospace,monospace;background:none;border:0;border-bottom:2px solid transparent;padding:.3rem .6rem;color:#666;cursor:pointer}
+    .wiki .tabs button.on{color:#1b1b1b;border-bottom-color:#1b1b1b}
+    .wiki .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem;margin-top:.6rem}
+    .wiki .card{display:block;border:1px solid #e8e5dd;border-radius:8px;padding:.7rem .9rem;background:#fff;color:inherit}
+    .wiki .card:hover{border-color:#bbb;text-decoration:none}.wiki .card b{display:block;margin-top:.3rem}
+    .wiki .light{display:inline-block;width:.7em;height:.7em;border-radius:50%;margin-right:.4em;vertical-align:middle;background:#bbb}
+    .wiki .light.ok{background:#2a9d4a}.wiki .light.bad{background:#c43b2f}.wiki .light.grey{background:#bbb}
+    .wiki .mark{border:1px solid #e8e5dd;border-radius:8px;padding:.6rem .9rem;margin:.5rem 0;background:#fff;font-size:14px}
+    .wiki .mark code{font-size:12.5px}.wiki .err{color:#c43b2f}.wiki .muted{color:#777;font-size:13px}
   `;
   const isIri = (s) => /^(https?:|magnet:|did:|txo:|urn:|mailto:|wss?:|\.{0,2}\/|[\w.-]+\.(html|jsonld|json|torrent|dat)(#|$)|#)/i.test(s);
   const href = (iri) => { try { return /^(https?:|\.{0,2}\/|[\w./-]+\.html|#)/i.test(iri) ? new URL(iri, location.href).href : iri; } catch { return iri; } };
@@ -56,15 +66,30 @@
     sec.append(h);
     if (id) sec.append(el('div', 'id', new URL(id, location.href).href));
     if (doc.description) sec.append(el('p', null, doc.description));
-    sec.append(table(doc));
-    const d = el('details'); d.append(el('summary', null, 'raw JSON-LD')); const pre = el('pre', null, JSON.stringify(doc, null, 2)); d.append(pre); sec.append(d);
+    tabs(doc, sec);
     return sec;
   }
   // the wiki's root is where this file lives, so pages in subfolders get the same nav
   const ROOT = (document.currentScript && document.currentScript.src) ? new URL('.', document.currentScript.src).href : new URL('.', location.href).href;
-  function run() {
+  // Panes: views by type, as solid-panes does it. A pane is { name, label(doc) -> string|null, render(doc, el) };
+  // label returns null when the pane does not apply. For each distinct @type on the page, panes/<type>.js is
+  // loaded (lower-cased) if it exists and registers itself with wiki.panes.push(...). The outline and the raw
+  // JSON are always the last two tabs, so a page with no pane still has its floor.
+  const wiki = (window.wiki = window.wiki || {}); wiki.panes = wiki.panes || []; wiki.ROOT = ROOT; wiki.el = el; wiki.link = link; wiki.value = value; wiki.table = table;
+  const loadPane = (type) => new Promise((res) => { const s = document.createElement('script'); s.src = new URL('panes/' + String(type).toLowerCase() + '.js', ROOT).href; s.onload = s.onerror = () => res(); document.head.append(s); });
+  function tabs(doc, sec) {
+    const views = wiki.panes.map((p) => { let l = null; try { l = p.label(doc); } catch {} return l ? { name: l, render: p.render } : null; }).filter(Boolean);
+    views.push({ name: 'outline', render: (d, e) => e.append(table(d)) }, { name: 'raw', render: (d, e) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
+    const bar = el('div', 'tabs'); const body = el('div', 'view'); let cur;
+    const show = (v) => { cur = v; body.replaceChildren(); try { v.render(doc, body); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.textContent === v.name)); };
+    for (const v of views) { const b = el('button', null, v.name); b.onclick = () => show(v); bar.append(b); }
+    sec.append(bar, body); show(views[0]);
+  }
+  async function run() {
     const islands = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => { try { return JSON.parse(s.textContent); } catch (e) { return { '@type': 'ParseError', error: e.message }; } });
     const style = el('style'); style.textContent = CSS; document.head.append(style);
+    const types = new Set(islands.flatMap((d) => [].concat(d['@type'] || [])));
+    await Promise.all([...types].map(loadPane));
     const main = el('main', 'wiki');
     const nav = el('nav'); for (const [p, t] of [['index.html', 'index'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', null, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
     islands.forEach((d, i) => main.append(island(d, i)));

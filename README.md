@@ -14,6 +14,18 @@ this repo is its spine: each anchored commit is one state on a trail on Bitcoin 
 - `faucet.html#this`: the txbt4 faucet.
 - `trail.html#this`: this wiki's trail, the mark given by value (bytes and block in the island).
 
+## Panes
+
+Views by type, as solid-panes does it. A pane is `{ name, label(doc), render(doc, el) }` in `panes/<type>.js`,
+loaded by `wiki.js` for every `@type` on the page; `label` returns null when the pane does not apply. The
+outline and the raw JSON are always the last two tabs, so a page with no pane still has its floor.
+A pane may verify, not only display: the Blocktrail pane checks every mark given by value in the page, with
+the kernel's codec and the trail key code pinned by commit, and shows what it checked (green or red) apart
+from what is only claimed (grey).
+
+- `panes/index.js`: the entries as cards.
+- `panes/blocktrail.js`: the trail verified in the page.
+
 ## Rules
 
 - A page's `@id` is a fragment, `#this` for a thing and `#me` for an agent, so the document and the
