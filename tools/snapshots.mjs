@@ -15,7 +15,7 @@ for (const s of D.snapshots) {
       description: `UTXO set of ${s.chain} at height ${s.height.toLocaleString('en-US')}, as Bitcoin Core's chain parameters name it: the txoutset hash is the entry a node compares against after loading. ${s.sharedWith ? 'Shared with ' + s.sharedWith + '. ' : ''}Facts read from the sources below; we have not loaded this one ourselves.`,
       network: s.network, chain: s.chain, height: s.height, txoutsetHash: s.txoutsetHash, chainTxCount: s.chainTxCount, bytes: s.bytes, sha256: s.sha256, sharedWith: s.sharedWith,
       torrent: s.infohash ? { '@type': 'Torrent', infohash: s.infohash, magnet: s.magnet, webseed: s.mirror ? [{ '@id': s.mirror }] : undefined } : undefined, bytesFrom: s.bytesFrom,
-      source: refs[0], sources: refs, producedBy: s.source, creator: { '@id': '../me.html#me' } };
+      source: refs[0], sources: refs, producedBy: s.source, note: s.note, creator: { '@id': '../me.html#me' } };
     for (const k of Object.keys(island)) if (island[k] === undefined) delete island[k]; if (island.torrent && island.torrent.webseed === undefined) delete island.torrent.webseed;
     page(path, `${s.network} snapshot at ${s.height}`, island, '../'); made++;
   }
