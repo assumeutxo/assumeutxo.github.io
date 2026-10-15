@@ -11,7 +11,7 @@ import { homedir } from 'node:os';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..'); const HOME = homedir(); const dry = process.argv.includes('--dry');
 const { finalizeEvent, parsePrivateKey, publicKey, RelayPool } = await import(`${HOME}/remote/github.com/bitcoin-desktop/headers/publisher/nostr.js`);
 const RELAYS = ['wss://nos.lol', 'wss://relay.damus.io', 'wss://nostr.mom', 'wss://relay.primal.net', 'wss://relay.nostr.band', 'wss://nostr.oxtr.dev'];
-const WIKI = 'https://melvin.me/public/datawiki/';
+const WIKI = 'https://assumeutxo.github.io/';
 const D = JSON.parse(readFileSync(`${ROOT}/data/snapshots.json`, 'utf8'));
 const CHAIN_WORDS = { btc: ['mainnet'], xbt: ['mainnet', 'blake2b'], tbtc3: ['testnet', 'testnet3'], tbtc4: ['testnet', 'testnet4'], txbt4: ['testnet', 'testnet4', 'blake2b'], signet: ['signet'] };
 const priv = dry ? null : parsePrivateKey(execFileSync('git', ['config', 'nostr.privkey'], { cwd: `${HOME}/ideas/knots`, encoding: 'utf8' }));

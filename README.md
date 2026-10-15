@@ -1,4 +1,7 @@
-# datawiki
+# assumeUTXO
+
+https://assumeutxo.github.io/ · every assumeUTXO snapshot we know of, as data: identity, torrents, announcements, and who
+verified them. Built as a data wiki:
 
 An experiment: a wiki whose pages are data. Every page is an HTML file whose truth is its JSON-LD
 island (`<script type="application/ld+json">`); `wiki.js` renders the island as an outline, with
@@ -8,12 +11,11 @@ this repo is its spine: each anchored commit is one state on a trail on Bitcoin 
 
 ## Pages
 
-- `index.html#this`: the front door, an Index of every entry.
-- `me.html#me`: the identity behind the wiki, a Nostr key (`agent.did.json`, written by `npm init agent`).
-- `snapshots/txbt4-150307.html#this`: the txbt4 assumeUTXO snapshot, with its torrent and announcement.
-- `faucet.html#this`: the txbt4 faucet.
-- `trail.html#this`: this wiki's trail, every mark given by value (bytes and block in the island).
-- `torrents/`, `events/`, `epochs/`, `attestations/`, `fraudproofs/`, `marks/`: one page per thing, by value where the thing has bytes. The attestation is real, signed by this wiki's key; the fraud proof and the marking objects are examples and say so.
+- `index.html#this`: the snapshot table, the front door; generated from `data/snapshots.json` by `tools/snapshots.mjs`.
+- `snapshots/<chain>-<height>.html#this`: one page per snapshot; `torrents/`, `events/` beside them.
+- `attestations/`: signed statements; `epochs/`: SwiftSync-style epoch packages; `fraudproofs/`: the shape of a dispute.
+- `trail.html#this`: this site's git-mark trail; `me.html#me`: its key; `pages.html#this`: every page.
+- `coin.html?txo=…`, `tx.html?hex=…`: viewers that build their island from the query.
 
 ## Panes
 
