@@ -45,4 +45,6 @@ const island = { '@context': CTX, '@id': '#this', '@type': ['SnapshotIndex', 'In
   status: 'Formal attestations, signed statements checked in the page, and fraud proofs are coming soon. What is here today: every published snapshot, its torrents and announcements, and the informal verifications found in the Core and Knots review threads, each linked to its source.',
   entries };
 page('index.html', 'assumeUTXO snapshots', island, '');
+// the networks page, from data/networks.jsonld: the same nodes with ids resolved against the page
+{ const N = JSON.parse(readFileSync(`${ROOT}/data/networks.jsonld`, 'utf8')); const isl = { ...N, '@id': '#this', data: { '@id': 'data/networks.jsonld' }, networks: N.networks.map((n) => ({ ...n, '@id': 'data/networks.jsonld' + n['@id'], ...(n.forkOf ? { forkOf: { '@id': 'data/networks.jsonld' + n.forkOf['@id'] } } : {}) })) }; page('networks.html', 'networks', isl, ''); }
 console.log(`${made} snapshot pages, ${evPages.size} announcement pages written, ${entries.length} entries on index.html`);

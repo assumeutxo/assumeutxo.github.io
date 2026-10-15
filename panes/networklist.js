@@ -8,7 +8,7 @@ wiki.panes.push({
     for (const n of [].concat(doc.networks || [])) {
       const tr = el('tr', 'net-' + n.id); const c = el('td'); c.append(el('span', 'type', n.id)); tr.append(c);
       const nm = el('td'); nm.append(n.name); if (n.note) nm.append(el('div', 'muted', n.note)); tr.append(nm);
-      const idc = el('td', 'num'); if (n.genesis) { idc.append('genesis '); const a = el('span', null, n.genesis.slice(0, 16) + '…'); a.title = n.genesis; idc.append(a); } else if (n.forkOf) { idc.append('fork of '); idc.append(link(n.forkOf['@id'], n.forkOf['@id'].replace('#', ''))); idc.append(` at ${n.forkHeight.toLocaleString('en-US')}`); } tr.append(idc);
+      const idc = el('td', 'num'); if (n.genesis) { idc.append('genesis '); const a = el('span', null, n.genesis.slice(0, 16) + '…'); a.title = n.genesis; idc.append(a); } else if (n.forkOf) { idc.append('fork of '); idc.append(link(n.forkOf['@id'], n.forkOf['@id'].split('#').pop())); idc.append(` at ${n.forkHeight.toLocaleString('en-US')}`); } tr.append(idc);
       tr.append(el('td', 'num', n.magic || '')); tr.append(el('td', 'num', n.hrp || '')); tr.append(el('td', null, (n.aliases || []).join(', ') || '—'));
       t.append(tr);
     }
