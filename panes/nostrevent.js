@@ -15,7 +15,9 @@ wiki.panes.push({
       root.append(el('h3', null, 'what it states'));
       const LABEL = { x: 'infohash', t: 'topics', r: 'references', n: 'network', d: 'identifier', tracker: 'trackers', file: 'file', title: 'title', sha256: 'sha256', txoutset_hash: 'txoutset hash', height: 'height', hash: 'block', muhash: 'muhash', coins: 'coins', rules: 'rules', engine: 'engine', base: 'base block', e: 'event', p: 'key' };
       const SKIP = new Set(['alt', 'i']); const groups = new Map();
-      for (const tag of ev.tags) { if (SKIP.has(tag[0])) continue; (groups.get(tag[0]) || groups.set(tag[0], []).get(tag[0])).push(tag.slice(1)); }
+      // our own addresses are not references: a pointer back to this record stays in the signed bytes (raw) but is not listed as a source
+      const OWN = /^https?:\/\/(assumeutxo\.com|assumeutxo\.github\.io|melvin\.me\/public\/datawiki)\//;
+      for (const tag of ev.tags) { if (SKIP.has(tag[0])) continue; if (tag[0] === 'r' && OWN.test(tag[1] || '')) continue; (groups.get(tag[0]) || groups.set(tag[0], []).get(tag[0])).push(tag.slice(1)); }
       const t = el('table');
       for (const [k, vals] of groups) {
         const tr = el('tr'); tr.append(el('td', 'k', LABEL[k] || k)); const v = el('td', 'v');
