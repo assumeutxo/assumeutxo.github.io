@@ -10,7 +10,8 @@
     *{box-sizing:border-box}
     html{background:var(--paper)}
     body{margin:0;font:16px/1.55 var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
-    main.wiki{max-width:880px;margin:0 auto;padding:0 20px 96px}
+    main.wiki{max-width:1080px;margin:0 auto;padding:0 20px 96px}
+    .wiki section > .eyebrow,.wiki section > h1,.wiki section > h2,.wiki section > .id,.wiki section > p.lede{max-width:860px}
     .wiki nav{display:flex;align-items:center;gap:22px;height:56px;margin:0 0 40px;border-bottom:1px solid var(--line);font-size:13px;letter-spacing:.02em}
     .wiki nav a{color:var(--mute);text-decoration:none}.wiki nav a:hover{color:var(--ink)}
     .wiki nav a.wordmark{color:var(--ink);font:600 15px var(--serif);letter-spacing:0;margin-right:auto}
@@ -70,7 +71,7 @@
     .wiki table.dt tr.grp .type{margin-right:4px}
     .wiki table.dt td:first-child{border-left:4px solid var(--stripe,transparent);padding-left:12px}
     .wiki table.dt td.src{max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mute);font-size:13px}
-    .wiki table.dt td.get{font-size:12.5px;min-width:13em}
+    .wiki table.dt td.get{font-size:12.5px;min-width:22em;white-space:nowrap}
     .wiki table.dt td.get .chip{display:inline-block;margin:0 6px 6px 0;padding:3px 9px;border-radius:999px;border:1px solid var(--line2);background:var(--card);color:var(--ink2);font:500 12px var(--sans);text-decoration:none}
     .wiki table.dt td.get a.chip:hover{border-color:var(--ink);color:var(--ink)}
     .wiki table.dt td.get .chip.primary{background:var(--ink);color:#fff;border-color:var(--ink)}.wiki table.dt td.get .chip.primary:hover{background:#2a2820}
@@ -79,7 +80,8 @@
     .wiki .pill{display:inline-block;margin:0 6px 4px 0;padding:2px 9px;border-radius:999px;font:12px var(--sans);color:var(--mute);background:#f3f0e8;border:1px solid var(--line)}
     .wiki .pill b{font-weight:600;color:inherit}
     .wiki .pill.formal.on{color:#1f6b3f;background:#e3f3e9;border-color:#bfe3cc}.wiki .pill.informal.on{color:#8a5a00;background:#fbefd6;border-color:#f1dcb9}
-    .wiki table.dt td.src{max-width:14em}
+    .wiki table.dt td.src{max-width:18em;white-space:normal}
+    .wiki table.dt td.src .clamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}
     .wiki table.dt td:first-child a{font:500 15px var(--sans)}
     .wiki tr.net-btc{--stripe:#e0a93a}.wiki tr.net-xbt{--stripe:#c47a12}.wiki tr.net-tbtc4{--stripe:#5aa87a}.wiki tr.net-txbt4{--stripe:#2f9e5b}.wiki tr.net-tbtc3{--stripe:#8c9bb0}.wiki tr.net-signet{--stripe:#9b7ad1}
     .wiki tr.grp.net-btc .type{color:#8a5a00;background:#fbefd6;border-color:#f1dcb9}.wiki tr.grp.net-xbt .type{color:#8a4a00;background:#fde9d2;border-color:#f3cfa7}

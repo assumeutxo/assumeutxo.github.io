@@ -20,8 +20,8 @@ wiki.panes.push({
         // attested: two small pills, formal green and informal amber when present, grey when zero
         const ac = el('td', 'att'); const at = e.attested || {};
         const pill = (n, kind) => { const p = el('span', 'pill ' + kind + (n ? ' on' : '')); p.append(el('b', null, String(n || 0)), ' ' + kind); p.title = kind === 'formal' ? 'signed statements, checked in the page' : 'claims made elsewhere, linked, not vouched for'; return p; };
-        ac.append(pill(at.formal, 'formal'), pill(at.informal, 'informal')); tr.append(ac);
-        const sc = el('td', 'src'); sc.title = e.source || ''; sc.textContent = e.source || ''; tr.append(sc);
+        if (at.formal || at.informal) ac.append(pill(at.formal, 'formal'), pill(at.informal, 'informal')); else ac.append(el('span', 'muted', 'none yet')); tr.append(ac);
+        const sc = el('td', 'src'); sc.title = e.source || ''; sc.append(el('span', 'clamp', e.source || '')); tr.append(sc);
         // get it: small chips that wrap cleanly, no separators
         const g = el('td', 'get'); const chip = (a, cls) => { a.className = 'chip ' + (cls || ''); g.append(a); };
         if (e.magnet) { const a = el('a', null, 'magnet'); a.href = e.magnet; chip(a, 'primary'); } if (e.torrent) chip(link(e.torrent['@id'], 'torrent')); if (e.webseed) chip(el('span', null, 'webseed'), 'plain'); if (e.announcedAt) chip(link(e.announcedAt['@id'], 'announcement')); tr.append(g);
