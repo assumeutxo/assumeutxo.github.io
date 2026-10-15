@@ -65,6 +65,16 @@
     .wiki table.dt td.num{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
     .wiki table.dt tr:first-child td{border-top:0}.wiki table.dt .muted{font-size:12px}
     .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
+    .wiki table.dt tr.grp td{background:#f6f3ec;font:500 13px var(--sans);color:var(--ink);padding:9px 14px;border-top:1px solid var(--line2)}
+    .wiki table.dt tr.grp .type{margin-right:4px}
+    .wiki table.dt td:first-child{border-left:4px solid var(--stripe,transparent);padding-left:12px}
+    .wiki table.dt td.src{max-width:16em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--mute);font-size:13px}
+    .wiki table.dt td.get{white-space:nowrap;font-size:13px}
+    .wiki table.dt td.get a{color:var(--link)}
+    .wiki tr.net-btc{--stripe:#e0a93a}.wiki tr.net-xbt{--stripe:#c47a12}.wiki tr.net-tbtc4{--stripe:#5aa87a}.wiki tr.net-txbt4{--stripe:#2f9e5b}.wiki tr.net-tbtc3{--stripe:#8c9bb0}.wiki tr.net-signet{--stripe:#9b7ad1}
+    .wiki tr.grp.net-btc .type{color:#8a5a00;background:#fbefd6;border-color:#f1dcb9}.wiki tr.grp.net-xbt .type{color:#8a4a00;background:#fde9d2;border-color:#f3cfa7}
+    .wiki tr.grp.net-tbtc4 .type,.wiki tr.grp.net-txbt4 .type{color:#1f6b3f;background:#e3f3e9;border-color:#bfe3cc}
+    .wiki tr.grp.net-tbtc3 .type{color:#3f5068;background:#e8edf3;border-color:#cdd6e1}.wiki tr.grp.net-signet .type{color:#5a3d8a;background:#eee8f8;border-color:#d7c9ef}
     .wiki .facts{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 16px}
     .wiki .fact{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;min-width:120px}
     .wiki .fk{display:block;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 4px}
