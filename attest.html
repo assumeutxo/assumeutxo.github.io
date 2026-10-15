@@ -1,0 +1,68 @@
+<!doctype html>
+<meta charset="utf-8"><title>attesting a snapshot</title>
+<!-- ogp -->
+<meta name="description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<link rel="canonical" href="https://assumeutxo.com/attest.html">
+<meta property="og:site_name" content="assumeUTXO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Guide · attesting a snapshot">
+<meta property="og:description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<meta property="og:url" content="https://assumeutxo.com/attest.html">
+<meta property="og:image" content="https://assumeutxo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guide · attesting a snapshot">
+<meta name="twitter:description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<meta name="twitter:image" content="https://assumeutxo.com/og.png">
+<link rel="icon" href="https://assumeutxo.com/favicon.svg" type="image/svg+xml">
+<!-- /ogp -->
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Guide",
+  "name": "attesting a snapshot",
+  "description": "An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.",
+  "sections": [
+    {
+      "name": "The bar",
+      "text": "You ran it on a node you control, and the hash came out of your own validation, one of two ways. Recomputed: your node validated the chain to that height and you ran dumptxoutset or gettxoutsetinfo there. Loaded: you loaded the snapshot and let background validation finish, so your node rebuilt the set from genesis and confirmed the match. Checking a file's sha256 proves you have the right bytes, not that the bytes are right, and is recorded as possession, not verification."
+    },
+    {
+      "name": "Informal, today",
+      "text": "Paste your node's output as a comment on the pinned issue: the chain, the height, the implementation and version, the date, and the txoutset_hash line. It is recorded on the snapshot's page as your handle, the date, what you did, your hash beside the entry's, and a link to your comment. The site vouches for nothing beyond \"the hash you wrote matches\" or \"does not\". A disagreement is recorded and shown, never rejected. The reviews already on the Core and Knots pull requests were recorded this way.",
+      "link": {
+        "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/5",
+        "name": "Attest a snapshot here"
+      }
+    },
+    {
+      "name": "Formal, soon",
+      "text": "The same facts as a canonical statement, signed with a Nostr key or GPG, filed by pull request, checked in the page: signature, author, and that it states what the page states. Your informal comment stays and links to it.",
+      "links": [
+        {
+          "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/1",
+          "name": "#1 Attestations"
+        },
+        {
+          "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/4",
+          "name": "#4 The Nostr event, kind 33332"
+        }
+      ]
+    },
+    {
+      "name": "What the page shows",
+      "text": "Green for what it checked itself. Grey for what is only linked or claimed. Nothing else."
+    },
+    {
+      "name": "Keys, not names",
+      "text": "A name is a column. Weight comes from a key's history: statements that held up when checked. One key, one standing statement per snapshot. Counts never decide a hash; a recompute does."
+    }
+  ],
+  "creator": {
+    "@id": "me.html#me"
+  }
+}
+</script>
+<script src="wiki.js"></script>

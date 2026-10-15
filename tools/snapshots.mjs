@@ -42,7 +42,7 @@ const island = { '@context': CTX, '@id': '#this', '@type': ['SnapshotIndex', 'In
   description: 'Every UTXO set snapshot we know of, across the SHA256d and BLAKE2b Bitcoin chains: mainnet, testnet3, testnet4 and signet, with their identity by txoutset hash, their torrents and announcements, and who has verified them. A snapshot is named by its txoutset hash; a file is proven by its sha256 and its infohash; a torrent or a host is only where a copy was.',
   creator: { '@id': 'me.html#me' }, trail: { '@id': 'trail.html#this' }, data: { '@id': 'data/snapshots.json' },
   networks: (() => { const N = JSON.parse(readFileSync(`${ROOT}/data/networks.jsonld`, 'utf8')).networks; const order = ['btc', 'xbt', 'tbtc4', 'txbt4', 'tbtc3', 'signet']; return order.map((id) => N.find((n) => n.id === id)).filter(Boolean).map((n) => ({ '@id': 'networks.html#this', id: n.id, name: n.name })); })(),
-  status: 'Formal attestations, signed statements checked in the page, and fraud proofs are coming soon. What is here today: every published snapshot, its torrents and announcements, and the informal verifications found in the Core and Knots review threads, each linked to its source.',
+  status: 'Formal attestations, signed statements checked in the page, and fraud proofs are coming soon. What is here today: every published snapshot, its torrents and announcements, and the informal verifications found in the Core and Knots review threads, each linked to its source. You can add yours: see attesting a snapshot.', statusLink: { '@id': 'attest.html#this', name: 'attesting a snapshot' },
   entries };
 page('index.html', 'assumeUTXO snapshots', island, '');
 // the networks page, from data/networks.jsonld: the same nodes with ids resolved against the page
