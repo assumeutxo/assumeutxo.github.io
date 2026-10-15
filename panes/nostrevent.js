@@ -2,8 +2,10 @@
 const NOSTR_KINDS = { 0: 'profile', 1: 'note', 3: 'follows', 2003: 'torrent (NIP-35)', 2004: 'torrent comment', 30333: 'tip attestation (provisional)' };
 wiki.panes.push({
   name: 'nostrevent',
-  label: (doc) => wiki.has(doc, 'NostrEvent') ? 'event' : null,
-  render: (doc, root) => {
+  label: 'event',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'NostrEvent'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki;
     const ev = doc.event || doc; const when = ev.created_at ? new Date(ev.created_at * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : null;
     root.append(facts([['kind', `${ev.kind}${NOSTR_KINDS[ev.kind] ? ' · ' + NOSTR_KINDS[ev.kind] : ''}`], ['created', when], ['tags', (ev.tags || []).length]]));

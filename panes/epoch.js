@@ -1,8 +1,10 @@
 // The Epoch pane: the head of a SwiftSync-style epoch package: the set's muhash at both ends and what the epoch did between them.
 wiki.panes.push({
   name: 'epoch',
-  label: (doc) => wiki.has(doc, 'Epoch') ? 'epoch' : null,
-  render: (doc, root) => {
+  label: 'epoch',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Epoch'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki; const s = doc.start || {}, e = doc.end || {};
     root.append(facts([['blocks', doc.blocks && doc.blocks.count], ['transactions', doc.blocks && doc.blocks.txs], ['outputs created', doc.outputs], ['still unspent', doc.unspent], ['older coins spent', doc.spentOlder]]));
     root.append(el('h3', null, `start · height ${s.height}`)); root.append(card([['block', hash(s.hash)], ['muhash', hash(s.muhash)], ['coins', String(s.coins)]].filter((r) => r[1])));

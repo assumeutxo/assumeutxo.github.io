@@ -2,8 +2,10 @@
 // kernel's codec and the output read from the bytes; by name only the outpoint is shown. Spend status is not known here.
 wiki.panes.push({
   name: 'transactionoutput',
-  label: (doc) => wiki.has(doc, 'TransactionOutput') ? 'coin' : null,
-  render: (doc, root) => {
+  label: 'coin',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'TransactionOutput'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki;
     const hex = doc.transaction && doc.transaction.hex; const chain = doc.chain || 'txbt4';
     const head = el('div'); root.append(head);

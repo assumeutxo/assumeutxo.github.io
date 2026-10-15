@@ -110,23 +110,31 @@
     }
     return t;
   }
-  function island(doc, i) {
+  async function island(doc, i) {
     const sec = el('section');
     const id = doc['@id']; if (id && id.startsWith('#')) sec.id = id.slice(1);
     const eyebrow = el('div', 'eyebrow'); eyebrow.append(...[].concat(doc['@type'] || []).map((x) => el('span', 'type', x))); sec.append(eyebrow);
     sec.append(el(i ? 'h2' : 'h1', null, doc.name || doc.title || (id ? id : 'document')));
     if (id) { const full = new URL(id, location.href).href; const line = el('div', 'id'); line.append(link(full, full)); const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(full).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); line.append(b); sec.append(line); }
     if (doc.description) sec.append(el('p', 'lede', doc.description));
-    tabs(doc, sec);
+    await tabs(doc, sec);
     return sec;
   }
   // the wiki's root is where this file lives, so pages in subfolders get the same nav
   const ROOT = (document.currentScript && document.currentScript.src) ? new URL('.', document.currentScript.src).href : new URL('.', location.href).href;
-  // Panes: views by type, as solid-panes does it. A pane is { name, label(doc) -> string|null, render(doc, el) };
-  // label returns null when the pane does not apply. For each distinct @type on the page, panes/<type>.js is
-  // loaded (lower-cased) if it exists and registers itself with wiki.panes.push(...). The outline and the raw
-  // JSON are always the last two tabs, so a page with no pane still has its floor.
+  // Panes, LOSOS's contract (https://losos.org/): a pane is { label, icon?, canHandle(subject, store) -> bool,
+  // render(subject, store, container, rawData) }. The subject is a named node { value } for the island's @id; the store
+  // answers store.get(iri) with the node; rawData is the island as parsed. Resolution, in LOSOS's order with two amendments:
+  //   1. local panes: panes/<type>.js for every @type on the page (the directory is the registry), plus any <script data-pane src>;
+  //   2. ui:view on the node: the page may name a pane for itself, shown after the local ones, never first, so a pane that
+  //      verifies the page is never displaced by one the page chose;
+  //   3. the public registry (solid-panes.github.io): @type -> manifest -> pane URL, consulted only when 1 and 2 gave nothing;
+  //   4. the floor: the outline and the raw JSON, always the last two tabs.
   const wiki = (window.wiki = window.wiki || {}); wiki.panes = wiki.panes || []; wiki.ROOT = ROOT; wiki.el = el; wiki.link = link; wiki.value = value; wiki.table = table; wiki.hash = hash;
+  wiki.registry = wiki.registry ?? 'https://solid-panes.github.io/';
+  wiki.namedNode = (iri) => ({ termType: 'NamedNode', value: new URL(iri, location.href).href });
+  // the page's store: every island by its resolved @id and by its fragment
+  wiki.store = { nodes: new Map(), add(doc) { const id = doc['@id']; if (id) { this.nodes.set(new URL(id, location.href).href, doc); this.nodes.set(id, doc); } }, get(iri) { if (!iri) return null; const v = typeof iri === 'string' ? iri : iri.value; return this.nodes.get(v) || this.nodes.get(new URL(v, location.href).href) || null; } };
   // shared pieces for panes: a copy button, fact tiles, an id card of rows, a light with its text
   wiki.copyBtn = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = (e) => { e.preventDefault(); navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); }; return b; };
   wiki.facts = (pairs) => { const f = el('div', 'facts'); for (const [k, v] of pairs) if (v != null && v !== '') { const d = el('div', 'fact'); d.append(el('span', 'fk', k), el('span', 'fv', String(v))); f.append(d); } return f; };
@@ -151,25 +159,48 @@
   // marking: BIP 340 over sha256 of the canonical object (sorted keys, no whitespace, sig excluded)
   wiki.canon = (v) => v === null || typeof v !== 'object' ? JSON.stringify(v) : Array.isArray(v) ? '[' + v.map(wiki.canon).join(',') + ']' : '{' + Object.keys(v).sort().map((k) => JSON.stringify(k) + ':' + wiki.canon(v[k])).join(',') + '}';
   wiki.markCheck = async (obj, signerDid) => { if (!obj.sig) return null; const { hash, secp } = await wiki.kit(); const { sig, ...rest } = obj; const msg = hash.sha256(new TextEncoder().encode(wiki.canon(rest))); const pk = (String(signerDid || '').match(/^did:nostr:([0-9a-f]{64})$/) || [])[1]; if (!pk) return false; try { return secp.verifySchnorr(msg, hash.hexToBytes(sig), hash.hexToBytes(pk)); } catch { return false; } };
-  const loadPane = (type) => new Promise((res) => { const s = document.createElement('script'); s.src = new URL('panes/' + String(type).toLowerCase() + '.js', ROOT).href; s.onload = s.onerror = () => res(); document.head.append(s); });
-  function tabs(doc, sec) {
-    const views = wiki.panes.map((p) => { let l = null; try { l = p.label(doc); } catch {} return l ? { name: l, render: p.render } : null; }).filter(Boolean);
-    // the outline leaves out what the hero already shows: the id, the type, the name and the description
+  const asPane = (p) => typeof p.label === 'function' ? { ...p, label: p.name || 'view', canHandle: (subject, store) => !!p.label(store.get(subject) || {}), render: (subject, store, c, raw) => p.render(raw || store.get(subject), c) } : p; // an older wiki pane (label(doc), render(doc, el)) still works
+  const loadScript = (src) => new Promise((res) => { const s = document.createElement('script'); s.src = src; s.onload = s.onerror = () => res(); document.head.append(s); });
+  const loadModulePane = async (url) => { try { const m = await import(new URL(url, location.href).href); const p = m.default || m.pane; if (p && typeof p.render === 'function') return asPane(p); } catch (e) { console.warn('[wiki] pane failed to load', url, e.message); } return null; };
+  async function localPanes(types) {
+    await Promise.all([...types].map((t) => loadScript(new URL('panes/' + String(t).toLowerCase() + '.js', ROOT).href)));
+    for (const s of document.querySelectorAll('script[data-pane]')) { const p = await loadModulePane(s.getAttribute('src') || s.dataset.pane); if (p) wiki.panes.push(p); }
+  }
+  async function registryPanes(types, doc) {
+    if (!wiki.registry) return [];
+    try {
+      const idx = await (await fetch(new URL('reverse-index.json', wiki.registry))).json(); const out = [];
+      // the registry keys full IRIs (urn:solid:Note); a page may say the type short, so the local name is tried too
+      const local = (k) => String(k).split(/[:/#]/).pop();
+      for (const t of types) { const key = idx[t] ? t : Object.keys(idx).find((k) => local(k) === local(t)); const hit = key && idx[key]; if (!hit) continue; const ref = typeof hit === 'string' ? hit : hit.manifest || hit.url; if (!ref) continue; const manifest = await (await fetch(new URL(ref, wiki.registry))).json();
+        if (manifest.schema && doc && !doc.$schema) doc.$schema = manifest.schema; // as solid-panes' autoSchema does: the registry's schema for the type, so a schema-driven pane can take it
+        if (manifest.pane) { const p = await loadModulePane(new URL(manifest.pane, wiki.registry).href); if (p) { p.label = p.label || manifest.label || String(t); p.source = 'registry'; out.push(p); } } }
+      return out;
+    } catch { return []; }
+  }
+  const applies = (p, subject) => { try { return !!p.canHandle(subject, wiki.store); } catch (e) { console.warn('[wiki] canHandle failed:', p.label, e.message); return false; } };
+  async function tabs(doc, sec) {
+    const subject = wiki.namedNode(doc['@id'] || '#this');
+    const views = wiki.panes.map(asPane).filter((p) => applies(p, subject));
+    const own = doc['ui:view'] || doc.view; if (typeof own === 'string') { const p = await loadModulePane(own); if (p && applies(p, subject)) { p.label = (p.label || 'view') + ' · from the page'; views.push(p); } }
+    if (!views.length) for (const p of await registryPanes(wiki.types(doc), doc)) if (applies(p, subject)) views.push(p);
+    // the floor: the outline leaves out what the hero already shows
     const rest = (d) => Object.fromEntries(Object.entries(d).filter(([k]) => !['@id', '@type', 'name', 'title', 'description'].includes(k)));
-    views.push({ name: 'outline', render: (d, e) => e.append(table(rest(d))) }, { name: 'raw', render: (d, e) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
-    const bar = el('div', 'tabs'); const body = el('div', 'view'); let cur;
-    const show = (v) => { cur = v; body.replaceChildren(); try { v.render(doc, body); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.textContent === v.name)); };
-    for (const v of views) { const b = el('button', null, v.name); b.onclick = () => show(v); bar.append(b); }
-    sec.append(bar, body); show(views[0]);
+    views.push({ label: 'outline', canHandle: () => true, render: (s, st, e, d) => e.append(table(rest(d))) }, { label: 'raw', canHandle: () => true, render: (s, st, e, d) => e.append(el('pre', null, JSON.stringify(d, null, 2))) });
+    const bar = el('div', 'tabs'); const body = el('div', 'view');
+    const show = (v) => { body.replaceChildren(); try { v.render(subject, wiki.store, body, doc); } catch (e) { body.append(el('p', 'err', 'this view failed: ' + e.message)); } [...bar.children].forEach((b) => b.classList.toggle('on', b.dataset.label === v.label)); try { localStorage.setItem('wiki-tab:' + location.pathname, v.label); } catch {} };
+    for (const v of views) { const b = el('button', null, (v.icon ? v.icon + ' ' : '') + v.label); b.dataset.label = v.label; b.onclick = () => show(v); bar.append(b); }
+    sec.append(bar, body); let remembered = null; try { remembered = localStorage.getItem('wiki-tab:' + location.pathname); } catch {} show(views.find((v) => v.label === remembered) || views[0]);
   }
   async function run() {
     const islands = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => { try { return JSON.parse(s.textContent); } catch (e) { return { '@type': 'ParseError', error: e.message }; } });
     const style = el('style'); style.textContent = CSS; document.head.append(style);
+    islands.forEach((d) => wiki.store.add(d));
     const types = new Set(islands.flatMap((d) => [].concat(d['@type'] || [])));
-    await Promise.all([...types].map(loadPane));
+    await localPanes(types);
     const main = el('main', 'wiki');
     const nav = el('nav'); for (const [p, t, c] of [['index.html', 'datawiki', 'wordmark'], ['index.html', 'index'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
-    islands.forEach((d, i) => main.append(island(d, i)));
+    for (const [i, d] of islands.entries()) main.append(await island(d, i));
     if (!document.title && islands[0]) document.title = islands[0].name || islands[0]['@id'] || 'datawiki';
     document.body.append(main);
   }

@@ -1,8 +1,10 @@
 // The Verdict pane: the marking vocabulary (https://bitmark.co/marking/): the object's parties, subject and amount, and its signature checked when it has one.
 wiki.panes.push({
   name: 'verdict',
-  label: (doc) => wiki.has(doc, 'Verdict') ? 'verdict' : null,
-  render: (doc, root) => {
+  label: 'verdict',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Verdict'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki;
     const who = doc.from || doc.by; const id = (x) => x && (x['@id'] || x);
     root.append(facts([['amount', doc.amount != null ? doc.amount + ' mark' + (doc.amount === 1 ? '' : 's') : null], ['outcome', doc.verdict ? id(doc.verdict) : null], ['when', doc.at ? String(doc.at).slice(0, 10) : null], ['deadline', doc.deadline ? String(doc.deadline).slice(0, 10) : null]]));

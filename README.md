@@ -17,12 +17,17 @@ this repo is its spine: each anchored commit is one state on a trail on Bitcoin 
 
 ## Panes
 
-Views by type, as solid-panes does it. A pane is `{ name, label(doc), render(doc, el) }` in `panes/<type>.js`,
-loaded by `wiki.js` for every `@type` on the page; `label` returns null when the pane does not apply. The
-outline and the raw JSON are always the last two tabs, so a page with no pane still has its floor.
-A pane may verify, not only display: the Blocktrail pane checks every mark given by value in the page, with
-the kernel's codec and the trail key code pinned by commit, and shows what it checked (green or red) apart
-from what is only claimed (grey).
+Views by type, on [LOSOS](https://losos.org/)'s contract: a pane is `{ label, icon?, canHandle(subject, store), render(subject, store, container, rawData) }`.
+The subject is a named node for the island's `@id`, the store answers `store.get(iri)` with the island, `rawData` is the island as parsed.
+A pane is found in LOSOS's order, with two amendments:
+
+1. local panes: `panes/<type>.js` for every `@type` on the page (the directory is the registry), plus any `<script data-pane src>` ES module;
+2. `ui:view` on the node: the page may name a pane for itself, shown after the local ones and never first, so a pane that verifies the page is never displaced by one the page chose;
+3. the public registry, [solid-panes.github.io](https://solid-panes.github.io/): `@type` → manifest → pane URL, consulted only when 1 and 2 gave nothing; the manifest's schema is set on the node first, as solid-panes' `autoSchema` does, so a schema-driven pane can take it (a `Note` with no local pane gets LOSOS's editor this way);
+4. the floor: the outline and the raw JSON, always the last two tabs, so a page with no pane still renders and the data is never hidden.
+
+A pane may verify, not only display: the Blocktrail pane checks every mark given by value in the page, with the kernel's codec and the
+trail key code pinned by commit, and shows what it checked (green or red) apart from what is only claimed (grey).
 
 - `panes/index.js`: the entries as cards.
 - `panes/agent.js`: a profile card: npub and DID with copy, the address (balance from a local explorer when one answers), what it maintains.

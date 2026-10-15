@@ -27,8 +27,10 @@
   };
   wiki.panes.push({
     name: 'blocktrail',
-    label: (doc) => [].concat(doc['@type'] || []).includes('Blocktrail') ? 'trail' : null,
-    render: (doc, root) => {
+    label: 'trail',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Blocktrail'),
+    render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
       const { el, link } = wiki;
       const txos = [].concat(doc.txo || []).map(parseTxo);
       const states = doc.states && doc.states.length ? doc.states : txos.map((t) => t && t.commit);

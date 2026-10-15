@@ -8,8 +8,10 @@
   const EXPLORER = 'http://127.0.0.1:3491/api';
   wiki.panes.push({
     name: 'agent',
-    label: (doc) => [].concat(doc['@type'] || []).includes('Agent') ? 'profile' : null,
-    render: (doc, root) => {
+    label: 'profile',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Agent'),
+    render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
       const { el, link } = wiki;
       const copy = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); return b; };
       const did = doc.sameAs && doc.sameAs['@id'] || ''; const hex = (did.match(/^did:nostr:([0-9a-f]{64})$/) || [])[1];

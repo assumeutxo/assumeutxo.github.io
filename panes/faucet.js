@@ -2,8 +2,10 @@
 // and what it has paid to this wiki, as txo: links.
 wiki.panes.push({
   name: 'faucet',
-  label: (doc) => [].concat(doc['@type'] || []).includes('Faucet') ? 'faucet' : null,
-  render: (doc, root) => {
+  label: 'faucet',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Faucet'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, value } = wiki;
     const copy = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); return b; };
     const facts = el('div', 'facts');

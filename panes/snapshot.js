@@ -2,8 +2,10 @@
 // sha256 and the infohash; the magnet, the metainfo file and the webseed are where a copy was; the Nostr event is where it was announced.
 wiki.panes.push({
   name: 'snapshot',
-  label: (doc) => [].concat(doc['@type'] || []).includes('Snapshot') ? 'download' : null,
-  render: (doc, root) => {
+  label: 'download',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Snapshot'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, value } = wiki;
     const copy = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); return b; };
     const gb = doc.bytes ? (doc.bytes / 1e9).toFixed(2) + ' GB' : '';

@@ -1,8 +1,10 @@
 // The Index pane: one card per entry, type chip and name, linking through to the entry's page.
 wiki.panes.push({
   name: 'index',
-  label: (doc) => [].concat(doc['@type'] || []).includes('Index') ? 'entries' : null,
-  render: (doc, root) => {
+  label: 'entries',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Index'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link } = wiki;
     const grid = el('div', 'cards');
     for (const e of [].concat(doc.entries || [])) {

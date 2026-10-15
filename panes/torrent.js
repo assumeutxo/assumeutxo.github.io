@@ -1,8 +1,10 @@
 // The Torrent pane: the infohash as the identity, the magnet and the metainfo and webseeds as where copies are, the trackers.
 wiki.panes.push({
   name: 'torrent',
-  label: (doc) => wiki.has(doc, 'Torrent') ? 'torrent' : null,
-  render: (doc, root) => {
+  label: 'torrent',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Torrent'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki;
     root.append(facts([['file', doc.fileName || doc.name], ['size', doc.length ? (doc.length / 1e9).toFixed(2) + ' GB' : null], ['pieces', doc.pieces], ['trackers', (doc.trackers || []).length]]));
     root.append(card([['infohash', hash(doc.infohash)], doc.contents ? ['contents', link(doc.contents['@id'])] : null].filter(Boolean)));

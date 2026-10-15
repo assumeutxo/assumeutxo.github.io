@@ -1,8 +1,10 @@
 // The Transaction pane: a whole transaction from its bytes: txid recomputed, inputs as outpoints, outputs as coins.
 wiki.panes.push({
   name: 'transaction',
-  label: (doc) => wiki.has(doc, 'Transaction') ? 'transaction' : null,
-  render: (doc, root) => {
+  label: 'transaction',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Transaction'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki; const chain = doc.chain || 'txbt4';
     if (!doc.hex) { root.append(light('grey', 'given by name only; nothing to decode')); return; }
     wiki.kit().then(({ codec }) => {

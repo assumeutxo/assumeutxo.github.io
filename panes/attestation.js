@@ -2,8 +2,10 @@
 // The event carrying it is verified here (id, signature, author); the agreement of the muhash with the chain is not.
 wiki.panes.push({
   name: 'attestation',
-  label: (doc) => wiki.has(doc, 'Attestation') ? 'attestation' : null,
-  render: (doc, root) => {
+  label: 'attestation',
+  canHandle: (subject, store) => wiki.has(store.get(subject) || {}, 'Attestation'),
+  render(subject, store, root, raw) {
+    const doc = raw || store.get(subject);
     const { el, link, hash, facts, card, light } = wiki; const ev = doc.event;
     root.append(facts([['network', doc.network], ['height', doc.height], ['signed', ev && ev.created_at ? new Date(ev.created_at * 1000).toISOString().slice(0, 10) : null]]));
     root.append(card([['block', hash(doc.hash)], ['muhash', hash(doc.muhash)], doc.rules ? ['rules', hash(doc.rules.sha256)] : null, doc.rules && doc.rules.engine ? ['engine', hash(doc.rules.engine)] : null, doc.signer ? ['signer', link(doc.signer['@id'])] : null].filter(Boolean)));
