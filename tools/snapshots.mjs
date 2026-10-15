@@ -41,6 +41,7 @@ entries.push({ '@id': 'https://nostrapps.github.io/ntorrent/?q=assumeutxo', '@ty
 const island = { '@context': CTX, '@id': '#this', '@type': ['SnapshotIndex', 'Index'], name: 'assumeUTXO snapshots',
   description: 'Every UTXO set snapshot we know of, across Bitcoin and the BLAKE2b chains: Core\'s chain-parameter entries with their torrents, Knots\' mainnet entry, and ours. A snapshot is named by its txoutset hash; a file is proven by its sha256 and its infohash; a torrent or a host is only where a copy was. Attestations of who loaded what are to come.',
   creator: { '@id': 'me.html#me' }, trail: { '@id': 'trail.html#this' }, data: { '@id': 'data/snapshots.json' },
+  networks: (() => { const N = JSON.parse(readFileSync(`${ROOT}/data/networks.jsonld`, 'utf8')).networks; const order = ['btc', 'xbt', 'tbtc4', 'txbt4', 'tbtc3', 'signet']; return order.map((id) => N.find((n) => n.id === id)).filter(Boolean).map((n) => ({ '@id': 'networks.html#this', id: n.id, name: n.name })); })(),
   status: 'Formal attestations, signed statements checked in the page, and fraud proofs are coming soon. What is here today: every published snapshot, its torrents and announcements, and the informal verifications found in the Core and Knots review threads, each linked to its source.',
   entries };
 page('index.html', 'assumeUTXO snapshots', island, '');

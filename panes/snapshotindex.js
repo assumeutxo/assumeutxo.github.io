@@ -6,7 +6,8 @@ wiki.panes.push({
     const doc = raw || store.get(subject); const { el, link } = wiki;
     const snaps = [].concat(doc.entries || []).filter((e) => wiki.has(e, 'Snapshot')); const others = [].concat(doc.entries || []).filter((e) => !wiki.has(e, 'Snapshot'));
     // one tint per chain, rows grouped under the chain and sorted by height, a stripe at the left of each row
-    const ORDER = ['btc', 'xbt', 'tbtc4', 'txbt4', 'tbtc3', 'signet']; const NAMES = { btc: 'Bitcoin mainnet', xbt: 'Bitcoin BLAKE2b mainnet', tbtc4: 'Bitcoin testnet4', txbt4: 'Bitcoin BLAKE2b testnet4', tbtc3: 'Bitcoin testnet3', signet: 'Bitcoin signet' };
+    // chain names and order come from the index's own copy of the network list (data/networks.jsonld), written by the generator
+    const nets = [].concat(doc.networks || []); const ORDER = nets.length ? nets.map((n) => n.id) : ['btc', 'xbt', 'tbtc4', 'txbt4', 'tbtc3', 'signet']; const NAMES = Object.fromEntries(nets.map((n) => [n.id, n.name]));
     const t = el('table', 'dt'); const head = el('tr'); for (const h of ['height', 'txoutset hash', 'size', 'attested', 'source', 'get it']) head.append(el('th', null, h)); t.append(head);
     const groups = new Map(); for (const e of snaps) { const k = e.network || '?'; (groups.get(k) || groups.set(k, []).get(k)).push(e); }
     const keys = [...groups.keys()].sort((a, b) => (ORDER.indexOf(a) + 1 || 99) - (ORDER.indexOf(b) + 1 || 99));
