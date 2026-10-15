@@ -5,7 +5,7 @@
   "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
   "@id": "#this",
   "name": "this wiki's trail on txbt4",
-  "description": "Each anchored commit of this repo is a state on a Blocktrails git-mark trail. The mark is given by value: the transaction bytes and its block are in this island, so the commitment can be checked with no explorer.",
+  "description": "Each anchored commit of this repo is a state on a Blocktrails git-mark trail. Every mark is given by value: the transaction bytes, and the block once it has one, are in this island, so the commitments can be checked with no explorer.",
   "creator": {
     "@id": "me.html#me"
   },
@@ -18,7 +18,8 @@
   "pubkeyBase": "029798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723",
   "chain": "txbt4",
   "states": [
-    "bc4859083751322ed7e6da2a74fbcf42b3302701"
+    "bc4859083751322ed7e6da2a74fbcf42b3302701",
+    "7396ac028b6688e3059a0a230c81ecc6e5a18507"
   ],
   "txo": [
     {
@@ -28,6 +29,10 @@
         "hash": "000000005addb5b5a3cd732fd3bb599dcc10147882c8276c26c7fa4fdaca3137",
         "height": 153040
       }
+    },
+    {
+      "@id": "txo:txbt4:bce6aaa0ac8c13b784559719a80deb02d041bd3d49fcf043479935914f69b409:0?amount=9888&pubkey=fa90461c476a3d6b021259b889397da6548edae8ed9f646b2cc5b2eff8833bba&commit=7396ac028b6688e3059a0a230c81ecc6e5a18507",
+      "hex": "02000000000101611b089d23367f1b50bb96285479034a8f48b2d3f45802e386f89d347fa16fc10100000000fdffffff01a026000000000000225120fa90461c476a3d6b021259b889397da6548edae8ed9f646b2cc5b2eff8833bba0141c09e0b7c1ed717981252c291e26774f15928bafd5b440e42c9dc20d64efa46d451e2eed87a313a5e9c2fceef370ff34e2d8c7d4344598c30a981dbf316fdb3ef21b2550200"
     }
   ]
 }
