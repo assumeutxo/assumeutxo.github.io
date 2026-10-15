@@ -311,6 +311,109 @@
           "description": "the same site by rsync; the trail says which copy is which"
         }
       ]
+    },
+    {
+      "name": "Reading",
+      "links": [
+        {
+          "@id": "https://www.microsoft.com/en-us/research/publication/the-sybil-attack/",
+          "@type": "WebPage",
+          "name": "Douceur, The Sybil Attack",
+          "description": "without a trusted authority or a cost per identity, one entity can present as many; the reason counts of keys mean nothing",
+          "date": "2002"
+        },
+        {
+          "@id": "https://dl.acm.org/doi/10.1145/1080192.1080202",
+          "@type": "WebPage",
+          "name": "Cheng and Friedman, Sybilproof reputation mechanisms",
+          "description": "any reputation function symmetric in identities can be gamed; only asymmetric, seed-rooted flows survive; the citation for refusing to count keys",
+          "date": "2005"
+        },
+        {
+          "@id": "https://nlp.stanford.edu/pubs/eigentrust.pdf",
+          "@type": "WebPage",
+          "name": "Kamvar, Schlosser, Garcia-Molina, EigenTrust",
+          "description": "reputation as a flow through a trust graph from pre-trusted peers",
+          "date": "2003"
+        },
+        {
+          "@id": "https://www.cs.cornell.edu/people/egs/sybilguard/",
+          "@type": "WebPage",
+          "name": "Yu et al., SybilGuard and SybilLimit",
+          "description": "bounding sybils by the cut of a social graph; the social-graph strand we do not take",
+          "date": "2006"
+        },
+        {
+          "@id": "https://www.advogato.org/trust-metric.html",
+          "@type": "WebPage",
+          "name": "Levien, Advogato trust metric",
+          "description": "the flow metric that made attack-resistant trust practical on a real site",
+          "date": "2000"
+        },
+        {
+          "@id": "https://www.jstor.org/stable/1882010",
+          "@type": "WebPage",
+          "name": "Spence, Job Market Signaling",
+          "description": "a signal is credible only if it costs the honest less than the liar; why stake and work belong beside a rating, not inside it",
+          "date": "1973"
+        },
+        {
+          "@id": "http://www.hashcash.org/hashcash.pdf",
+          "@type": "WebPage",
+          "name": "Back, Hashcash",
+          "description": "the computational cost per identity, which proof of work made into a system",
+          "date": "2002"
+        },
+        {
+          "@id": "https://eprint.iacr.org/2007/202",
+          "@type": "WebPage",
+          "name": "Ateniese et al., Provable Data Possession",
+          "description": "prove you hold a file with a challenge tied to you; the formal cousin of the salted set hash",
+          "date": "2007"
+        },
+        {
+          "@id": "https://dl.acm.org/doi/10.1145/1315245.1315317",
+          "@type": "WebPage",
+          "name": "Juels and Kaliski, Proofs of Retrievability",
+          "description": "the same idea with stronger guarantees; what a staked attestation is a cheap version of",
+          "date": "2007"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bips/pull/2152",
+          "@type": "WebPage",
+          "name": "SwiftSync, BIP 457, the salted aggregate",
+          "description": "the Bitcoin instance: a per-key salted sum over the UTXO set that only a holder of the set can produce",
+          "date": "2026"
+        },
+        {
+          "@id": "http://www.glicko.net/glicko/glicko2.pdf",
+          "@type": "WebPage",
+          "name": "Glickman, Glicko-2",
+          "description": "a rating with a deviation: fresh keys are provisional by construction, and silence widens the error bars",
+          "date": "2001"
+        },
+        {
+          "@id": "https://www.microsoft.com/en-us/research/project/trueskill-ranking-system/",
+          "@type": "WebPage",
+          "name": "Herbrich, Minka, Graepel, TrueSkill",
+          "description": "the multi-party version, if attestations ever become contests with more than two sides",
+          "date": "2006"
+        },
+        {
+          "@id": "https://www.rfc-editor.org/rfc/rfc6962",
+          "@type": "WebPage",
+          "name": "Laurie, Langley, Kasper, Certificate Transparency (RFC 6962)",
+          "description": "append-only logs, monitors, and public proofs of misissuance instead of trust; the closest existing design to this record",
+          "date": "2013"
+        },
+        {
+          "@id": "https://www.truthcoin.info/papers/truthcoin-whitepaper.pdf",
+          "@type": "WebPage",
+          "name": "Sztorc, Truthcoin",
+          "description": "paying people to report facts and what breaks when the question is not computable",
+          "date": "2015"
+        }
+      ]
     }
   ]
 }
