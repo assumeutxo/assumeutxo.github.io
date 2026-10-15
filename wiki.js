@@ -65,6 +65,7 @@
     .wiki table.dt td.num{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
     .wiki table.dt tr:first-child td{border-top:0}.wiki table.dt .muted{font-size:12px}
     .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
+    .wiki ul.links li{margin:0 0 10px}.wiki ul.links li a{font-size:15px}.wiki ul.links li div.muted{margin-top:1px}
     .wiki table.dt tr.grp td{background:#f6f3ec;font:500 13px var(--sans);color:var(--ink);padding:9px 14px;border-top:1px solid var(--line2)}
     .wiki table.dt tr.grp .type{margin-right:4px}
     .wiki table.dt td:first-child{border-left:4px solid var(--stripe,transparent);padding-left:12px}
@@ -216,7 +217,7 @@
     const types = new Set(islands.flatMap((d) => [].concat(d['@type'] || [])));
     await localPanes(types);
     const main = el('main', 'wiki');
-    const nav = el('nav'); for (const [p, t, c] of [['index.html', 'assumeUTXO', 'wordmark'], ['index.html', 'snapshots'], ['pages.html', 'all pages'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
+    const nav = el('nav'); for (const [p, t, c] of [['index.html', 'assumeUTXO', 'wordmark'], ['index.html', 'snapshots'], ['links.html', 'links'], ['pages.html', 'all pages'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
     for (const [i, d] of islands.entries()) main.append(await island(d, i));
     if (!document.title && islands[0]) document.title = islands[0].name || islands[0]['@id'] || 'datawiki';
     document.body.append(main);

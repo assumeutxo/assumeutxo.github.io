@@ -1,0 +1,301 @@
+<!doctype html>
+<meta charset="utf-8"><title>assumeUTXO · links</title>
+<script type="application/ld+json">
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#this",
+  "@type": "Links",
+  "name": "links",
+  "description": "Everything we read on the way: the proposals, where the hashes and files live, what verification looks like today, and the tools. Each with a line on what it is and, where it is a moment rather than a place, when.",
+  "creator": {
+    "@id": "me.html#me"
+  },
+  "groups": [
+    {
+      "name": "Specs and proposals",
+      "links": [
+        {
+          "@id": "https://github.com/bitcoin/bips/pull/2137",
+          "@type": "WebPage",
+          "name": "BIP 452: P2P UTXO Set Sharing (Fabian Jahr)",
+          "description": "the draft BIP for serving UTXO sets over P2P in chunks under a Merkle root; numbered July 2026, still open",
+          "date": "2026-04-10"
+        },
+        {
+          "@id": "https://groups.google.com/g/bitcoindev/c/rThmyI8ZN3Q",
+          "@type": "WebPage",
+          "name": "bitcoindev thread on BIP 452",
+          "description": "the list discussion, with AJ's October reply proposing 64 KB leaves, tagged hashes and the header in the tree",
+          "date": "2026-05-05"
+        },
+        {
+          "@id": "https://github.com/ajtowns/bitcoin/blob/202610-auto-utxo-snap/contrib/utxo-tools/utxo_snapshot_chunks.py",
+          "@type": "WebPage",
+          "name": "AJ's utxo_snapshot_chunks.py",
+          "description": "splits a dumptxoutset file, computes the chunk tree and a summary (merkle root, muhash, total amount)",
+          "date": "2026-10-15"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/35054",
+          "@type": "WebPage",
+          "name": "Core PR 35054: p2p: UTXO set sharing",
+          "description": "the reference implementation of BIP 452; draft since April 2026, stuck on whether background validation stays",
+          "date": "2026-04-10"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/issues/32377",
+          "@type": "WebPage",
+          "name": "Core issue 32377: crowdsource trust through independent snapshot verification (l0rinc)",
+          "description": "every IBD checks its own set against the baked-in hash and warns; expanded into a proposal to drop background validation",
+          "date": "2026-10-10"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/issues/36476",
+          "@type": "WebPage",
+          "name": "Core issue 36476: pruneassumevalid (l0rinc)",
+          "description": "skip witness downloads and block writes during pruned assumevalid; where the proposer's energy went next",
+          "date": "2026-10-08"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bips/pull/2152",
+          "@type": "WebPage",
+          "name": "SwiftSync: BIPs 455, 456, 457 (Netzke, Somsen)",
+          "description": "spent coins over P2P, hints for unspent coins, and the salted-sum initial block download; our epoch packages align with 455's coin format",
+          "date": "2026-05-06"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/blob/master/doc/assumeutxo.md",
+          "@type": "WebPage",
+          "name": "doc/assumeutxo.md in Core",
+          "description": "how assumeutxo works today: loadtxoutset, the two chainstates, pruning"
+        },
+        {
+          "@id": "https://github.com/jamesob/assumeutxo-docs",
+          "@type": "WebPage",
+          "name": "jamesob's assumeutxo-docs (2019)",
+          "description": "the original proposal, with David Harding's feedback questioning why every snapshot user must revalidate",
+          "date": "2019-04"
+        }
+      ]
+    },
+    {
+      "name": "Where the hashes live",
+      "links": [
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/blob/master/src/kernel/chainparams.cpp",
+          "@type": "WebPage",
+          "name": "Bitcoin Core chainparams",
+          "description": "the assumeutxo entries a Core node accepts: height, hash_serialized, chain tx count, per network"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/28553",
+          "@type": "WebPage",
+          "name": "Core PR 28553: assumeutxo params mainnet (840000)",
+          "description": "the first mainnet entry; Sjors' magnet and sha256 in the body",
+          "date": "2023-09-30"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/28516",
+          "@type": "WebPage",
+          "name": "Core PR 28516: params for testnet and signet",
+          "description": "testnet 2,500,000 and signet 160,000 with torrents",
+          "date": "2023-09-21"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/31969",
+          "@type": "WebPage",
+          "name": "Core PR 31969: mainnet 880,000",
+          "description": "magnet, sha256, and reviewers' hashes and ACKs underneath",
+          "date": "2025-03-01"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/33274",
+          "@type": "WebPage",
+          "name": "Core PR 33274: chainparams updates for 30.0",
+          "description": "adds 910,000",
+          "date": "2025-09-01"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/34677",
+          "@type": "WebPage",
+          "name": "Core PR 34677: chainparams updates pre-31.0",
+          "description": "adds 935,000",
+          "date": "2026-02-26"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/36196",
+          "@type": "WebPage",
+          "name": "Core PR 36196: chainparams updates pre-32.0",
+          "description": "adds 965,000, testnet3 5,125,000, testnet4 150,000, signet 320,000",
+          "date": "2026-09-09"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399",
+          "@type": "WebPage",
+          "name": "Sjors' torrents for the pre-32.0 snapshots",
+          "description": "the magnets with sizes for 965,000 and the three test chains",
+          "date": "2026-09-10"
+        },
+        {
+          "@id": "https://github.com/bitcoinknots/bitcoin/pull/444",
+          "@type": "WebPage",
+          "name": "Knots PR 444: assumeutxo snapshot at 976000 (chrisguida)",
+          "description": "the BLAKE2b mainnet entry: facts, a verification recipe, and three reviewers who recomputed or loaded it",
+          "date": "2026-10-07"
+        }
+      ]
+    },
+    {
+      "name": "Where the files live",
+      "links": [
+        {
+          "@id": "https://bitcoin-snapshots.jaonoctus.dev/",
+          "@type": "WebPage",
+          "name": "bitcoin-snapshots.jaonoctus.dev",
+          "description": "torrents and direct copies of the Core snapshots for four chains, with SHA-512 sums and a GPG signature; also FastSync node archives"
+        },
+        {
+          "@id": "https://github.com/jaonoctus/bitcoin-snapshots",
+          "@type": "WebPage",
+          "name": "jaonoctus/bitcoin-snapshots",
+          "description": "the site's source"
+        },
+        {
+          "@id": "https://nostrapps.github.io/ntorrent/?q=assumeutxo",
+          "@type": "WebPage",
+          "name": "ntorrent: assumeutxo",
+          "description": "every kind 2003 announcement tagged assumeutxo on Nostr; the sixteen there are ours"
+        },
+        {
+          "@id": "https://melvin.me/datstr/snapshots/",
+          "@type": "WebPage",
+          "name": "our webseed",
+          "description": "the txbt4 snapshot file, manifest and .torrent, served with Range and CORS"
+        },
+        {
+          "@id": "udp://tracker.bitcoin.sprovoost.nl:6969",
+          "@type": "WebPage",
+          "name": "Sjors' tracker",
+          "description": "the tracker in every Core snapshot magnet"
+        }
+      ]
+    },
+    {
+      "name": "Verification as it exists",
+      "links": [
+        {
+          "@id": "https://github.com/bitcoin-core/guix.sigs",
+          "@type": "WebPage",
+          "name": "bitcoin-core/guix.sigs",
+          "description": "the model: one folder per release, one subfolder per signer, so independent attestations can be counted"
+        },
+        {
+          "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#pullrequestreview-5447913209",
+          "@type": "WebPage",
+          "name": "luke-jr's review on Knots PR 444",
+          "description": "a pasted dumptxoutset result with the same txoutset hash; an informal attestation",
+          "date": "2026-10-07"
+        },
+        {
+          "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6091037710",
+          "@type": "WebPage",
+          "name": "alphaminetech on Knots PR 444",
+          "description": "loaded the snapshot on an unpatched node and let background validation finish",
+          "date": "2026-10-09"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/35054#issuecomment-4501781606",
+          "@type": "WebPage",
+          "name": "sipa on background revalidation",
+          "description": "the argument that the hash is trusted like the code and the background pass is an anti-feature",
+          "date": "2026-05-20"
+        },
+        {
+          "@id": "https://github.com/bitcoin/bitcoin/pull/35054#issuecomment-4530515268",
+          "@type": "WebPage",
+          "name": "fjahr's reply",
+          "description": "no assumeUTXO without full background validation",
+          "date": "2026-05-24"
+        }
+      ]
+    },
+    {
+      "name": "Tools and readers",
+      "links": [
+        {
+          "@id": "https://bitcoin-kernel.com/utxo/",
+          "@type": "WebPage",
+          "name": "utxo: one coin, shown",
+          "description": "opens a txo: URI, fetches and verifies the transaction with bitcoin-kernel in the browser, sweeps a coin"
+        },
+        {
+          "@id": "https://blocktrails.org/verify/",
+          "@type": "WebPage",
+          "name": "Blocktrails verifier",
+          "description": "verifies a git-mark trail, by name or by value, on btc, tbtc4, xbt and txbt4"
+        },
+        {
+          "@id": "https://github.com/bitcoin-blake/blaketestnode",
+          "@type": "WebPage",
+          "name": "blaketestnode",
+          "description": "a txbt4 node in JavaScript that starts from the torrented snapshot and builds epoch packages"
+        },
+        {
+          "@id": "https://solid-panes.github.io/spec/",
+          "@type": "WebPage",
+          "name": "Panes, the spec",
+          "description": "what a pane is and how a host chooses one; this site is one of the two hosts"
+        },
+        {
+          "@id": "https://losos.org/",
+          "@type": "WebPage",
+          "name": "LOSOS",
+          "description": "the pane contract this site follows"
+        },
+        {
+          "@id": "https://blog.lopp.net/bitcoin-node-sync-with-utxo-snapshots/",
+          "@type": "WebPage",
+          "name": "lopp: Boost your Bitcoin node sync with UTXO snapshots",
+          "description": "a practitioner's walkthrough"
+        }
+      ]
+    },
+    {
+      "name": "This site",
+      "links": [
+        {
+          "@id": "data/snapshots.json",
+          "@type": "WebPage",
+          "name": "data/snapshots.json",
+          "description": "the source of every row: identity, sizes, torrents, announcements, attestations"
+        },
+        {
+          "@id": "https://github.com/assumeutxo/assumeutxo.github.io",
+          "@type": "WebPage",
+          "name": "the repository",
+          "description": "gh-pages; add a snapshot or an attestation by pull request"
+        },
+        {
+          "@id": "index.html#this",
+          "@type": "WebPage",
+          "name": "the snapshot table",
+          "description": "the front door"
+        },
+        {
+          "@id": "trail.html#this",
+          "@type": "WebPage",
+          "name": "the trail",
+          "description": "this site's commits anchored on txbt4"
+        },
+        {
+          "@id": "https://melvin.me/public/datawiki/",
+          "@type": "WebPage",
+          "name": "the mirror",
+          "description": "the same site by rsync; the trail says which copy is which"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script src="wiki.js"></script>
