@@ -103,6 +103,8 @@
     .wiki .btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line2)}.wiki .btn.ghost:hover{border-color:var(--ink)}
     .wiki h3{font:400 20px var(--serif);margin:18px 0 8px}
     @media (max-width:640px){.wiki .prow{flex-direction:column;gap:2px}.wiki .pk{flex:none}}
+    .wiki footer.foot{margin-top:72px;padding-top:14px;border-top:1px solid var(--line);font:12px var(--mono);letter-spacing:.04em}
+    .wiki footer.foot a{color:var(--mute)}.wiki footer.foot a:hover{color:var(--ink)}
     @media (max-width:640px){.wiki h1{font-size:34px}.wiki td.k{width:9em;font-size:11px}.wiki td{padding:9px 12px}main.wiki{padding:0 14px 72px}}
   `;
   const isIri = (s) => /^(https?:|magnet:|did:|txo:|urn:|mailto:|wss?:|\.{0,2}\/|[\w.-]+\.(html|jsonld|json|torrent|dat)(#|$)|#)/i.test(s);
@@ -231,6 +233,8 @@
     const nav = el('nav'); for (const [p, t, c] of [['index.html', 'assumeUTXO', 'wordmark'], ['index.html', 'snapshots'], ['links.html', 'links'], ['pages.html', 'all pages'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
     for (const [i, d] of islands.entries()) main.append(await island(d, i));
     if (!document.title && islands[0]) document.title = islands[0].name || islands[0]['@id'] || 'datawiki';
+    // a quiet footer: where the source is
+    const foot = el('footer', 'foot'); const src = el('a', null, 'source'); src.href = 'https://github.com/assumeutxo/assumeutxo.github.io'; foot.append(src); main.append(foot);
     document.body.append(main);
   }
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', run) : run();
