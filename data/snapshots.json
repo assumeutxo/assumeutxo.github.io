@@ -57,10 +57,12 @@
       "bytes": 869836053,
       "sha256": "86118db3a692b7c64bd4d9aef51a401f09722b9e92acb2826e7e76ac964529cd",
       "infohash": "242e9b7dcba15cc0ed8f1bc5f06b68da008f87c0",
-      "magnet": "magnet:?xt=urn:btih:242e9b7dcba15cc0ed8f1bc5f06b68da008f87c0&dn=utxo-knots-150307.dat",
+      "magnet": "magnet:?xt=urn:btih:242e9b7dcba15cc0ed8f1bc5f06b68da008f87c0&dn=utxo-knots-150307.dat&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=wss%3A%2F%2Ftracker.webtorrent.dev&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fopen.tracker.cl%3A1337%2Fannounce&ws=https%3A%2F%2Fmelvin.me%2Fdatstr%2Fsnapshots%2Futxo-knots-150307.dat",
       "webseed": true,
       "source": "ours: the fork point, cut from our node",
-      "announcedAt": "events/86d79268.html#this"
+      "announcedAt": "events/86d79268.html#this",
+      "mirror": "https://melvin.me/datstr/snapshots/utxo-knots-150307.dat",
+      "torrentFile": "https://melvin.me/datstr/snapshots/utxo-knots-150307.torrent"
     },
     {
       "network": "xbt",
@@ -215,7 +217,7 @@
         "jaonoctus"
       ],
       "bytes": 1245790499,
-      "note": "Sjors' original torrent (511e09f4…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "note": "Sjors' original torrent (511e09f4\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
       "bytesFrom": "the torrent metainfo, from a peer",
       "announcedAt": {
         "id": "0b3d3afb10637fd4d4f49a9a5fad19858f1a3c65ba756c57746a6f81929b8400",
@@ -355,7 +357,7 @@
         "jaonoctus"
       ],
       "bytes": 87828915,
-      "note": "Sjors' original torrent (9da986cb…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "note": "Sjors' original torrent (9da986cb\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
       "bytesFrom": "the torrent metainfo, from a peer",
       "announcedAt": {
         "id": "2d39893ab241d971aab2f339863be90121fb1649136339a0be4a3ed2eea20b4c",
