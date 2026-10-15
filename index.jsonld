@@ -1,9 +1,0 @@
-{
-  "@context": { "@vocab": "https://schema.org/", "did": "https://www.w3.org/ns/did#" },
-  "@id": "index.jsonld",
-  "@type": "DataFeed",
-  "name": "datawiki",
-  "description": "A wiki whose pages are data. Rendered from JSON-LD, versioned in git, anchored by a git-mark trail on txbt4.",
-  "creator": { "@id": "did:nostr:9798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723" },
-  "dataFeedElement": []
-}
