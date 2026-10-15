@@ -41,20 +41,49 @@
     "@id": "https://github.com/bitcoinknots/bitcoin/pull/444",
     "name": "bitcoinknots/bitcoin PR 444: chainparams: add assumeutxo snapshot at height 976000"
   },
-  "verifiedBy": [
+  "attestations": [
     {
-      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#pullrequestreview-5447913209",
-      "name": "luke-jr, 2026-10-07",
-      "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "luke-jr (GitHub)",
+      "at": "2026-10-07",
+      "did": "recomputed the txoutset hash with dumptxoutset rollback=976000 and approved the PR",
+      "says": {
+        "height": 976000,
+        "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118",
+        "coins": 167095701
+      },
+      "where": {
+        "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#pullrequestreview-5447913209"
+      }
     },
     {
-      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6046407002",
-      "name": "starslab, 2026-10-07",
-      "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "starslab (GitHub)",
+      "at": "2026-10-07",
+      "did": "recomputed the txoutset hash with dumptxoutset rollback=976000",
+      "says": {
+        "height": 976000,
+        "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118",
+        "coins": 167095701
+      },
+      "where": {
+        "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6046407002"
+      }
     },
     {
-      "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6091037710",
-      "name": "alphaminetech, 2026-10-09: loaded and validated on an unpatched 29.4.2 node"
+      "@type": "Attestation",
+      "form": "informal",
+      "by": "alphaminetech (GitHub)",
+      "at": "2026-10-09",
+      "did": "loaded the snapshot on an unpatched v29.4.2.knots20260508 node (pruned, 2 vCPU) and let background validation finish",
+      "says": {
+        "height": 976000
+      },
+      "where": {
+        "@id": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6091037710"
+      }
     }
   ]
 }

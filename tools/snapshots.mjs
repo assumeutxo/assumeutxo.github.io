@@ -24,12 +24,13 @@ for (const s of D.snapshots) {
       network: s.network, chain: s.chain, height: s.height, txoutsetHash: s.txoutsetHash, chainTxCount: s.chainTxCount, bytes: s.bytes, sha256: s.sha256, sharedWith: s.sharedWith,
       torrent: s.infohash ? { '@type': 'Torrent', infohash: s.infohash, magnet: s.magnet, webseed: s.mirror ? [{ '@id': s.mirror }] : undefined } : undefined, bytesFrom: s.bytesFrom,
       source: refs[0], sources: refs, producedBy: s.source, note: s.note,
+      attestations: s.attestations ? s.attestations.map((a) => ({ '@type': 'Attestation', form: a.form, by: a.by, at: a.at, did: a.did, says: a.txoutsetHash ? { height: s.height, txoutsetHash: a.txoutsetHash } : undefined, where: a.where ? { '@id': a.where } : undefined })) : undefined,
       announcedAt: s.announcedAt && s.announcedAt.id ? [{ '@id': '../' + evPages.get(s.announcedAt.id), '@type': 'NostrEvent', kind: 2003, id: s.announcedAt.id, browse: { '@id': 'https://nostrapps.github.io/ntorrent/?q=assumeutxo' } }] : undefined,
       creator: { '@id': '../me.html#me' } };
     for (const k of Object.keys(island)) if (island[k] === undefined) delete island[k]; if (island.torrent && island.torrent.webseed === undefined) delete island.torrent.webseed;
     page(path, `${s.network} snapshot at ${s.height}`, island, '../'); made++;
   }
-  entries.push({ '@id': id, '@type': 'Snapshot', name: `${s.network} at ${s.height.toLocaleString('en-US')}`, network: s.network, chain: s.chain, height: s.height, coins: s.coins, bytes: s.bytes, txoutsetHash: s.txoutsetHash, source: s.source, sharedWith: s.sharedWith,
+  entries.push({ '@id': id, '@type': 'Snapshot', name: `${s.network} at ${s.height.toLocaleString('en-US')}`, attested: s.attestations ? { formal: s.attestations.filter((a) => a.form === 'formal').length, informal: s.attestations.filter((a) => a.form !== 'formal').length } : undefined, network: s.network, chain: s.chain, height: s.height, coins: s.coins, bytes: s.bytes, txoutsetHash: s.txoutsetHash, source: s.source, sharedWith: s.sharedWith,
     torrent: s.infohash && s.page ? { '@id': path.replace('snapshots/', 'torrents/').replace(/^torrents\/(txbt4|xbt)-(\d+)\.html/, (m, n, h) => n === 'txbt4' ? 'torrents/utxo-knots-150307.html' : 'torrents/utxo-976000.html') + '#this' } : undefined, magnet: s.magnet, webseed: !!(s.webseed || s.mirror), announcedAt: typeof s.announcedAt === 'string' ? { '@id': s.announcedAt } : s.announcedAt && s.announcedAt.id ? { '@id': evPages.get(s.announcedAt.id) } : undefined });
 }
 for (const e of entries) for (const k of Object.keys(e)) if (e[k] === undefined) delete e[k];

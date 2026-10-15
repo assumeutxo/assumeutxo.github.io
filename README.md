@@ -41,6 +41,15 @@ trail key code pinned by commit, and shows what it checked (green or red) apart 
 
 The shim exports a toolkit for panes that verify (`wiki.kit()`: the kernel's codec, hashes and curve, pinned by commit), Nostr and marking signature checks, bech32 for addresses and npubs, and the shared pieces (`facts`, `card`, `light`, `copyBtn`).
 
+## Attestations, formal and informal
+
+A snapshot (or a tip) can carry `attestations`. A **formal** one is a signed statement carried by value, a Nostr event
+whose tags state the height, hash and txoutset hash or muhash, checked in the page: signature, author, and that it states
+what the page states. An **informal** one is a claim someone made elsewhere, a PR review, a comment, a post: who (by their
+handle there), when, what they did, what they said, and the link. The page never vouches for an informal one beyond the
+narrow fact that the number they wrote matches; it shows grey, "said elsewhere, as linked". Three informal is evidence; one
+formal is a commitment. An informal record can later be joined by the same person's formal one.
+
 ## Rules
 
 - A page's `@id` is a fragment, `#this` for a thing and `#me` for an agent, so the document and the

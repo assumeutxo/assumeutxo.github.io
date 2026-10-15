@@ -80,7 +80,29 @@
       "sourceRefs": [
         "knots444"
       ],
-      "announcedAt": "events/8f0f0b05.html#this"
+      "announcedAt": "events/8f0f0b05.html#this",
+      "attestations": [
+        {
+          "form": "informal",
+          "by": "luke-jr (GitHub)",
+          "at": "2026-10-07",
+          "where": "https://github.com/bitcoinknots/bitcoin/pull/444#pullrequestreview-5447913209",
+          "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+        },
+        {
+          "form": "informal",
+          "by": "starslab (GitHub)",
+          "at": "2026-10-07",
+          "where": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6046407002",
+          "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118"
+        },
+        {
+          "form": "informal",
+          "by": "alphaminetech (GitHub)",
+          "at": "2026-10-09",
+          "where": "https://github.com/bitcoinknots/bitcoin/pull/444#issuecomment-6091037710"
+        }
+      ]
     },
     {
       "network": "btc",
