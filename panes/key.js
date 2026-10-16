@@ -21,7 +21,7 @@
       const doc = raw || store.get(subject); const { el, link, light } = wiki; const hex = ((doc.sameAs && doc.sameAs['@id'] || '').match(/^did:nostr:([0-9a-f]{64})$/) || [])[1];
       if (!hex) { root.append(el('p', 'muted', doc.description)); return; }
       const did = 'did:nostr:' + hex; const copy = (text) => { const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(text).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); return b; };
-      root.append(wiki.card([['did', el('span', 'hash', did), copy(did)], ['npub', el('span', 'hash', npub(hex)), copy(npub(hex))], ['work in the key', `${bitsOf(hex)} leading zero bits`], ['elsewhere', link('https://nostr.social/' + hex, 'nostr.social'), ' · ', link('https://njump.me/' + npub(hex), 'njump')]]));
+      root.append(wiki.card([['did', el('span', 'hash', did), copy(did)], ['npub', el('span', 'hash', npub(hex)), copy(npub(hex))], ['work in the key', `${bitsOf(hex)} leading zero bits`], ['elsewhere', link('https://nostr.social/' + hex, 'nostr.social'), ' · ', link('https://nostr.at/' + npub(hex), 'nostr.at')]]));
       const sec = (title) => { root.append(el('h3', null, title)); const d = el('div'); root.append(d); return d; };
       // the profile and the two directions
       const who = sec('who this key is'); who.append(el('p', 'muted', 'fetching the profile from the relays…'));
