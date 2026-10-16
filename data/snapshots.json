@@ -106,7 +106,7 @@
     },
     {
       "network": "btc",
-      "chain": "Bitcoin mainnet",
+      "chain": "Bitcoin SHA256d mainnet",
       "height": 840000,
       "txoutsetHash": "a2a5521b1b5ab65f67818e5e8eccabb7171a517f9e2382208f77687310768f96",
       "chainTxCount": 991032194,
@@ -176,7 +176,7 @@
     },
     {
       "network": "btc",
-      "chain": "Bitcoin mainnet",
+      "chain": "Bitcoin SHA256d mainnet",
       "height": 880000,
       "txoutsetHash": "dbd190983eaf433ef7c15f78a278ae42c00ef52e0fd2a54953782175fbadcea9",
       "chainTxCount": 1145604538,
@@ -233,7 +233,7 @@
     },
     {
       "network": "btc",
-      "chain": "Bitcoin mainnet",
+      "chain": "Bitcoin SHA256d mainnet",
       "height": 910000,
       "txoutsetHash": "4daf8a17b4902498c5787966a2b51c613acdab5df5db73f196fa59a4da2f1568",
       "chainTxCount": 1226586151,
@@ -266,7 +266,7 @@
     },
     {
       "network": "btc",
-      "chain": "Bitcoin mainnet",
+      "chain": "Bitcoin SHA256d mainnet",
       "height": 935000,
       "txoutsetHash": "e4b90ef9eae834f56c4b64d2d50143cee10ad87994c614d7d04125e2a6025050",
       "chainTxCount": 1305397408,
@@ -300,7 +300,7 @@
     },
     {
       "network": "btc",
-      "chain": "Bitcoin mainnet",
+      "chain": "Bitcoin SHA256d mainnet",
       "height": 965000,
       "txoutsetHash": "4a8d794337118c0c615b574f817c7306c687584a537184b8d233df42bf477ec2",
       "chainTxCount": 1429611231,
@@ -332,7 +332,7 @@
     },
     {
       "network": "tbtc3",
-      "chain": "Bitcoin testnet3",
+      "chain": "Bitcoin SHA256d testnet3",
       "height": 2500000,
       "txoutsetHash": "f841584909f68e47897952345234e37fcd9128cd818f41ee6c3ca68db8071be7",
       "chainTxCount": 66484552,
@@ -346,7 +346,7 @@
         "jaonoctus"
       ],
       "bytes": 1245790499,
-      "note": "Sjors' original torrent (511e09f4\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "note": "Sjors' original torrent (511e09f4…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
       "bytesFrom": "the torrent metainfo, from a peer",
       "announcedAt": {
         "id": "0b3d3afb10637fd4d4f49a9a5fad19858f1a3c65ba756c57746a6f81929b8400",
@@ -357,7 +357,7 @@
     },
     {
       "network": "tbtc3",
-      "chain": "Bitcoin testnet3",
+      "chain": "Bitcoin SHA256d testnet3",
       "height": 4840000,
       "txoutsetHash": "ce6bb677bb2ee9789c4a1c9d73e6683c53fc20e8fdbedbdaaf468982a0c8db2a",
       "chainTxCount": 536078574,
@@ -390,7 +390,7 @@
     },
     {
       "network": "tbtc3",
-      "chain": "Bitcoin testnet3",
+      "chain": "Bitcoin SHA256d testnet3",
       "height": 5125000,
       "txoutsetHash": "d05430f34c9b7dd7eb98c0718cdf03782bcce8273847557d68ac2efc1365d4b8",
       "chainTxCount": 536708663,
@@ -422,7 +422,7 @@
     },
     {
       "network": "tbtc4",
-      "chain": "Bitcoin testnet4",
+      "chain": "Bitcoin SHA256d testnet4",
       "height": 90000,
       "txoutsetHash": "784fb5e98241de66fdd429f4392155c9e7db5c017148e66e8fdbc95746f8b9b5",
       "chainTxCount": 11347043,
@@ -445,7 +445,7 @@
     },
     {
       "network": "tbtc4",
-      "chain": "Bitcoin testnet4",
+      "chain": "Bitcoin SHA256d testnet4",
       "height": 120000,
       "txoutsetHash": "10b05d05ad468d0971162e1b222a4aa66caca89da2bb2a93f8f37fb29c4794b0",
       "chainTxCount": 14141057,
@@ -479,7 +479,7 @@
     },
     {
       "network": "tbtc4",
-      "chain": "Bitcoin testnet4",
+      "chain": "Bitcoin SHA256d testnet4",
       "height": 150000,
       "txoutsetHash": "ca068cae50679d7c947454bbe4f0e6aeec1fbe2c6c2735a08bb988623649f950",
       "chainTxCount": 14810011,
@@ -512,7 +512,7 @@
     },
     {
       "network": "signet",
-      "chain": "Bitcoin signet",
+      "chain": "Bitcoin SHA256d signet",
       "height": 160000,
       "txoutsetHash": "fe0a44309b74d6b5883d246cb419c6221bcccf0b308c9b59b7d70783dbdf928a",
       "chainTxCount": 2289496,
@@ -526,7 +526,7 @@
         "jaonoctus"
       ],
       "bytes": 87828915,
-      "note": "Sjors' original torrent (9da986cb\u2026, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
+      "note": "Sjors' original torrent (9da986cb…, PR 28516) had no peers on 2026-10-15; the jaonoctus packaging is the one that answers",
       "bytesFrom": "the torrent metainfo, from a peer",
       "announcedAt": {
         "id": "2d39893ab241d971aab2f339863be90121fb1649136339a0be4a3ed2eea20b4c",
@@ -537,7 +537,7 @@
     },
     {
       "network": "signet",
-      "chain": "Bitcoin signet",
+      "chain": "Bitcoin SHA256d signet",
       "height": 290000,
       "txoutsetHash": "97267e000b4b876800167e71b9123f1529d13b14308abec2888bbd2160d14545",
       "chainTxCount": 28547497,
@@ -570,7 +570,7 @@
     },
     {
       "network": "signet",
-      "chain": "Bitcoin signet",
+      "chain": "Bitcoin SHA256d signet",
       "height": 320000,
       "txoutsetHash": "1aaf72ecb376cc16957fbb8d5d406bfd6e3165510e2fc83879b6d14cd20b4462",
       "bytes": 3273449689,
