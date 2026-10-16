@@ -38,16 +38,28 @@
       }
     },
     {
-      "name": "Formal, soon",
-      "text": "The same facts as a canonical statement, signed with a Nostr key or GPG, filed by pull request, checked in the page: signature, author, and that it states what the page states. Your informal comment stays and links to it.",
+      "name": "Formal, now",
+      "text": "The same facts as a canonical statement (NIP-332), signed by your Nostr key, checked in the page: signature, canonical form, the rules of the claim, and that it states the hash the page states. Three outputs from your node, dumptxoutset with a rollback to the height, getchainstates, and getnetworkinfo, go into the sign page and your extension signs; or the tool reads them over RPC and types nothing. Then publish the event to a relay, or open a pull request adding it as attestations/<network>-<height>/<pubkey>.json. Your own key is the best key; a key mined with leading zeros is a start. Your informal comment stays and links to it. GPG is next.",
       "links": [
         {
+          "@id": "https://nip-332.github.io/",
+          "name": "NIP-332: the statement and the event"
+        },
+        {
+          "@id": "https://play-grounds.github.io/assumeutxo/sign/",
+          "name": "the sign page: paste your node's output, sign with your extension"
+        },
+        {
+          "@id": "https://github.com/play-grounds/assumeutxo/tree/gh-pages/sign",
+          "name": "the tool: sign from a node over RPC, verify, publish"
+        },
+        {
           "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/1",
-          "name": "#1 Attestations"
+          "name": "design issue 1: attestations"
         },
         {
           "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/4",
-          "name": "#4 The Nostr event, kind 33332"
+          "name": "design issue 4: the Nostr event"
         }
       ]
     },
