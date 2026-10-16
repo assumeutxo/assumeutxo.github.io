@@ -149,7 +149,7 @@
     sec.append(el(i ? 'h2' : 'h1', null, doc.name || doc.title || (id ? id : 'document')));
     if (id) { const full = new URL(id, location.href).href; const line = el('div', 'id'); line.append(link(full, full)); const b = el('button', 'copy', 'copy'); b.onclick = () => navigator.clipboard.writeText(full).then(() => { b.textContent = 'copied'; setTimeout(() => (b.textContent = 'copy'), 1200); }); line.append(b); sec.append(line); }
     if (doc.description) sec.append(el('p', 'lede', doc.description));
-    if (doc.status) { const st = el('p', 'status'); st.append(doc.status); if (doc.statusLink) { st.append(' '); st.append(link(doc.statusLink['@id'], '→ ' + (doc.statusLink.name || doc.statusLink['@id']))); } sec.append(st); } // the state of the thing, part of the hero, above any view
+    if (doc.status) { const st = el('p', 'status'); for (const part of [].concat(doc.status)) st.append(typeof part === 'string' ? part : link(part['@id'], part.name || part['@id'])); if (doc.statusLink) { st.append(' '); st.append(link(doc.statusLink['@id'], '→ ' + (doc.statusLink.name || doc.statusLink['@id']))); } sec.append(st); } // the state of the thing, part of the hero, above any view; a string, or parts: strings and links
     await tabs(doc, sec);
     return sec;
   }
