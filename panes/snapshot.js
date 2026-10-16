@@ -39,6 +39,7 @@ wiki.panes.push({
     if (att.length) root.append(el('h3', null, `attested by ${att.length}`));
     // formal, by file: a kind 3332 event (NIP-332) fetched by value and checked here: id, signature, canonical statement, and that its subject is this snapshot
     const up = location.pathname.includes('/snapshots/') || location.pathname.includes('/attestations/') ? '../' : '';
+    const who = (by) => { const m = String(by || '').match(/^(\S+) \((GitHub|Nostr)\)$/); if (m && m[2] === 'GitHub') { const a = link('https://github.com/' + m[1], m[1]); const s = el('span'); s.append(a, ' (GitHub)'); return s; } return el('span', null, by || 'someone'); };
     const bitsOf = (pk) => { let b = 0; for (const c of pk) { const n = parseInt(c, 16); if (n === 0) { b += 4; continue; } b += Math.clz32(n) - 28; break; } return b; };
     const renderFormal = async (box, a) => {
       const file = a['@id'] && a['@id'].endsWith('.json') ? a['@id'] : null;
