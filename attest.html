@@ -1,19 +1,19 @@
 <!doctype html>
 <meta charset="utf-8"><title>attesting a snapshot</title>
 <!-- ogp -->
-<meta name="description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<meta name="description" content="You ran it on your own node and say what you got. One command, one click, and your attestation is on the snapshot's page.">
 <link rel="canonical" href="https://assumeutxo.com/attest.html">
 <meta property="og:site_name" content="assumeUTXO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Guide · attesting a snapshot">
-<meta property="og:description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<meta property="og:description" content="You ran it on your own node and say what you got. One command, one click, and your attestation is on the snapshot's page.">
 <meta property="og:url" content="https://assumeutxo.com/attest.html">
 <meta property="og:image" content="https://assumeutxo.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Guide · attesting a snapshot">
-<meta name="twitter:description" content="An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.">
+<meta name="twitter:description" content="You ran it on your own node and say what you got. One command, one click, and your attestation is on the snapshot's page.">
 <meta name="twitter:image" content="https://assumeutxo.com/og.png">
 <link rel="icon" href="https://assumeutxo.com/favicon.svg" type="image/svg+xml">
 <!-- /ogp -->
@@ -23,36 +23,54 @@
   "@id": "#this",
   "@type": "Guide",
   "name": "attesting a snapshot",
-  "description": "An attestation is one person saying, with their name or key on it, that they computed a snapshot's hash themselves and what they got.",
+  "description": "You ran it on your own node and say what you got. One command, one click, and your attestation is on the snapshot's page.",
   "sections": [
     {
-      "name": "The bar",
-      "text": "You ran it on a node you control, and the hash came out of your own validation, one of two ways. Recomputed: your node validated the chain to that height and you ran dumptxoutset or gettxoutsetinfo there. Loaded: you loaded the snapshot and let background validation finish, so your node rebuilt the set from genesis and confirmed the match. Checking a file's sha256 proves you have the right bytes, not that the bytes are right, and is recorded as possession, not verification."
+      "name": "Formal, now",
+      "text": "A signed statement (NIP-332) from your node's own output, checked in the page. No key on disk, nothing typed.",
+      "steps": [
+        {
+          "text": "On the machine with your node:",
+          "code": "npx assumeutxo link --rpc ~/.bitcoin/bitcoin.conf --height 965000"
+        },
+        "Open the link it prints. Check the statement the page shows, sign with your Nostr extension, publish.",
+        "Your attestation appears on the snapshot's page, marked not yet on the record. A pull request with the downloaded file puts it on the record."
+      ],
+      "links": [
+        {
+          "@id": "https://www.npmjs.com/package/assumeutxo",
+          "name": "the tool on npm"
+        },
+        {
+          "@id": "https://play-grounds.github.io/assumeutxo/sign/",
+          "name": "the sign page, if you would rather paste your node's output by hand"
+        },
+        {
+          "@id": "https://nip-332.github.io/",
+          "name": "NIP-332: the statement and the event"
+        }
+      ]
     },
     {
       "name": "Informal, today",
-      "text": "Paste your node's output as a comment on the pinned issue: the chain, the height, the implementation and version, the date, and the txoutset_hash line. It is recorded on the snapshot's page as your handle, the date, what you did, your hash beside the entry's, and a link to your comment. The site vouches for nothing beyond \"the hash you wrote matches\" or \"does not\". A disagreement is recorded and shown, never rejected. The reviews already on the Core and Knots pull requests were recorded this way.",
+      "text": "Paste your node's output as a comment on the pinned issue: the chain, the height, the software, the date, the txoutset_hash line. It is recorded on the snapshot's page with a link to your comment.",
       "link": {
         "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/5",
         "name": "Attest a snapshot here"
       }
     },
     {
-      "name": "Formal, now",
-      "text": "The same facts as a canonical statement (NIP-332), signed by your Nostr key, checked in the page: signature, canonical form, the rules of the claim, and that it states the hash the page states. One command on the machine with your node, npx assumeutxo link --rpc ~/.bitcoin/bitcoin.conf --height 965000, does the node work (dumptxoutset rolled back to the height, getchainstates, getnetworkinfo) and prints a link to the sign page with every field filled; nothing is typed and no key is on disk. Open the link in a browser with a NIP-07 extension, read the statement the page shows, sign, download the event file, publish. The snapshot's page asks the relays: a verified attestation appears beneath the record's own rows, marked not yet on the record; a pull request adding the file as attestations/<network>-<height>/<pubkey>.json moves it onto the record. Without the command, the sign page takes the same outputs pasted by hand; with a key on disk, assumeutxo attest signs and writes the file itself. Your informal comment stays and links to it. GPG is next.",
+      "name": "The bar",
+      "text": "The hash came out of your own node's validation: recomputed (your node built the set from blocks) or loaded (you loaded the snapshot and background validation finished). A file's sha256 proves you have the right bytes, not that the bytes are right."
+    },
+    {
+      "name": "What the page shows",
+      "text": "Green for what it checked itself. Grey for what is only linked or claimed. Nothing else."
+    },
+    {
+      "name": "Keys, not names",
+      "text": "Weight comes from a key's history: statements that held up when checked. One key, one standing statement per snapshot; counts never decide a hash, a recompute does. A key mined with leading zero bits starts with something to show; the page shows the bits as a column, never as a verdict.",
       "links": [
-        {
-          "@id": "https://www.npmjs.com/package/assumeutxo",
-          "name": "the tool: npx assumeutxo link, attest, verify, publish"
-        },
-        {
-          "@id": "https://play-grounds.github.io/assumeutxo/sign/",
-          "name": "the sign page: sign with your extension; paste by hand if you must"
-        },
-        {
-          "@id": "https://nip-332.github.io/",
-          "name": "NIP-332: the statement and the event"
-        },
         {
           "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/1",
           "name": "design issue 1: attestations"
@@ -62,14 +80,6 @@
           "name": "design issue 4: the Nostr event"
         }
       ]
-    },
-    {
-      "name": "What the page shows",
-      "text": "Green for what it checked itself. Grey for what is only linked or claimed. Nothing else."
-    },
-    {
-      "name": "Keys, not names",
-      "text": "A name is a column. Weight comes from a key's history: statements that held up when checked. One key, one standing statement per snapshot. Counts never decide a hash; a recompute does. A new key has no history yet; a key with leading zero bits, mined before its first statement, starts with something to show, and the page shows the bits as a column, never as a verdict."
     }
   ],
   "creator": {

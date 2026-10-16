@@ -68,6 +68,8 @@
     .wiki ul.more{margin:14px 0 0}.wiki ul.more li{margin:6px 0}
     .wiki p.status{margin:-8px 0 26px;max-width:860px;border-left:3px solid var(--accent);padding:8px 16px;background:var(--accent2);border-radius:0 8px 8px 0;color:var(--ink2);font-size:14.5px;line-height:1.5}
     .wiki p.prose{max-width:66ch;font-size:16px;line-height:1.6;color:var(--ink2);margin:0 0 6px}
+    .wiki ol.steps{max-width:66ch;padding-left:22px;margin:0 0 6px}.wiki ol.steps li{margin:0 0 12px}.wiki ol.steps li p.prose{margin:0 0 4px}
+    .wiki pre.code{max-width:66ch;font:14px/1.5 var(--mono, ui-monospace, monospace);background:#f3efe6;border:1px solid #e6dfd2;border-radius:6px;padding:10px 12px;margin:4px 0 8px;white-space:pre-wrap;word-break:break-all}
     .wiki ul.links li{margin:0 0 10px}.wiki ul.links li a{font-size:15px}.wiki ul.links li div.muted{margin-top:1px}
     .wiki table.dt tr.grp td{background:#f6f3ec;font:500 13px var(--sans);color:var(--ink);padding:9px 14px;border-top:1px solid var(--line2)}
     .wiki table.dt tr.grp .type{margin-right:4px}
