@@ -68,7 +68,7 @@ wiki.panes.push({
           ws.onopen = () => ws.send(JSON.stringify(['REQ', 's', filter])); ws.onerror = () => { try { ws.close(); } catch {} }; ws.onclose = () => { clearTimeout(t); done(); };
           ws.onmessage = (m) => { try { const d = JSON.parse(m.data); answered.add(url); if (d[0] === 'EOSE') { ws.close(); return; } if (d[0] !== 'EVENT') return; const e = d[2]; const r = got.get(e.id) || { e, relays: new Set() }; r.relays.add(url.replace('wss://', '')); got.set(e.id, r); } catch {} }; }
         if (!open) res({ got, answered }); });
-      const relayBox = el('div', 'mark'); const head = el('div', null, `on the relays · asking ${RELAYS.length}…`); relayBox.append(head); root.append(relayBox); const fresh = el('div'); root.append(fresh);
+      const relayBox = el('div', 'mark'); const head = el('div', null, 'on the relays'); relayBox.append(head); const asking = light('grey', `asking ${RELAYS.length} relays…`); relayBox.append(asking); root.append(relayBox); const fresh = el('div'); root.append(fresh);
       (async () => {
         const known = new Set((await Promise.all(onRecord)).filter(Boolean).map((ev) => ev.id));
         const { got, answered } = await query({ kinds: [3332], '#t': ['assumeutxo'], limit: 200 });
@@ -80,14 +80,17 @@ wiki.panes.push({
           here++; if (known.has(e.id)) { listed++; continue; }
           seen.set(e.id, { e, relays });
         }
-        head.textContent = `on the relays · ${RELAYS.length} asked, ${answered.size} answered · ${here} attestation${here === 1 ? '' : 's'} of this snapshot verified here · ${listed} on the record · ${seen.size} not yet` + (bad ? ` · ${bad} rejected` : '');
-        relayBox.append(el('div', 'muted', (answered.size ? `answered: ${[...answered].map((u) => u.replace('wss://', '')).join(', ')}. ` : '') + (here ? 'An attestation on a relay is one anyone published; the record adds one after its claim is read. Not on the record yet means only that.' : answered.size ? 'Nothing about this snapshot on the relays that answered.' : 'No relay answered.')));
+        asking.remove(); const names = [...answered].map((u) => u.replace('wss://', '')).join(', ');
+        relayBox.append(light(here ? 'ok' : 'grey', here ? `${here} attestation${here === 1 ? '' : 's'} of this snapshot found on the relays and verified here` + (listed ? ` · ${listed} on the record` : '') + (seen.size ? ` · ${seen.size} not on the record yet, shown below` : '') : answered.size ? 'none about this snapshot on the relays that answered' : 'no relay answered'));
+        relayBox.append(light('grey', `asked ${RELAYS.length} relays, ${answered.size} answered` + (names ? ': ' + names : '')));
+        if (bad) relayBox.append(light('bad', `${bad} rejected: the signature or the statement did not check`));
+        if (seen.size) relayBox.append(el('div', 'muted', 'An attestation on a relay is one anyone published; the record adds one after its claim is read. Not on the record yet means only that.'));
         for (const { e, relays } of seen.values()) {
           const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); fresh.append(box); await renderFormal(box, { event: e });
           const dl = el('button', 'copy', 'download the event'); dl.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(e, null, 2) + '\n'], { type: 'application/json' })); a.download = `${e.pubkey}.json`; a.click(); };
           const p = el('div', 'muted'); p.append(`seen on ${[...relays].join(', ')} · not on the record yet: `, dl, ' and open a pull request adding it as attestations/' + (sub => `${sub.network}-${sub.height}`)(JSON.parse(e.content).subject) + `/${e.pubkey}.json`); box.append(p);
         }
-      })().catch(() => { head.textContent = 'on the relays · could not ask'; });
+      })().catch(() => { asking.remove(); relayBox.append(light('grey', 'could not ask the relays')); });
     }
     if (doc.note) root.append(el('p', 'muted', doc.note));
     const how = el('p', 'muted', 'Load it with any node that reads the dumptxoutset v2 format, then compare its txoutset hash with the one above. The hash is the claim; the comparison is the check.');
