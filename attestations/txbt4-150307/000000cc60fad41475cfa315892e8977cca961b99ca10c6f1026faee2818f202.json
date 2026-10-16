@@ -1,0 +1,52 @@
+{
+  "kind": 3332,
+  "pubkey": "000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202",
+  "created_at": 1792135420,
+  "content": "{\"@type\":\"Attestation\",\"claim\":{\"binarySha256\":\"a454b330e6fefeac983856ca00a924e21aadf59de5794de4165392eb776416f6\",\"build\":\"v29.4.2.knots20260508.plumb6\",\"chainstate\":\"full\",\"commit\":\"532e1eb168b743c5500d9fec0aad73ad6abfd0ac\",\"computedAt\":\"2026-10-16T06:17:56Z\",\"implementation\":\"/Satoshi:29.4.2/Knots:20260508/Plumb:6/\",\"method\":\"recomputed\",\"note\":\"dumptxoutset rollback=150307 on an unpruned node at 153068, 7 seconds\",\"validated\":true},\"subject\":{\"blockHash\":\"000000000017ec2251d81c8d2ca401c713e98e85196c7f660a4088a7ca57b1cc\",\"chainTxCount\":14813091,\"coins\":14230182,\"fileSha256\":\"86118db3a692b7c64bd4d9aef51a401f09722b9e92acb2826e7e76ac964529cd\",\"genesis\":\"00000000da84f2bafbbc53dee25a72ae507ff4914b867c565be350b0da8bf043\",\"hashType\":\"hash_serialized_3\",\"height\":150307,\"network\":\"txbt4\",\"txoutsetHash\":\"372bfcaeef1e93892acccda9e700b00bf90f45d73746d69959d33620a3df5518\"},\"v\":\"0.0.1\"}",
+  "tags": [
+    [
+      "network",
+      "txbt4"
+    ],
+    [
+      "height",
+      "150307"
+    ],
+    [
+      "hash",
+      "000000000017ec2251d81c8d2ca401c713e98e85196c7f660a4088a7ca57b1cc"
+    ],
+    [
+      "txoutset_hash",
+      "372bfcaeef1e93892acccda9e700b00bf90f45d73746d69959d33620a3df5518"
+    ],
+    [
+      "method",
+      "recomputed"
+    ],
+    [
+      "implementation",
+      "/Satoshi:29.4.2/Knots:20260508/Plumb:6/"
+    ],
+    [
+      "client",
+      "assumeutxo sign",
+      "https://play-grounds.github.io/assumeutxo/sign/",
+      "0.0.1"
+    ],
+    [
+      "t",
+      "attestation"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "txbt4"
+    ]
+  ],
+  "id": "f4277153334a8bdadb09085cde12bcba0880f17847561e312e807e8e52c77ea2",
+  "sig": "0ab6118419e361cd1d30077d5811fc6be6999ce3de121b27aa3e77e23d89e8bc3c827e2d0be3667560726c9d2138049709de6dd1cc1bc176e232d155f41b7a51"
+}
