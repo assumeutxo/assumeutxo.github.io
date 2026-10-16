@@ -1,0 +1,56 @@
+{
+  "kind": 3332,
+  "pubkey": "de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
+  "created_at": 1792183131,
+  "tags": [
+    [
+      "v",
+      "0.0.1"
+    ],
+    [
+      "network",
+      "btc"
+    ],
+    [
+      "height",
+      "910000"
+    ],
+    [
+      "hash",
+      "0000000000000000000108970acb9522ffd516eae17acddcb1bd16469194a821"
+    ],
+    [
+      "txoutset_hash",
+      "4daf8a17b4902498c5787966a2b51c613acdab5df5db73f196fa59a4da2f1568"
+    ],
+    [
+      "method",
+      "recomputed"
+    ],
+    [
+      "implementation",
+      "/Satoshi:31.0.0/"
+    ],
+    [
+      "client",
+      "assumeutxo sign page",
+      "https://play-grounds.github.io/assumeutxo/sign/",
+      "0.0.1"
+    ],
+    [
+      "t",
+      "attestation"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "btc"
+    ]
+  ],
+  "content": "{\"@type\":\"Attestation\",\"claim\":{\"chainstate\":\"full\",\"computedAt\":\"2026-10-16T20:37:10Z\",\"implementation\":\"/Satoshi:31.0.0/\",\"method\":\"recomputed\",\"validated\":true},\"subject\":{\"blockHash\":\"0000000000000000000108970acb9522ffd516eae17acddcb1bd16469194a821\",\"chainTxCount\":1226586151,\"coins\":167821142,\"fileSha256\":\"6ac0208110d6d6c0783c50ea825aae32f5229cf1dcb63ac986543e95aa0306bf\",\"genesis\":\"000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f\",\"hashType\":\"hash_serialized_3\",\"height\":910000,\"network\":\"btc\",\"txoutsetHash\":\"4daf8a17b4902498c5787966a2b51c613acdab5df5db73f196fa59a4da2f1568\"},\"v\":\"0.0.1\"}",
+  "id": "f65f0678d86169e2106a6c868d073785274c4d291c58ad570d035e1612d7574d",
+  "sig": "804cf4c83c4058bfe80fb5df79ab715cfab57240252fc4b5ce20fccb43a3dd0ab1164c150caabb6da051098214ef5a6df8ca4847832b44ee5c649511b0bcd9d5"
+}
