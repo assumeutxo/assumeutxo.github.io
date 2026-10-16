@@ -63,15 +63,15 @@ wiki.panes.push({
     // is counted; one not yet on the record is shown beneath, with its file to download for a pull request. Nothing is trusted for being on a relay.
     if (doc.txoutsetHash) {
       const RELAYS = ['wss://relay.damus.io', 'wss://nos.lol', 'wss://relay.nostr.band', 'wss://relay.primal.net'];
-      const query = (filter, ms = 8000) => new Promise((res) => { const got = new Map(); let open = 0; const done = () => { if (--open <= 0) res(got); };
+      const query = (filter, ms = 12000) => new Promise((res) => { const got = new Map(); const answered = new Set(); let open = 0; const done = () => { if (--open <= 0) res({ got, answered }); };
         for (const url of RELAYS) { let ws; try { ws = new WebSocket(url); } catch { continue; } open++; const t = setTimeout(() => { try { ws.close(); } catch {} }, ms);
           ws.onopen = () => ws.send(JSON.stringify(['REQ', 's', filter])); ws.onerror = () => { try { ws.close(); } catch {} }; ws.onclose = () => { clearTimeout(t); done(); };
-          ws.onmessage = (m) => { try { const d = JSON.parse(m.data); if (d[0] === 'EOSE') { ws.close(); return; } if (d[0] !== 'EVENT') return; const e = d[2]; const r = got.get(e.id) || { e, relays: new Set() }; r.relays.add(url.replace('wss://', '')); got.set(e.id, r); } catch {} }; }
-        if (!open) res(got); });
+          ws.onmessage = (m) => { try { const d = JSON.parse(m.data); answered.add(url); if (d[0] === 'EOSE') { ws.close(); return; } if (d[0] !== 'EVENT') return; const e = d[2]; const r = got.get(e.id) || { e, relays: new Set() }; r.relays.add(url.replace('wss://', '')); got.set(e.id, r); } catch {} }; }
+        if (!open) res({ got, answered }); });
       const relayBox = el('div', 'mark'); const head = el('div', null, `on the relays · asking ${RELAYS.length}…`); relayBox.append(head); root.append(relayBox); const fresh = el('div'); root.append(fresh);
       (async () => {
         const known = new Set((await Promise.all(onRecord)).filter(Boolean).map((ev) => ev.id));
-        const got = await query({ kinds: [3332], '#t': ['assumeutxo'], limit: 200 });
+        const { got, answered } = await query({ kinds: [3332], '#t': ['assumeutxo'], limit: 200 });
         let here = 0, listed = 0, bad = 0; const seen = new Map();
         for (const { e, relays } of got.values()) {
           let st = null; try { st = JSON.parse(e.content); } catch {} const sub = st && st.subject || {};
@@ -80,8 +80,8 @@ wiki.panes.push({
           here++; if (known.has(e.id)) { listed++; continue; }
           seen.set(e.id, { e, relays });
         }
-        head.textContent = `on the relays · ${RELAYS.length} asked · ${here} attestation${here === 1 ? '' : 's'} of this snapshot verified here · ${listed} on the record · ${seen.size} not yet` + (bad ? ` · ${bad} rejected` : '');
-        relayBox.append(el('div', 'muted', here ? 'An attestation on a relay is one anyone published; the record adds one after its claim is read. Not on the record yet means only that.' : 'Nothing about this snapshot on these relays yet, or they did not answer.'));
+        head.textContent = `on the relays · ${RELAYS.length} asked, ${answered.size} answered · ${here} attestation${here === 1 ? '' : 's'} of this snapshot verified here · ${listed} on the record · ${seen.size} not yet` + (bad ? ` · ${bad} rejected` : '');
+        relayBox.append(el('div', 'muted', (answered.size ? `answered: ${[...answered].map((u) => u.replace('wss://', '')).join(', ')}. ` : '') + (here ? 'An attestation on a relay is one anyone published; the record adds one after its claim is read. Not on the record yet means only that.' : answered.size ? 'Nothing about this snapshot on the relays that answered.' : 'No relay answered.')));
         for (const { e, relays } of seen.values()) {
           const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); fresh.append(box); await renderFormal(box, { event: e });
           const dl = el('button', 'copy', 'download the event'); dl.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(e, null, 2) + '\n'], { type: 'application/json' })); a.download = `${e.pubkey}.json`; a.click(); };
