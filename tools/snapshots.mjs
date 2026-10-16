@@ -60,3 +60,5 @@ page('index.html', 'assumeUTXO snapshots', island, '');
 // the networks page, from data/networks.jsonld: the same nodes with ids resolved against the page
 { const N = JSON.parse(readFileSync(`${ROOT}/data/networks.jsonld`, 'utf8')); const isl = { ...N, '@id': '#this', data: { '@id': 'data/networks.jsonld' }, networks: N.networks.map((n) => ({ ...n, '@id': 'data/networks.jsonld' + n['@id'], ...(n.forkOf ? { forkOf: { '@id': 'data/networks.jsonld' + n.forkOf['@id'] } } : {}) })) }; page('networks.html', 'networks', isl, ''); }
 console.log(`${made} snapshot pages, ${evPages.size} announcement pages written, ${entries.length} entries on index.html`);
+// the sitemap follows the pages
+await import('./sitemap.mjs');
