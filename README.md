@@ -45,12 +45,16 @@ The shim exports a toolkit for panes that verify (`wiki.kit()`: the kernel's cod
 
 ## Attestations, formal and informal
 
-A snapshot (or a tip) can carry `attestations`. A **formal** one is a signed statement carried by value, a Nostr event
-whose tags state the height, hash and txoutset hash or muhash, checked in the page: signature, author, and that it states
-what the page states. An **informal** one is a claim someone made elsewhere, a PR review, a comment, a post: who (by their
-handle there), when, what they did, what they said, and the link. The page never vouches for an informal one beyond the
-narrow fact that the number they wrote matches; it shows grey, "said elsewhere, as linked". Three informal is evidence; one
-formal is a commitment. An informal record can later be joined by the same person's formal one.
+A snapshot (or a tip) can carry `attestations`. A **formal** one is a [NIP-332](https://nip-332.github.io/spec/) event, kind
+3332, held by value under `attestations/<network>-<height>/<pubkey>.json`, indexed by the generator into `data/attestations.json`,
+and checked in the page: signature, canonical statement, the rules of the claim (`recomputed` on a validated chainstate, or
+`loaded` after background validation), tags against content, and that its subject is the hash the page states. The signer's
+implementation, build and commit show grey, as said. An **informal** one is a claim someone made elsewhere, a PR review, a
+comment, a post: who (by their handle there), when, what they did, what they said, and the link. The page never vouches for an
+informal one beyond the narrow fact that the number they wrote matches; it shows grey, "said elsewhere, as linked". An informal
+record can later be joined by the same person's formal one. Anyone makes a formal one with `npx assumeutxo attest` or the
+[sign page](https://play-grounds.github.io/assumeutxo/sign/); a Dispute (kind 3331) is the attestation that disagrees, and
+nothing is ever removed.
 
 ## Rules
 
