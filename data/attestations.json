@@ -127,6 +127,20 @@
       "computedAt": "2026-10-16T06:17:56Z",
       "txoutsetHash": "372bfcaeef1e93892acccda9e700b00bf90f45d73746d69959d33620a3df5518",
       "at": "2026-10-16"
+    },
+    {
+      "network": "xbt",
+      "height": 976000,
+      "file": "attestations/xbt-976000/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645.json",
+      "id": "37acd9f61fb77c629ff6131cb6f30ac3c032b735667cf5bf2fd9bfdf07d46ec6",
+      "pubkey": "de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
+      "bits": 0,
+      "method": "recomputed",
+      "chainstate": "full",
+      "implementation": "/Satoshi:29.4.2/Knots:20260508/",
+      "computedAt": "2026-10-16T21:55:00Z",
+      "txoutsetHash": "dbd67717d3f108e4fbd8b4f9efc4057cac11a0ba7c23584b43cca42c9edb7118",
+      "at": "2026-10-16"
     }
   ]
 }
