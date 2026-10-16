@@ -39,19 +39,19 @@
     },
     {
       "name": "Formal, now",
-      "text": "The same facts as a canonical statement (NIP-332), signed by your Nostr key, checked in the page: signature, canonical form, the rules of the claim, and that it states the hash the page states. Three outputs from your node, dumptxoutset with a rollback to the height, getchainstates, and getnetworkinfo, go into the sign page and your extension signs; or the tool reads them over RPC and types nothing. Then publish the event to a relay, or open a pull request adding it as attestations/<network>-<height>/<pubkey>.json. Your own key is the best key; a key mined with leading zeros is a start. Your informal comment stays and links to it. GPG is next.",
+      "text": "The same facts as a canonical statement (NIP-332), signed by your Nostr key, checked in the page: signature, canonical form, the rules of the claim, and that it states the hash the page states. One command on the machine with your node, npx assumeutxo link --rpc ~/.bitcoin/bitcoin.conf --height 965000, does the node work (dumptxoutset rolled back to the height, getchainstates, getnetworkinfo) and prints a link to the sign page with every field filled; nothing is typed and no key is on disk. Open the link in a browser with a NIP-07 extension, read the statement the page shows, sign, download the event file, publish. The snapshot's page asks the relays: a verified attestation appears beneath the record's own rows, marked not yet on the record; a pull request adding the file as attestations/<network>-<height>/<pubkey>.json moves it onto the record. Without the command, the sign page takes the same outputs pasted by hand; with a key on disk, assumeutxo attest signs and writes the file itself. Your informal comment stays and links to it. GPG is next.",
       "links": [
         {
-          "@id": "https://nip-332.github.io/",
-          "name": "NIP-332: the statement and the event"
+          "@id": "https://www.npmjs.com/package/assumeutxo",
+          "name": "the tool: npx assumeutxo link, attest, verify, publish"
         },
         {
           "@id": "https://play-grounds.github.io/assumeutxo/sign/",
-          "name": "the sign page: paste your node's output, sign with your extension"
+          "name": "the sign page: sign with your extension; paste by hand if you must"
         },
         {
-          "@id": "https://github.com/play-grounds/assumeutxo/tree/gh-pages/sign",
-          "name": "the tool: sign from a node over RPC, verify, publish"
+          "@id": "https://nip-332.github.io/",
+          "name": "NIP-332: the statement and the event"
         },
         {
           "@id": "https://github.com/assumeutxo/assumeutxo.github.io/issues/1",
