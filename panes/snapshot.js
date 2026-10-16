@@ -53,10 +53,41 @@ wiki.panes.push({
       const same = sub.txoutsetHash === doc.txoutsetHash && (sub.height === undefined || sub.height === doc.height); box.append(light(same ? 'ok' : 'bad', same ? 'states the hash this page states (checked here)' : 'states a different hash ✗'));
       if (cl.implementation) box.append(light('grey', 'says: ' + cl.implementation + (cl.build ? ', ' + cl.build : '') + ' (as said by the signer, not checked here)'));
       if (cl.note) box.append(el('div', 'muted', cl.note));
-      const p = el('div', 'muted'); p.append(link(file || '#', 'the event'), ' · ', link('https://nip-332.github.io/', 'NIP-332')); box.append(p);
+      const p = el('div', 'muted'); if (file) p.append(link(file, 'the event'), ' · '); p.append(link('https://nip-332.github.io/', 'NIP-332')); box.append(p);
+      return ev;
     };
-    for (const a of formal) { const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); root.append(box); renderFormal(box, a); }
+    const onRecord = formal.map((a) => { const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); root.append(box); return renderFormal(box, a); });
     for (const a of informal) { const box = el('div', 'mark'); const h = el('div'); h.append(who(a.by), a.at ? ' · ' + a.at : '', ' · informal'); box.append(h); if (a.did) box.append(el('div', 'muted', a.did)); if (a.says && a.says.txoutsetHash) box.append(light(a.says.txoutsetHash === doc.txoutsetHash ? 'ok' : 'bad', a.says.txoutsetHash === doc.txoutsetHash ? 'the hash they wrote is the hash on this page' : 'the hash they wrote differs ✗')); box.append(light('grey', 'said elsewhere, as linked; not checked here')); if (a.where) { const p = el('div', 'muted'); p.append(link(a.where['@id'], a.where['@id'].replace(/^https?:\/\//, '').slice(0, 70) + '…')); box.append(p); } root.append(box); }
+    // the relays: kind 3332 events about this snapshot as the relays hold them, each checked here the same way. One already on the record
+    // is counted; one not yet on the record is shown beneath, with its file to download for a pull request. Nothing is trusted for being on a relay.
+    if (doc.txoutsetHash) {
+      const RELAYS = ['wss://relay.damus.io', 'wss://nos.lol', 'wss://relay.nostr.band', 'wss://relay.primal.net'];
+      const query = (filter, ms = 8000) => new Promise((res) => { const got = new Map(); let open = 0; const done = () => { if (--open <= 0) res(got); };
+        for (const url of RELAYS) { let ws; try { ws = new WebSocket(url); } catch { continue; } open++; const t = setTimeout(() => { try { ws.close(); } catch {} }, ms);
+          ws.onopen = () => ws.send(JSON.stringify(['REQ', 's', filter])); ws.onerror = () => { try { ws.close(); } catch {} }; ws.onclose = () => { clearTimeout(t); done(); };
+          ws.onmessage = (m) => { try { const d = JSON.parse(m.data); if (d[0] === 'EOSE') { ws.close(); return; } if (d[0] !== 'EVENT') return; const e = d[2]; const r = got.get(e.id) || { e, relays: new Set() }; r.relays.add(url.replace('wss://', '')); got.set(e.id, r); } catch {} }; }
+        if (!open) res(got); });
+      const relayBox = el('div', 'mark'); const head = el('div', null, `on the relays · asking ${RELAYS.length}…`); relayBox.append(head); root.append(relayBox); const fresh = el('div'); root.append(fresh);
+      (async () => {
+        const known = new Set((await Promise.all(onRecord)).filter(Boolean).map((ev) => ev.id));
+        const got = await query({ kinds: [3332], '#t': ['assumeutxo'], limit: 200 });
+        let here = 0, listed = 0, bad = 0; const seen = new Map();
+        for (const { e, relays } of got.values()) {
+          let st = null; try { st = JSON.parse(e.content); } catch {} const sub = st && st.subject || {};
+          if (sub.txoutsetHash !== doc.txoutsetHash || (sub.height !== undefined && sub.height !== doc.height)) continue; // about another snapshot
+          const { idOK, sigOK } = await wiki.nostrCheck(e); if (!idOK || !sigOK) { bad++; continue; }
+          here++; if (known.has(e.id)) { listed++; continue; }
+          seen.set(e.id, { e, relays });
+        }
+        head.textContent = `on the relays · ${RELAYS.length} asked · ${here} attestation${here === 1 ? '' : 's'} of this snapshot verified here · ${listed} on the record · ${seen.size} not yet` + (bad ? ` · ${bad} rejected` : '');
+        relayBox.append(el('div', 'muted', here ? 'An attestation on a relay is one anyone published; the record adds one after its claim is read. Not on the record yet means only that.' : 'Nothing about this snapshot on these relays yet, or they did not answer.'));
+        for (const { e, relays } of seen.values()) {
+          const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); fresh.append(box); await renderFormal(box, { event: e });
+          const dl = el('button', 'copy', 'download the event'); dl.onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(e, null, 2) + '\n'], { type: 'application/json' })); a.download = `${e.pubkey}.json`; a.click(); };
+          const p = el('div', 'muted'); p.append(`seen on ${[...relays].join(', ')} · not on the record yet: `, dl, ' and open a pull request adding it as attestations/' + (sub => `${sub.network}-${sub.height}`)(JSON.parse(e.content).subject) + `/${e.pubkey}.json`); box.append(p);
+        }
+      })().catch(() => { head.textContent = 'on the relays · could not ask'; });
+    }
     if (doc.note) root.append(el('p', 'muted', doc.note));
     const how = el('p', 'muted', 'Load it with any node that reads the dumptxoutset v2 format, then compare its txoutset hash with the one above. The hash is the claim; the comparison is the check.');
     root.append(how);

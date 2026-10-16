@@ -233,7 +233,7 @@
     const types = new Set(islands.flatMap((d) => [].concat(d['@type'] || [])));
     await localPanes(types);
     const main = el('main', 'wiki');
-    const nav = el('nav'); for (const [p, t, c] of [['index.html', 'assumeUTXO', 'wordmark'], ['index.html', 'snapshots'], ['attest.html', 'attest'], ['links.html', 'links'], ['pages.html', 'all pages'], ['me.html', 'me'], ['trail.html', 'trail']]) { const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
+    const nav = el('nav'); for (const [p, t, c] of [['index.html', 'assumeUTXO', 'wordmark'], ['index.html', 'snapshots'], ['attest.html', 'attest'], ['links.html', 'links']]) { /* pages, me and trail stay reachable by link, off the nav for now */ const a = el('a', c, t); a.href = new URL(p, ROOT).href; nav.append(a); } main.append(nav);
     for (const [i, d] of islands.entries()) main.append(await island(d, i));
     if (!document.title && islands[0]) document.title = islands[0].name || islands[0]['@id'] || 'datawiki';
     // a quiet footer: where the source is
