@@ -18,12 +18,30 @@
 <link rel="icon" href="https://assumeutxo.com/favicon.svg" type="image/svg+xml">
 <!-- /ogp -->
 <script type="application/ld+json">
-{ "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
-  "@id": "#me", "@type": "Agent", "name": "datawiki",
+{
+  "@context": "https://bitcoin-desktop.github.io/schema/context.jsonld",
+  "@id": "#me",
+  "@type": "Agent",
+  "name": "datawiki",
   "description": "The identity behind this wiki: a Nostr key, written by npm init agent. Everything here is maintained by it and anchored by its trail.",
-  "sameAs": { "@id": "did:nostr:9798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723" },
-  "address": { "network": "txbt4", "value": "tb1pj7vd36v2eardrmswxevzcrercpgx43njfpre9gexukg9wap56u3skn0gx7" },
-  "maintains": { "@id": "index.html#this" },
-  "trail": { "@id": "trail.html#this" } }
+  "sameAs": {
+    "@id": "did:nostr:9798d8e98acf46d1ee0e36582c0f23c0506ac672484792a326e590577434d723"
+  },
+  "address": {
+    "network": "txbt4",
+    "value": "tb1pj7vd36v2eardrmswxevzcrercpgx43njfpre9gexukg9wap56u3skn0gx7"
+  },
+  "maintains": {
+    "@id": "index.html#this"
+  },
+  "trail": {
+    "@id": "trail.html#this"
+  },
+  "controller": {
+    "@id": "did:nostr:de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
+    "@type": "Agent",
+    "note": "claimed in this key's profile; shown as verified only when the controller's NIP-51 key set names this key"
+  }
+}
 </script>
 <script src="wiki.js"></script>
