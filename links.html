@@ -420,6 +420,44 @@
           "date": "2015"
         }
       ]
+    },
+    {
+      "name": "Related work",
+      "description": "other attestation designs on Nostr and elsewhere, and how this record differs from each",
+      "links": [
+        {
+          "@id": "https://github.com/nostr-protocol/nips/blob/master/85.md",
+          "@type": "WebPage",
+          "name": "NIP-85, Trusted Assertions",
+          "description": "service providers publish ranked assertions about keys and events (kinds 30382 to 30385) for clients that delegate trust by a 10040 list; a consumer side the record could feed with its verdicts later; it asserts opinions, this record asserts recomputed facts"
+        },
+        {
+          "@id": "https://github.com/forgesworn/nostr-attestations/blob/HEAD/NIP-VA.md",
+          "@type": "WebPage",
+          "name": "NIP-VA, Verifiable Attestations (ForgeSworn, draft)",
+          "description": "typed claims about keys as addressable kind 31000 events, assertion-first, revoked by replacement; about who a key is, not what a node computed, and replaceable where this record's attestations are permanent",
+          "date": "2026"
+        },
+        {
+          "@id": "https://nathan.day.ag/presentations/nosfabrica-wotathon-2026-attestr-final-pitch/",
+          "@type": "WebPage",
+          "name": "Attestr (Nathan Day, Nosfabrica Wotathon)",
+          "description": "an attestation as an event about the validity of any other event, trust by self-declared lists and NIP-85 delegation, proof of place as the demo; the pitch deck is what survives of it; same word, a different object: it trusts by whom you follow, this record by what was recomputed",
+          "date": "2026-04"
+        },
+        {
+          "@id": "https://github.com/in-toto/attestation",
+          "@type": "WebPage",
+          "name": "in-toto attestation framework",
+          "description": "a statement is a subject (digests of the thing) plus a predicate (the claim about it), signed in an envelope that carries the identity; the shape this record's statement follows"
+        },
+        {
+          "@id": "https://github.com/nostr-protocol/nips/blob/master/03.md",
+          "@type": "WebPage",
+          "name": "NIP-03, OpenTimestamps attestations",
+          "description": "a kind 1040 event carrying an OpenTimestamps proof that another event existed by a Bitcoin block; proves when, not whether; an attestation here could carry one"
+        }
+      ]
     }
   ]
 }
