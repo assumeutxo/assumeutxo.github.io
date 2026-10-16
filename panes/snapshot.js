@@ -37,9 +37,25 @@ wiki.panes.push({
     // attestations: formal ones are signed statements carried by value and checked here; informal ones are claims made elsewhere, linked, never vouched for beyond "the number they wrote matches"
     const att = [].concat(doc.attestations || []); const formal = att.filter((a) => a.form === 'formal'), informal = att.filter((a) => a.form !== 'formal');
     if (att.length) root.append(el('h3', null, `attested by ${att.length}`));
-    for (const a of formal) { const box = el('div', 'mark'); const h = el('div'); h.append(a.signer ? link(a.signer['@id'], a.signer.name || a.signer['@id']) : 'a key', ' · formal'); box.append(h); const ev = a.event; if (ev) { wiki.nostrCheck(ev).then(({ idOK, sigOK }) => { box.append(light(idOK && sigOK ? 'ok' : 'bad', idOK && sigOK ? 'signed by its author (checked here)' : 'the signature does not verify')); const tag = (k) => (ev.tags.find((t) => t[0] === k) || [])[1]; const same = tag('txoutset_hash') === doc.txoutsetHash || tag('muhash') === doc.muhash; box.append(light(same ? 'ok' : 'bad', same ? 'states the hash this page states (checked here)' : 'states a different hash ✗')); }); } else if (a['@id']) { h.append(' · ', link(a['@id'], 'the statement')); box.append(light('grey', 'the signed statement is on its own page')); } root.append(box); }
-    // "handle (GitHub)" links to the profile on that platform; the record's text is unchanged
-    const who = (by) => { const m = String(by || '').match(/^(\S+) \((GitHub|Nostr)\)$/); if (m && m[2] === 'GitHub') { const a = link('https://github.com/' + m[1], m[1]); const s = el('span'); s.append(a, ' (GitHub)'); return s; } return el('span', null, by || 'someone'); };
+    // formal, by file: a kind 3332 event (NIP-332) fetched by value and checked here: id, signature, canonical statement, and that its subject is this snapshot
+    const up = location.pathname.includes('/snapshots/') || location.pathname.includes('/attestations/') ? '../' : '';
+    const bitsOf = (pk) => { let b = 0; for (const c of pk) { const n = parseInt(c, 16); if (n === 0) { b += 4; continue; } b += Math.clz32(n) - 28; break; } return b; };
+    const renderFormal = async (box, a) => {
+      const file = a['@id'] && a['@id'].endsWith('.json') ? a['@id'] : null;
+      let ev = a.event; if (!ev && file) { try { ev = await (await fetch(file)).json(); } catch { box.append(light('bad', 'the attestation file could not be fetched')); return; } }
+      if (!ev) { box.append(light('grey', 'the signed statement is on its own page')); return; }
+      const { idOK, sigOK } = await wiki.nostrCheck(ev); let st = null; try { st = JSON.parse(ev.content); } catch {}
+      const canon = st && wiki.canon(st) === ev.content; const sub = st && st.subject || {}, cl = st && st.claim || {};
+      const h = box.firstChild; h.textContent = ''; h.append(link(file || '#', 'did:nostr:' + ev.pubkey.slice(0, 8) + '…' + ev.pubkey.slice(-4)), ' · formal · ' + (cl.method || '?') + (cl.chainstate && cl.chainstate !== 'full' ? ' (' + cl.chainstate + ')' : cl.chainstate === 'full' ? ', full sync' : ''));
+      const meta = el('div', 'muted'); meta.append(`key work ${bitsOf(ev.pubkey)} bits · computed ${cl.computedAt || '?'} · signed ${new Date(ev.created_at * 1000).toISOString().slice(0, 10)}`); box.append(meta);
+      box.append(light(idOK && sigOK ? 'ok' : 'bad', idOK && sigOK ? 'signed by its author (checked here)' : 'the signature does not verify ✗'));
+      box.append(light(canon ? 'ok' : 'bad', canon ? 'a canonical NIP-332 statement (checked here)' : 'the statement is not canonical ✗'));
+      const same = sub.txoutsetHash === doc.txoutsetHash && (sub.height === undefined || sub.height === doc.height); box.append(light(same ? 'ok' : 'bad', same ? 'states the hash this page states (checked here)' : 'states a different hash ✗'));
+      if (cl.implementation) box.append(light('grey', 'says: ' + cl.implementation + (cl.build ? ', ' + cl.build : '') + ' (as said by the signer, not checked here)'));
+      if (cl.note) box.append(el('div', 'muted', cl.note));
+      const p = el('div', 'muted'); p.append(link(file || '#', 'the event'), ' · ', link('https://nip-332.github.io/', 'NIP-332')); box.append(p);
+    };
+    for (const a of formal) { const box = el('div', 'mark'); box.append(el('div', null, 'a key · formal')); root.append(box); renderFormal(box, a); }
     for (const a of informal) { const box = el('div', 'mark'); const h = el('div'); h.append(who(a.by), a.at ? ' · ' + a.at : '', ' · informal'); box.append(h); if (a.did) box.append(el('div', 'muted', a.did)); if (a.says && a.says.txoutsetHash) box.append(light(a.says.txoutsetHash === doc.txoutsetHash ? 'ok' : 'bad', a.says.txoutsetHash === doc.txoutsetHash ? 'the hash they wrote is the hash on this page' : 'the hash they wrote differs ✗')); box.append(light('grey', 'said elsewhere, as linked; not checked here')); if (a.where) { const p = el('div', 'muted'); p.append(link(a.where['@id'], a.where['@id'].replace(/^https?:\/\//, '').slice(0, 70) + '…')); box.append(p); } root.append(box); }
     if (doc.note) root.append(el('p', 'muted', doc.note));
     const how = el('p', 'muted', 'Load it with any node that reads the dumptxoutset v2 format, then compare its txoutset hash with the one above. The hash is the claim; the comparison is the check.');
