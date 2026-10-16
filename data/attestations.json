@@ -45,6 +45,20 @@
       "at": "2026-10-16"
     },
     {
+      "network": "btc",
+      "height": 935000,
+      "file": "attestations/btc-935000/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645.json",
+      "id": "0f51be67751044e9a6a280ba6cba44fbc01adfdb65172721f548e51b282553cd",
+      "pubkey": "de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645",
+      "bits": 0,
+      "method": "recomputed",
+      "chainstate": "full",
+      "implementation": "/Satoshi:31.0.0/",
+      "computedAt": "2026-10-16T21:06:25Z",
+      "txoutsetHash": "e4b90ef9eae834f56c4b64d2d50143cee10ad87994c614d7d04125e2a6025050",
+      "at": "2026-10-16"
+    },
+    {
       "network": "tbtc4",
       "height": 120000,
       "file": "attestations/tbtc4-120000/000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202.json",
