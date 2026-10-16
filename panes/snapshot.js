@@ -46,7 +46,7 @@ wiki.panes.push({
       if (!ev) { box.append(light('grey', 'the signed statement is on its own page')); return; }
       const { idOK, sigOK } = await wiki.nostrCheck(ev); let st = null; try { st = JSON.parse(ev.content); } catch {}
       const canon = st && wiki.canon(st) === ev.content; const sub = st && st.subject || {}, cl = st && st.claim || {};
-      const h = box.firstChild; h.textContent = ''; h.append(link(file || '#', 'did:nostr:' + ev.pubkey.slice(0, 8) + '…' + ev.pubkey.slice(-4)), ' · formal · ' + (cl.method || '?') + (cl.chainstate && cl.chainstate !== 'full' ? ' (' + cl.chainstate + ')' : cl.chainstate === 'full' ? ', full sync' : ''));
+      const h = box.firstChild; h.textContent = ''; h.append(link(up + 'key.html?did=did:nostr:' + ev.pubkey, 'did:nostr:' + ev.pubkey.slice(0, 8) + '…' + ev.pubkey.slice(-4)), ' · formal · ' + (cl.method || '?') + (cl.chainstate && cl.chainstate !== 'full' ? ' (' + cl.chainstate + ')' : cl.chainstate === 'full' ? ', full sync' : ''));
       const meta = el('div', 'muted'); meta.append(`key work ${bitsOf(ev.pubkey)} bits · computed ${cl.computedAt || '?'} · signed ${new Date(ev.created_at * 1000).toISOString().slice(0, 10)}`); box.append(meta);
       box.append(light(idOK && sigOK ? 'ok' : 'bad', idOK && sigOK ? 'signed by its author (checked here)' : 'the signature does not verify ✗'));
       box.append(light(canon ? 'ok' : 'bad', canon ? 'a canonical NIP-332 statement (checked here)' : 'the statement is not canonical ✗'));

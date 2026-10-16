@@ -1,0 +1,30 @@
+<!doctype html>
+<meta charset="utf-8"><title>key</title>
+<!-- ogp -->
+<meta name="description" content="Every assumeUTXO snapshot we know of, and who verified it.">
+<link rel="canonical" href="https://assumeutxo.com/key.html">
+<meta property="og:site_name" content="assumeUTXO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="key">
+<meta property="og:description" content="Every assumeUTXO snapshot we know of, and who verified it.">
+<meta property="og:url" content="https://assumeutxo.com/key.html">
+<meta property="og:image" content="https://assumeutxo.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="key">
+<meta name="twitter:description" content="Every assumeUTXO snapshot we know of, and who verified it.">
+<meta name="twitter:image" content="https://assumeutxo.com/og.png">
+<link rel="icon" href="https://assumeutxo.com/favicon.svg" type="image/svg+xml">
+<!-- /ogp -->
+<script>
+// ?did=did:nostr:<hex> (or ?pk=<hex>): one key as the record sees it: who controls it, what it controls, its GitHub identity, and every row it signed
+(() => {
+  const q = new URLSearchParams(location.search); const raw = (q.get('did') || q.get('pk') || '').trim(); const hex = (raw.match(/^(?:did:nostr:)?([0-9a-f]{64})$/i) || [])[1];
+  const island = { '@context': 'https://bitcoin-desktop.github.io/schema/context.jsonld', '@id': '#this', '@type': 'Key' };
+  if (hex) Object.assign(island, { name: `key ${hex.slice(0, 8)}…${hex.slice(-4)}`, sameAs: { '@id': 'did:nostr:' + hex.toLowerCase() }, description: 'One key: its identity, who it says controls it and whether the controller agrees, the keys it controls, its GitHub identity if claimed, and every attestation it signed, on the record and on the relays. Everything shown green was checked in this page.' });
+  else Object.assign(island, { name: 'key', description: 'Open this page as key.html?did=did:nostr:<hex> to see a key as the record sees it.' });
+  const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(island, null, 2); document.head.append(s); document.title = island.name;
+})();
+</script>
+<script src="wiki.js"></script>

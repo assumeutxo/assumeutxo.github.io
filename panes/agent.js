@@ -17,7 +17,7 @@
       const did = doc.sameAs && doc.sameAs['@id'] || ''; const hex = (did.match(/^did:nostr:([0-9a-f]{64})$/) || [])[1];
       const card = el('div', 'profile'); root.append(card);
       const row = (k, ...v) => { const r = el('div', 'prow'); r.append(el('span', 'pk', k)); const pv = el('span', 'pv'); pv.append(...v); r.append(pv); card.append(r); return pv; };
-      if (hex) { row('npub', el('span', 'hash', npub(hex)), copy(npub(hex))); row('did', link(did, did), copy(did)); }
+      if (hex) { row('npub', el('span', 'hash', npub(hex)), copy(npub(hex))); row('did', link(did, did), copy(did)); row('as a key', link('key.html?did=' + did, 'who controls it, what it signed')); }
       const addr = typeof doc.address === 'string' ? doc.address : doc.address && doc.address.value; const net = doc.address && doc.address.network || doc.network || '';
       if (addr) { const pv = row(net ? `address · ${net}` : 'address', el('span', 'hash', addr), copy(addr)); fetch(`${EXPLORER}/address/${addr}`).then((r) => r.json()).then((a) => { const c = a.chain_stats, m = a.mempool_stats; const sats = c.funded_txo_sum - c.spent_txo_sum + (m.funded_txo_sum - m.spent_txo_sum); pv.append(el('span', 'muted', ` · ${sats.toLocaleString('en-US')} sats, from the local explorer`)); }).catch(() => {}); }
       if (doc.maintains) row('maintains', link(doc.maintains['@id']));
