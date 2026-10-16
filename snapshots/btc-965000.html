@@ -30,6 +30,7 @@
   "txoutsetHash": "4a8d794337118c0c615b574f817c7306c687584a537184b8d233df42bf477ec2",
   "chainTxCount": 1429611231,
   "bytes": 9468312119,
+  "sha256": "89351f7106051c0685880f9c64026e993335308de63ae6980e94ba3fafdc7dda",
   "torrent": {
     "@type": "Torrent",
     "infohash": "fa9e6c5e8e2c1eceb6867cb4b8923f8891e6d69b",
@@ -51,10 +52,26 @@
     {
       "@id": "https://github.com/bitcoin/bitcoin/pull/36196#issuecomment-5622908399",
       "name": "Sjors' torrents for the pre-32.0 snapshots"
+    },
+    {
+      "@id": "https://assumeutxo.com/attestations/btc-965000/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645.json",
+      "name": "formal attestation by did:nostr:de7ecd1e…d645 (recomputed on Core 31.0, 2026-10-16): file sha256"
     }
   ],
-  "producedBy": "Core chainparams (PR 36196); torrent from Sjors",
+  "producedBy": "Core chainparams (PR 36196); torrent from Sjors; file sha256 from the formal attestation",
   "attestations": [
+    {
+      "@id": "../attestations/btc-965000/de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645.json",
+      "@type": "Attestation",
+      "form": "formal",
+      "kind": 3332,
+      "signer": {
+        "@id": "did:nostr:de7ecd1e2976a6adb2ffa5f4db81a7d812c8bb6698aa00dcf1e76adb55efd645"
+      },
+      "bits": 0,
+      "method": "recomputed",
+      "at": "2026-10-16"
+    },
     {
       "@type": "Attestation",
       "form": "informal",
