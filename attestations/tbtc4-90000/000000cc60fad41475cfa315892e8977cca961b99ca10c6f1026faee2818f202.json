@@ -1,0 +1,52 @@
+{
+  "kind": 3332,
+  "pubkey": "000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202",
+  "created_at": 1792135994,
+  "content": "{\"@type\":\"Attestation\",\"claim\":{\"binarySha256\":\"a454b330e6fefeac983856ca00a924e21aadf59de5794de4165392eb776416f6\",\"build\":\"v29.4.2.knots20260508.plumb6\",\"chainstate\":\"full\",\"commit\":\"532e1eb168b743c5500d9fec0aad73ad6abfd0ac\",\"computedAt\":\"2026-10-16T07:31:15Z\",\"implementation\":\"/Satoshi:29.4.2/Knots:20260508/Plumb:6/\",\"method\":\"recomputed\",\"note\":\"dumptxoutset rollback=90000 on an unpruned node at 153068; the block is below the BLAKE2b fork at 150308, so it is on tbtc4 and txbt4 alike\",\"validated\":true},\"subject\":{\"blockHash\":\"0000000002ebe8bcda020e0dd6ccfbdfac531d2f6a81457191b99fc2df2dbe3b\",\"chainTxCount\":11347043,\"coins\":12742177,\"fileSha256\":\"23150d944b91d25c360149c62d98b6cd6d6a9ef5ce46d79ea1b2cd48fa0ccf2d\",\"genesis\":\"00000000da84f2bafbbc53dee25a72ae507ff4914b867c565be350b0da8bf043\",\"hashType\":\"hash_serialized_3\",\"height\":90000,\"network\":\"tbtc4\",\"txoutsetHash\":\"784fb5e98241de66fdd429f4392155c9e7db5c017148e66e8fdbc95746f8b9b5\"},\"v\":\"0.0.1\"}",
+  "tags": [
+    [
+      "network",
+      "tbtc4"
+    ],
+    [
+      "height",
+      "90000"
+    ],
+    [
+      "hash",
+      "0000000002ebe8bcda020e0dd6ccfbdfac531d2f6a81457191b99fc2df2dbe3b"
+    ],
+    [
+      "txoutset_hash",
+      "784fb5e98241de66fdd429f4392155c9e7db5c017148e66e8fdbc95746f8b9b5"
+    ],
+    [
+      "method",
+      "recomputed"
+    ],
+    [
+      "implementation",
+      "/Satoshi:29.4.2/Knots:20260508/Plumb:6/"
+    ],
+    [
+      "client",
+      "assumeutxo sign",
+      "https://play-grounds.github.io/assumeutxo/sign/",
+      "0.0.1"
+    ],
+    [
+      "t",
+      "attestation"
+    ],
+    [
+      "t",
+      "assumeutxo"
+    ],
+    [
+      "t",
+      "tbtc4"
+    ]
+  ],
+  "id": "bb1c05e6defb50497dbc2e9c27871e9376d4be5bc359f8a145d00254d5404033",
+  "sig": "4077c61da8d9025b35605cf7467da00b21f3377f46d2dd800eb911267ad9226611136b0bc6488d011bf2c4e1d0e2e2bdafc90bc96469bc39fbb0745d56a990fe"
+}

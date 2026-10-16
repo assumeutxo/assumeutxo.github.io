@@ -3,6 +3,48 @@
   "description": "every formal attestation held on this site, by file; each file is a kind 3332 Nostr event (NIP-332) whose signature and statement are checked in the page that shows it",
   "attestations": [
     {
+      "network": "tbtc4",
+      "height": 120000,
+      "file": "attestations/tbtc4-120000/000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202.json",
+      "id": "0a24fb641836c1bd65c1e86ad9657c25eba6f516a8950c28da837cff41f1a820",
+      "pubkey": "000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202",
+      "bits": 24,
+      "method": "recomputed",
+      "chainstate": "full",
+      "implementation": "/Satoshi:29.4.2/Knots:20260508/Plumb:6/",
+      "computedAt": "2026-10-16T07:29:47Z",
+      "txoutsetHash": "10b05d05ad468d0971162e1b222a4aa66caca89da2bb2a93f8f37fb29c4794b0",
+      "at": "2026-10-16"
+    },
+    {
+      "network": "tbtc4",
+      "height": 150000,
+      "file": "attestations/tbtc4-150000/000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202.json",
+      "id": "d4d32f64941271ae76e4d3104b7cfcddb8ddf4c5e64f7cfa764c5858fb0fdc40",
+      "pubkey": "000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202",
+      "bits": 24,
+      "method": "recomputed",
+      "chainstate": "full",
+      "implementation": "/Satoshi:29.4.2/Knots:20260508/Plumb:6/",
+      "computedAt": "2026-10-16T07:29:16Z",
+      "txoutsetHash": "ca068cae50679d7c947454bbe4f0e6aeec1fbe2c6c2735a08bb988623649f950",
+      "at": "2026-10-16"
+    },
+    {
+      "network": "tbtc4",
+      "height": 90000,
+      "file": "attestations/tbtc4-90000/000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202.json",
+      "id": "bb1c05e6defb50497dbc2e9c27871e9376d4be5bc359f8a145d00254d5404033",
+      "pubkey": "000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202",
+      "bits": 24,
+      "method": "recomputed",
+      "chainstate": "full",
+      "implementation": "/Satoshi:29.4.2/Knots:20260508/Plumb:6/",
+      "computedAt": "2026-10-16T07:31:15Z",
+      "txoutsetHash": "784fb5e98241de66fdd429f4392155c9e7db5c017148e66e8fdbc95746f8b9b5",
+      "at": "2026-10-16"
+    },
+    {
       "network": "txbt4",
       "height": 150307,
       "file": "attestations/txbt4-150307/000000cc60fad41475cfa315892e8977cca961b99ca10c6f1026faee2818f202.json",
